@@ -1,0 +1,5 @@
+ErrorDocument 404 /forbidden.php
+ErrorDocument 403 /forbidden.php
+
+Order Deny,Allow
+Deny from all

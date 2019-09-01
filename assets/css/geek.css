@@ -1,0 +1,103 @@
+.geek-help{
+    font-size: 12px;
+}
+.geek-layout i{
+    color: #000;
+}
+.geek-layout-main{
+    min-height: 120px;
+}
+
+.fixed-table-toolbar .columns label{
+    color: #5b5b5b !important;
+}
+
+.custom-control-label::before{
+    background-color: #cecece;
+    left: 2px;
+}
+.custom-control-label::after{
+    left: 2px;
+}
+
+
+/* Sortable items */
+.setspace, .remove, .btnAdd, .allpages{
+    cursor: pointer;
+}
+
+.sortable-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-top: 25px;
+    min-height: 10px;
+}
+.sortable-item {
+	background-color: #f9f9f9;
+	border: 1px solid #D8D8D8;
+	cursor: move;
+	display: block;
+	margin-bottom: 5px;
+	text-align: center;
+    position: relative;
+}
+
+.placeholder {
+    margin-bottom: 18px;
+    height: 40px;
+    border:2px dashed #67d3e0;
+    background:#c4f7fd;
+}
+
+.spacegrid {
+    text-align: center;
+}
+
+.spacegrid span {
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+    text-align: center;
+    font-size: 1.6em;
+    line-height: 2;
+    font-weight: 600;
+    color: #787878;
+    cursor: pointer;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.2);
+    width: 1.9em;
+    height: 2em;
+    line-height: 2em;
+    -webkit-transition: all .35s ease;
+    -moz-transition: all .35s ease;
+    -o-transition: all .35s ease;
+    transition: all .35s ease;
+    margin: .25em;
+}
+
+.spacegrid span.active {
+    background-color:#007bff;
+    color: #fff;
+}
+
+.filtr-item{
+    padding-right: 30px;
+    padding-left: 0%;
+}
+
+
+.browser-empty{
+    bottom: auto;
+    top: 15vh;
+    position: relative;
+}
+
+.browser-icon{
+    font-size: 90px;
+    margin-bottom: 30px;
+    opacity: 0.3;
+}
+
+.bootstrap-select.btn-group .dropdown-toggle .caret {
+    display: none
+}

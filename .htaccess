@@ -1,0 +1,20 @@
+Options -Indexes
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ ./index.php/$1 [L]
+
+ErrorDocument 404 /404.php
+ErrorDocument 403 /403.php
+
+<ifModule mod_deflate.c>
+	<filesmatch "\.(js|css|html|jpg|png|gif|eot|woff|ttf|svg)$">
+		SetOutputFilter DEFLATE
+	</filesmatch>
+</ifModule>
+
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|inc|bak|cache|tpl)$">
+	Order Allow,Deny
+	Deny from all
+</FilesMatch>

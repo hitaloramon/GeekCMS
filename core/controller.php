@@ -1,0 +1,135 @@
+<?php
+    class controller {
+
+        public  $config;
+
+        public function __construct(){
+            $cfg = new Config();
+            $this->config = $cfg->getConfig();
+            date_default_timezone_set($this->config['site_timezone']);
+            setlocale (LC_ALL, $this->config['site_locale']);
+            
+            if(!defined('DOMAIN')){
+                define('DOMAIN', $this->config['site_url']);
+                define('BASE', $this->config['site_url'].$this->config['site_dir']);
+                define('BASE_ADMIN', $this->config['site_url'].$this->config['site_dir'].'/admin');
+                define('BASE_UPLOADS', $this->config['site_url'].$this->config['site_dir'].'/uploads');
+                define('BASE_UPLOADS_PATH', $_SERVER['DOCUMENT_ROOT'].$this->config['site_dir'].'/uploads');
+                $_SESSION['BASE'] = BASE;
+            }
+        }
+
+        public function loadView($viewName, $viewData = array()){
+            extract($viewData);
+            include 'views/'.$viewName.'.php';
+        }
+        
+        public function loadSnippets($snippet, $viewData = array()){
+            extract($viewData);
+            include 'views/front/templates/'.$this->config['site_theme'].'/snippets/'.$snippet.'.php';
+        }
+
+
+        public function loadTemplate($viewData = array()){
+            include 'views/front/templates/'.$this->config['site_theme'].'/template.tpl.php';
+        }
+
+        public function loadTemplateInAdmin($viewName, $viewData = array()){
+            include 'views/admin/admin.php';
+        }
+
+        public function renderModule($viewData = array()){
+            if(!empty($viewData)){
+                $themefile = 'views/front/modules/'.$viewData['module_name'].'/'.$this->config['site_theme'].'/main.php';
+                $modulefile = 'views/front/modules/'.$viewData['module_name'].'/main.php';
+
+                if(file_exists($themefile)){
+                    include $themefile;
+                }elseif (file_exists($modulefile)) {
+                    include $modulefile;
+                }
+            }
+        }
+
+        public function renderPage($viewData = array()){
+            $body = html_entity_decode($viewData['body']);
+            preg_match_all("/{{(.*?)}}/", $body, $matches);
+            if ($matches[1]) {
+                foreach ($matches[1] as $key => $widget) {
+                    $widget = explode('|', $widget);
+                    if (file_exists('views/front/widgets/'.$widget[0].'/'.$this->config['site_theme'].'/main.php')) {
+                        ob_start();
+                        include ('views/front/widgets/'.$widget[0].'/'.$this->config['site_theme'].'/main.php');
+                        $contents = ob_get_contents();
+                        ob_clean();
+                        $body = str_replace($matches[0][$key], $contents, $body);
+                        if(file_exists('views/front/widgets/'.$widget[0].'/'.$this->config['site_theme'].'/js/script.js')){
+                            Asset::add('script', ['name' => $widget[0], 'url'  => ''.BASE.'/views/front/widgets/'.$widget[0].'/'.$this->config['site_theme'].'/js/script.js']);
+                        }
+
+                        if(file_exists('views/front/widgets/'.$widget[0].'/'.$this->config['site_theme'].'/css/style.css')){
+                            Asset::add('style', ['name' => $widget[0], 'url'  => ''.BASE.'/views/front/widgets/'.$widget[0].'/'.$this->config['site_theme'].'/css/style.js']);
+                        }
+                    } else {
+                        if (file_exists('views/front/widgets/'.$widget[0].'/main.php')) {
+                            ob_start();
+                            include ('views/front/widgets/'.$widget[0].'/main.php');
+                            $contents = ob_get_contents();
+                            ob_clean();
+                            $body = str_replace($matches[0][$key], $contents, $body);
+                            
+                            if(file_exists('views/front/widgets/'.$widget[0].'/js/script.js')){
+                                Asset::add('script', ['name' => $widget[0], 'url'  => ''.BASE.'/views/front/widgets/'.$widget[0].'/js/script.js']);
+                            }
+
+                            if(file_exists('views/front/widgets/'.$widget[0].'/css/style.css')){
+                                Asset::add('style', ['name' => $widget[0], 'url'  => ''.BASE.'/views/front/widgets/'.$widget[0].'/css/style.css']);
+                            }
+                        }
+                    }
+                }
+                
+            }
+
+            return $body;
+        }
+        
+
+        // public function renderPage($page = null){
+        //     if($page != 'normal' && $page != 'home'){
+        //         if(file_exists('views/front/templates/'.$this->config['site_theme'].'/pages/'.$page.'.php')){
+        //             include 'views/front/templates/'.$this->config['site_theme'].'/pages/'.$page.'.php';
+        //         }
+        //     }
+        // }
+
+        public function renderMetatags($viewData = array()){
+            $meta = '';
+            $mod = 'Mod'.$viewData['module_name'];
+
+            $meta .= '<title>'.$this->config['site_name'].' - '.$viewData['title'].'</title>'. PHP_EOL;
+            $meta .= '<meta name="keywords" content="'.$viewData['keywords'].'">'. PHP_EOL;
+            $meta .= '<meta name="description" content="'.$viewData['description'].'">'. PHP_EOL;
+            $meta .= '<meta property="og:url" content="'.DOMAIN.''.$_SERVER['REQUEST_URI'].'">'. PHP_EOL;
+            $meta .= '<meta property="og:title" content="'.$viewData['title'].'">'. PHP_EOL;
+            $meta .= '<meta property="og:site_name" content="'.$this->config['site_name'].'">'. PHP_EOL;
+            $meta .= '<meta property="og:description" content="'.$viewData['description'].'">'. PHP_EOL;
+            $meta .= '<meta property="og:image" content="'.BASE_UPLOADS.'/'.$this->config['site_logo'].'">'. PHP_EOL;
+            $meta .= '<meta property="og:type" content="website">'. PHP_EOL;
+
+            if($viewData['module_id'] != 0 && class_exists($mod)){
+                 $module = new $mod();
+                 if(method_exists($module, 'metatags')){
+                    $meta = $module->metatags($this->config, $viewData);
+                 }
+            }
+            
+            echo($meta);
+        }
+
+        public function getConfig(){
+            return $this->config;
+        }
+        
+    }
+?>
