@@ -1,15 +1,20 @@
 <?php
 class adminController extends controller{
 
+    protected $user; 
+    protected $permission;
+
     public function __construct(){
         parent::__construct();
+
+        $this->user = new User();
+        $this->permission = new Permissions();
     }
 
     public function index(){
-        $u = new User();
-        $u->verifyLogin();
+        $this->user->verifyLogin();
 
-        $data = $array = array();
+        $data = array();
         $hits = $visits = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         
         $stats = new Stats();
@@ -32,19 +37,16 @@ class adminController extends controller{
     }
 
     public function clearstats(){
-        $u = new User();
-        $u->verifyLogin();
+        $this->user->verifyLogin();
 
         $stats = new Stats();
         $stats->clearStats();
     }
 
     public function layout($id = null){
-        $u = new User();
-        $u->verifyLogin();
+        $this->user->verifyLogin();
 
         $layout = new Layout;
-        $permission = new Permissions();
 
         if(isset($_POST) && !empty($_POST)){
             switch ($_GET['action']) {
@@ -65,7 +67,7 @@ class adminController extends controller{
                     }
                 break;
                 case 'columm':
-                    $permission->hasPermission('layout', 'edit');
+                    $this->permission->hasPermission('layout', 'edit');
                     $plug_id = intval($_POST['id']);
                     $cols = intval($_POST['cols']);
                     $page_id = intval($_POST['page_id']);
@@ -74,7 +76,7 @@ class adminController extends controller{
                     $layout->layoutUpdate($data, $plug_id, $page_id);
                 break;
                 case 'allpages':
-                    $permission->hasPermission('layout', 'edit');
+                    $this->permission->hasPermission('layout', 'edit');
                     $page_id = intval($_POST['page_id']);
                     $place = $_POST['place'];
 
@@ -108,13 +110,13 @@ class adminController extends controller{
                     echo json_encode($json);
                 break;
                 case 'delete':
-                    $permission->hasPermission('layout', 'delete');
+                    $this->permission->hasPermission('layout', 'delete');
                     $plug_id = intval($_POST['id']);
                     $page_id = intval($_POST['page_id']);
                     $layout->layoutDelete(['plug_id = ?' => $plug_id, 'page_id = ?' => $page_id]);
                 break;
                 default:
-                    $permission->hasPermission('layout', 'edit');
+                    $this->permission->hasPermission('layout', 'edit');
                     $sort = $_GET['layout'];
                     @$sorted = str_replace("list-", "", $_POST[$sort]);
 
@@ -151,24 +153,22 @@ class adminController extends controller{
 
 
     public function page($action = null, int $id = null){
-        $u = new User();
-        $u->verifyLogin();
+        $this->user->verifyLogin();
         
         $p = new Page();
         $data = array('action' => $action, 'id' => $id);
         
-        $permission = new Permissions();
         
         switch ($action):
             case 'add':
-                $permission->hasPermission('page', 'add');
+                $this->permission->hasPermission('page', 'add');
                 if(isset($_POST) && !empty($_POST)){
                     $p->pageInsert($_POST);
                     exit;
                 }
             break;
             case 'edit':
-                $permission->hasPermission('page', 'edit');
+                $this->permission->hasPermission('page', 'edit');
                 $data['pages'] = $p->getPageByID($id);
 
                 if(isset($_POST) && !empty($_POST)){
@@ -177,27 +177,26 @@ class adminController extends controller{
                 }
             break;
             case 'delete':
-                $permission->hasPermission('page', 'delete');
+                $this->permission->hasPermission('page', 'delete');
                 $trash = new Trash();
                 $trash->setTrash('pages', $id);
                 $p->pageDelete($id);
                 exit;
             break;
             case 'datatable':
-                $permission->hasPermission('page', 'view');
+                $this->permission->hasPermission('page', 'view');
                 $p->getPagesDatatable();
                 exit;
             break;
         endswitch;
 
-        $permission->hasPermission('page', 'view');
+        $this->permission->hasPermission('page', 'view');
         $this->loadTemplateInAdmin('admin/page', $data);
     }
 
     
     public function menu($action = null, $id = null){
-        $u = new User();
-        $u->verifyLogin();
+        $this->user->verifyLogin();
 
         Asset::add('style', [
             'name' => 'nestable',
@@ -213,11 +212,10 @@ class adminController extends controller{
         $data = array('action' => $action);
         $menu = new Menu();
 
-        $permission = new Permissions();
 
         switch ($action):
             case 'edit':
-                $permission->hasPermission('menu', 'edit');
+                $this->permission->hasPermission('menu', 'edit');
                 $data['menus'] = $menu->getMenuByID($id);
 
                 if(isset($_POST) && !empty($_POST)){
@@ -226,11 +224,11 @@ class adminController extends controller{
                 }
             break;
             case 'delete':
-                $permission->hasPermission('menu', 'delete');
+                $this->permission->hasPermission('menu', 'delete');
                 $menu->deleteMenu($id);
             break;
             case 'sort':
-                $permission->hasPermission('menu', 'edit');
+                $this->permission->hasPermission('menu', 'edit');
                 $menu->menuProcess($_POST['menu']);
                 
                 $json['heading'] = "Sucesso";
@@ -242,75 +240,71 @@ class adminController extends controller{
             case 'add':
             default:
                 if(isset($_POST) && !empty($_POST)){
-                    $permission->hasPermission('menu', 'add');
+                    $this->permission->hasPermission('menu', 'add');
                     $menu->menuInsert($_POST);
                     exit;
                 }
             break;
         endswitch;
 
-        $permission->hasPermission('menu', 'view');
+        $this->permission->hasPermission('menu', 'view');
         $this->loadTemplateInAdmin('admin/menu', $data);
     }
 
 
     public function notification($action = null, int $id = null){
-        $u = new User();
-        $u->verifyLogin();
+        $this->user->verifyLogin();
         
         $data = array('action' => $action, 'id' => $id);
         $notification = new Notification();
-        $permission = new Permissions();
 
         switch ($action):
             case 'datatable':
-                $permission->hasPermission('notification', 'view');
+                $this->permission->hasPermission('notification', 'view');
                 $data = $notification->datatable();
                 echo json_encode($data);
                 exit;
             break;
             case 'delete':
-                $permission->hasPermission('notification', 'delete');
+                $this->permission->hasPermission('notification', 'delete');
                 $notification->delete($id);
                 exit;
             break;
             case 'deleteall':
-                $permission->hasPermission('notification', 'delete');
+                $this->permission->hasPermission('notification', 'delete');
                 $notification->deleteAll($_POST['data']);
                 exit;
             break;
         endswitch;
 
-        $permission->hasPermission('notification', 'view');
+        $this->permission->hasPermission('notification', 'view');
         $this->loadTemplateInAdmin('admin/notification', $data);
     }
 
     public function user($action = null, int $id = null){
-        $u = new User();
-        $u->verifyLogin();
+        $this->user->verifyLogin();
         
         $data = array('action' => $action, 'id' => $id);
 
-        $permission = new Permissions();
 
         switch ($action):
             case 'edit':
-                $permission->hasPermission('user', 'edit');
-                $data['user'] = $u->getUser($id);
+                $this->permission->hasPermission('user', 'edit');
+                $data['user'] = $this->user->getUser($id);
                 if(isset($_POST) && !empty($_POST)){
-                    $u->userUpdate($_POST, $id); 
+                    $this->user->userUpdate($_POST, $id); 
                     exit;
                 }
             break;
             case 'add':
-                $permission->hasPermission('user', 'add');
+                $this->permission->hasPermission('user', 'add');
                 if(isset($_POST) && !empty($_POST)){
-                    $u->userInsert($_POST);
+                    $this->user->userInsert($_POST);
                     exit;
                 }
             break;
             case 'manage':
-                $permission->hasPermission('user', 'delete');
+                $this->permission->hasPermission('user', 'delete');
                 if(isset($_POST) && !empty($_POST)){
                     $typeuser = $_POST['typeuser'];
                     if(isset($_POST['days'])){
@@ -318,47 +312,45 @@ class adminController extends controller{
                     }else{
                         $days = null;
                     }
-                    $u->userManageDelete($typeuser, $days);
+                    $this->user->userManageDelete($typeuser, $days);
                     exit;
                 }
             break;
             case 'delete':
-                $permission->hasPermission('user', 'delete');
+                $this->permission->hasPermission('user', 'delete');
                 $trash = new Trash();
                 $trash->setTrash('users', $id);
-                $u->userDelete($id);
+                $this->user->userDelete($id);
                 exit;
             break;
             case 'datatable':
-                $permission->hasPermission('user', 'view');
-                $u->getUserDatatable();
+                $this->permission->hasPermission('user', 'view');
+                $this->user->getUserDatatable();
                 exit;
             break;
         endswitch;
 
-        $permission->hasPermission('user', 'view');
+        $this->permission->hasPermission('user', 'view');
         $this->loadTemplateInAdmin('admin/user', $data);
     }
 
     public function widget($action = null, $id = null){
-        $u = new User();
-        $u->verifyLogin();
+        $this->user->verifyLogin();
         
         $data = array('action' => $action);
 
         $widget = new Widget();
-        $permission = new Permissions();
 
         switch ($action):
             case 'add':
-                $permission->hasPermission('widget', 'add');
+                $this->permission->hasPermission('widget', 'add');
                 if(isset($_POST) && !empty($_POST)){
                     $widget->widgetInsert($_POST);
                     exit;
                 }
             break;
             case 'edit':
-                $permission->hasPermission('widget', 'edit');
+                $this->permission->hasPermission('widget', 'edit');
                 $data['widget'] = $widget->getWidget($id);
                 if(isset($_POST) && !empty($_POST)){
                     $widget->widgetUpdate($_POST, $id);
@@ -366,37 +358,31 @@ class adminController extends controller{
                 }
             break;
             case 'delete':
-                $permission->hasPermission('widget', 'delete');
+                $this->permission->hasPermission('widget', 'delete');
                 $widget->widgetDelete($id);
                 exit;
             break;
             case 'view':
-                $permission->hasPermission('widget', 'edit');
+                $this->permission->hasPermission('widget', 'edit');
                 if(file_exists('views/admin/widget/'.$id.'/main_admin.php')){
                     $data['widget'] = $widget;
-
-                    if(isset($_POST) && !empty($_POST)){
-                        echo 'HITALO RAMON';
-                        exit;
-                    }
                 }else{
                     header('Location:'.BASE.'/404.php');
                 }
             break;
             case 'datatable':
-                $permission->hasPermission('widget', 'view');
+                $this->permission->hasPermission('widget', 'view');
                 $widget->getWidgetDataTable();
                 exit;
             break;
         endswitch;
 
-        $permission->hasPermission('widget', 'view');
+        $this->permission->hasPermission('widget', 'view');
         $this->loadTemplateInAdmin('admin/widget', $data);
     }
 
     public function module($action = null, $module = null, $mod_action = null, $mod_id = null){
-        $u = new User();
-        $u->verifyLogin();
+        $this->user->verifyLogin();
 
         Asset::add('script', [
             'name'    => 'filterizr',
@@ -411,7 +397,6 @@ class adminController extends controller{
             'mod_id'     => $mod_id
         );
 
-        $permission = new Permissions();
 
         switch ($action):
             case 'view':
@@ -425,28 +410,26 @@ class adminController extends controller{
                 }
             break;
             default:
-                $permission->hasPermission('module', 'view');
+                $this->permission->hasPermission('module', 'view');
                 $modules = new Modules();
                 $data['modules'] = $modules->getModules();
             break;
         endswitch;
 
-        $permission->hasPermission('module', 'view');
+        $this->permission->hasPermission('module', 'view');
         $this->loadTemplateInAdmin('admin/module', $data);
     }
 
 
     public function membership($action = null, int $id = null){
-        $u = new User();
-        $u->verifyLogin();
+        $this->user->verifyLogin();
 
         $data = array('action' => $action);
         $memberships = new Memberships();
-        $permission = new Permissions();
 
         switch ($action):
             case 'edit':
-                $permission->hasPermission('membership', 'edit');
+                $this->permission->hasPermission('membership', 'edit');
                 $data['memberships'] = $memberships->getMembershipByID($id);
                 if(isset($_POST) && !empty($_POST)){
                     $memberships->membershipUpdate($_POST, $id); 
@@ -454,14 +437,14 @@ class adminController extends controller{
                 }
             break;
             case 'add':
-                $permission->hasPermission('membership', 'add');
+                $this->permission->hasPermission('membership', 'add');
                 if(isset($_POST) && !empty($_POST)){
                     $memberships->membershipInsert($_POST); 
                     exit;
                 }
             break;
             case 'delete':
-                $permission->hasPermission('membership', 'delete');
+                $this->permission->hasPermission('membership', 'delete');
                 $memberships->membershipDelete($id);
             break;
             default:
@@ -469,71 +452,65 @@ class adminController extends controller{
             break;
         endswitch;
         
-        $permission->hasPermission('membership', 'view');
+        $this->permission->hasPermission('membership', 'view');
         $this->loadTemplateInAdmin('admin/membership', $data);
     }
 
 
     public function filemanager($action = null, int $id = null){
-        $u = new User();
-        $u->verifyLogin();
+        $this->user->verifyLogin();
         $data = array('action' => $action);
-        $permission = new Permissions();
 
-        $permission->hasPermission('filemanager', 'view');
+        $this->permission->hasPermission('filemanager', 'view');
         $this->loadTemplateInAdmin('admin/filemanager', $data);
     }
 
 
     public function permissions($action = null, int $id = null){
-        $u = new User();
-        $u->verifyLogin();
+        $this->user->verifyLogin();
 
         $data = array('action' => $action);
-        $permission = new Permissions();
 
         switch ($action):
             case 'edit':
-                $permission->hasPermission('permission', 'edit');
-                $data['groups'] = $permission->getGroups($id);
-                $data['params_action'] = $permission->getAction($id);
-                $data['params'] = $permission->getParams();
+                $this->permission->hasPermission('permission', 'edit');
+                $data['groups'] = $this->permission->getGroups($id);
+                $data['params_action'] = $this->permission->getAction($id);
+                $data['params'] = $this->permission->getParams();
                 if(isset($_POST) && !empty($_POST)){
-                    $permission->addParams($id, $_POST);
+                    $this->permission->addParams($id, $_POST);
                     exit;
                 }
             break;
             case 'add':
-                $permission->hasPermission('permission', 'add');
-                $permission->addGroup();
+                $this->permission->hasPermission('permission', 'add');
+                $this->permission->addGroup();
                 header('Location: '.BASE_ADMIN.'/permissions');
             break;
             case 'delete':
-                $permission->hasPermission('permission', 'delete');
-                $permission->groupDelete($id);
+                $this->permission->hasPermission('permission', 'delete');
+                $this->permission->groupDelete($id);
                 header('Location: '.BASE_ADMIN.'/permissions');
             break;
             default:
-                $data['groups'] = $permission->getGroups();
+                $data['groups'] = $this->permission->getGroups();
             break;
         endswitch;
 
-        $permission->hasPermission('permission', 'view');
+        $this->permission->hasPermission('permission', 'view');
         $this->loadTemplateInAdmin('admin/permissions', $data);
     }
 
 
     public function backup($action = null, $file = null){
-        $u = new User();
-        $u->verifyLogin();
+        $this->user->verifyLogin();
 
         $data = array('action' => $action);
         $backup = new Backup();
-        $permission = new Permissions();
 
         switch ($action):
             case 'add':
-                $permission->hasPermission('backup', 'add');
+                $this->permission->hasPermission('backup', 'add');
                 $folder = "backup/";
                 $archive_name = date('d-m-Y_H-i') . ".sql";
                 $archive = $folder . '/' . $archive_name;
@@ -542,7 +519,7 @@ class adminController extends controller{
                 header('Location: '.BASE_ADMIN.'/backup');
             break;
             case 'restore':
-                $permission->hasPermission('backup', 'edit');
+                $this->permission->hasPermission('backup', 'edit');
                 if($backup->import('backup/'.$file) == true){
                     $json['heading'] = "Sucesso";
                     $json['text'] =  "Banco de dados restaurado com sucesso!";
@@ -551,49 +528,45 @@ class adminController extends controller{
                 }
             break;
             case 'delete':
-                $permission->hasPermission('backup', 'delete');
+                $this->permission->hasPermission('backup', 'delete');
                 unlink('backup/'.$file);
                 header('Location: '.BASE_ADMIN.'/backup');
             break;
         endswitch;
 
-        $permission->hasPermission('backup', 'view');
+        $this->permission->hasPermission('backup', 'view');
         $this->loadTemplateInAdmin('admin/backup', $data);
     }
 
 
     public function emailmodel($id = 1){
-        $u = new User();
-        $u->verifyLogin();
+        $this->user->verifyLogin();
 
         $data = array('id' => $id);
-        $permission = new Permissions();
         $emailmodel = new EmailModel();
 
         $data['allmodel'] = $emailmodel->getModel();
         $data['model'] = $emailmodel->getModel($id);
 
         if(isset($_POST) && !empty($_POST)){
-            //$permission->hasPermission('emailmodel', 'edit');
+            //$this->permission->hasPermission('emailmodel', 'edit');
             $emailmodel->update($_POST, $id);
             exit;
         }
 
-        //$permission->hasPermission('system', 'view');
+        //$this->permission->hasPermission('system', 'view');
         $this->loadTemplateInAdmin('admin/emailmodel', $data);
     }
 
 
     public function system($action = null, $file = null){
-        $u = new User();
-        $u->verifyLogin();
+        $this->user->verifyLogin();
 
         $data = array('action' => $action);
         $config = new Config();
-        $permission = new Permissions();
 
         if(isset($_POST) && !empty($_POST)){
-            $permission->hasPermission('system', 'edit');
+            $this->permission->hasPermission('system', 'edit');
             $config->saveConfig($_POST);
             exit;
         }else{
@@ -602,14 +575,13 @@ class adminController extends controller{
 
         $data['transaction_notify'] = explode(',', $this->config['transaction_notify']);
 
-        $permission->hasPermission('system', 'view');
+        $this->permission->hasPermission('system', 'view');
         $this->loadTemplateInAdmin('admin/system', $data);
     }
     
 
     public function customfields($action = null, $id = null){
-        $u = new User();
-        $u->verifyLogin();
+        $this->user->verifyLogin();
 
         Asset::add('style', [
             'name' => 'nestable',
@@ -624,11 +596,10 @@ class adminController extends controller{
 
         $data = array('action' => $action);
         $fields = new CustomFields();
-        $permission = new Permissions();
 
         switch ($action):
             case 'edit':
-                $permission->hasPermission('customfield', 'edit');
+                $this->permission->hasPermission('customfield', 'edit');
                 $data['fields'] = $fields->getFields($id);
 
                 if(isset($_POST) && !empty($_POST)){
@@ -637,36 +608,34 @@ class adminController extends controller{
                 }
             break;
             case 'delete':
-                $permission->hasPermission('customfield', 'delete');
+                $this->permission->hasPermission('customfield', 'delete');
                 $fields->fieldDelete($id);
             break;
             case 'add':
             default:
                 if(isset($_POST) && !empty($_POST)){
-                    $permission->hasPermission('customfield', 'add');
+                    $this->permission->hasPermission('customfield', 'add');
                     $fields->fieldInsert($_POST);
                     exit;
                 }
             break;
         endswitch;
 
-        $permission->hasPermission('customfield', 'view');
+        $this->permission->hasPermission('customfield', 'view');
         $this->loadTemplateInAdmin('admin/customfields', $data);
     }
 
 
     public function gateway($action = null, $dir = null){
-        $u = new User();
-        $u->verifyLogin();
+        $this->user->verifyLogin();
 
         $data = array('action' => $action);
         $gateways = new Gateways();
-        $permission = new Permissions();
         
         switch ($action):
             case 'config':
                 $dir = addslashes($dir);
-                $permission->hasPermission('gateway', 'edit');
+                $this->permission->hasPermission('gateway', 'edit');
                 if(isset($_POST) && !empty($_POST)){
                     $gateways->saveGateway($_POST, $dir);
                     exit;
@@ -678,17 +647,15 @@ class adminController extends controller{
             break;
         endswitch;
 
-        $permission->hasPermission('gateway', 'view');
+        $this->permission->hasPermission('gateway', 'view');
         $this->loadTemplateInAdmin('admin/gateway', $data);
     }
 
 
     public function financial($action = null, $id = null){
-        $u = new User();
-        $u->verifyLogin();
+        $this->user->verifyLogin();
 
         $data = array('action' => $action);
-        $permission = new Permissions();
         $transactions = new Transactions();
         
         $data['paid'] = $transactions->getPaid();
@@ -698,37 +665,35 @@ class adminController extends controller{
 
         switch ($action):
             case 'datatable':
-                $permission->hasPermission('financial', 'view');
+                $this->permission->hasPermission('financial', 'view');
                 $transactions->getDatatable();
                 exit;
             break;
         endswitch;
 
-        $permission->hasPermission('financial', 'view');
+        $this->permission->hasPermission('financial', 'view');
         $this->loadTemplateInAdmin('admin/financial', $data);
     }
 
     public function trash($action = null, $id = null){
-        $u = new User();
-        $u->verifyLogin();
+        $this->user->verifyLogin();
 
         $data = array('action' => $action);
         $trash = new Trash();
-        $permission = new Permissions();
 
         switch ($action):
             case 'restore':
-                $permission->hasPermission('trash', 'edit');
+                $this->permission->hasPermission('trash', 'edit');
                 $trash->restore($id);
                 exit;
             break;
             case 'delete':
-                $permission->hasPermission('trash', 'delete');
+                $this->permission->hasPermission('trash', 'delete');
                 $trash->delete($id);
                 exit;
             break;
             case 'clean':
-                $permission->hasPermission('trash', 'delete');
+                $this->permission->hasPermission('trash', 'delete');
                 $trash->clean();
                 header('Location: '.BASE_ADMIN.'/trash');
                 exit;
@@ -739,7 +704,7 @@ class adminController extends controller{
             break;
         endswitch;
 
-        $permission->hasPermission('trash', 'view');
+        $this->permission->hasPermission('trash', 'view');
         $this->loadTemplateInAdmin('admin/trash', $data);
     }
 
@@ -747,8 +712,8 @@ class adminController extends controller{
         $data = array('error' => '');
 
         if(isset($_POST['login']) && !empty($_POST['login'])){
-            $u = new User();
-            $data = json_decode($u->loginCheck($_POST), true);
+
+            $data = json_decode($this->user->loginCheck($_POST), true);
 
             if($data['icon'] == 'success'){
                 header('Location: '.BASE_ADMIN);
@@ -766,8 +731,7 @@ class adminController extends controller{
     }
 
     public function snippetspage(){
-        $u = new User();
-        $u->verifyLogin();
+        $this->user->verifyLogin();
 
         $widget = new Widget();
         $data = $widget->getWidget();
@@ -776,8 +740,7 @@ class adminController extends controller{
     }
 
     public function snippetsemail(){
-        $u = new User();
-        $u->verifyLogin();
+        $this->user->verifyLogin();
 
         $this->loadSnippets('snippets');
     }
