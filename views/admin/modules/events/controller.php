@@ -22,22 +22,22 @@
     ]);
 
     $events = new ModEvents();
-    $permission->hasPermission('mod/events', 'view');
+   $this->permission->hasPermission('mod/events', 'view');
     switch ($mod_action) {
         case 'save':
             if(isset($_POST) && !empty($_POST)){
                 if(empty($_POST['id'])){
-                    $permission->hasPermission('mod/events', 'add');
+                   $this->permission->hasPermission('mod/events', 'add');
                     $events->insert($_POST);
                 }else{
-                    $permission->hasPermission('mod/events', 'edit');
+                   $this->permission->hasPermission('mod/events', 'edit');
                     $events->update($_POST);
                 }
             }
             exit;
         break;
         case 'delete':
-            $permission->hasPermission('mod/events', 'delete');
+           $this->permission->hasPermission('mod/events', 'delete');
             $events->delete($_POST['id']);
             exit;
         break;

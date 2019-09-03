@@ -15,10 +15,10 @@
         'footer'  => false
     ]);
     
-    $permission->hasPermission('mod/slider', 'view');
+   $this->permission->hasPermission('mod/slider', 'view');
     switch ($mod_action) {
         case 'upload':
-            $permission->hasPermission('mod/slider', 'edit');
+           $this->permission->hasPermission('mod/slider', 'edit');
             require_once 'actions/uploadController.php';
             $upload = new uploadController();
             $upload->run();
@@ -26,7 +26,7 @@
             exit;
         break;
         case 'item':
-            $permission->hasPermission('mod/slider', 'view');
+           $this->permission->hasPermission('mod/slider', 'view');
             require_once 'actions/itemController.php';
             $save = new itemController();
             $save->run();
@@ -34,7 +34,7 @@
             exit;
         break;
         case 'save':
-            $permission->hasPermission('mod/slider', 'add');
+           $this->permission->hasPermission('mod/slider', 'add');
             require_once 'actions/saveController.php';
             $save = new saveController();
             $save->run();
@@ -42,7 +42,7 @@
             exit;
         break;
         case 'resize':
-            $permission->hasPermission('mod/slider', 'edit');
+           $this->permission->hasPermission('mod/slider', 'edit');
             require_once 'actions/resizeController.php';
             $resize = new resizeController();
             $resize->run();
@@ -50,7 +50,7 @@
             exit;
         break;
         case 'getfiles':
-            $permission->hasPermission('mod/slider', 'edit');
+           $this->permission->hasPermission('mod/slider', 'edit');
             require_once 'actions/getfilesController.php';
             $getfiles = new getfilesController();
             $getfiles->run();

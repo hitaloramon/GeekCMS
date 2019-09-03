@@ -65,13 +65,14 @@ pre.prettyprint {
     text-align: center;
 }
 
+.widget::before{
+    content: attr(data-widget);
+    display: grid;
+}
+
 
 .keditor-content-area{
     padding: 40px;
-}
-
-.keditor-container>.keditor-toolbar{
-    left: -34px;
 }
 
 .keditor-component .keditor-toolbar{
@@ -79,26 +80,36 @@ pre.prettyprint {
     left: -15px;
 }
 
-.keditor-container-content:before{
-    left: -36px;
-    right: -36px;
-}
-
-.widget::before{
-    content: attr(data-widget);
-    display: grid;
-}
-
-.keditor-component:before{
-    right: -15px;
-    left: -15px;
-}
-
-.keditor-container>.keditor-container-inner:before{
-    right: -15px;
-    left: -15px;
+.keditor-modal-header .keditor-snippets-filter, .keditor-modal-header .keditor-snippets-search {
+    background-color: #FFF;
 }
 
 .keditor-ui .fas {
     line-height: 2;
+}
+
+.keditor-component .keditor-toolbar{
+    background-color: rgb(27, 29, 39);
+    left: 0px;
+    top: -22px;
+    border-radius: 5px 5px 0px 0px;
+}
+
+
+/* CKEDITOR CSS  */
+div.cke_float[id*=cke_keditor-ui-]{
+    background: #1b1d27;
+    border-bottom: 1px solid #1e242c;
+}
+
+div.cke_float[id*=cke_keditor-ui-] .cke_inner{
+    background: #1b1d27;
+}
+
+a.cke_button_on{
+    background: #5a5a5a !important;
+    border: 1px #242a33 solid !important;
+}
+.cke_combo_text{
+    color: #CCC !important;
 }

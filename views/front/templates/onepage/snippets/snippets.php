@@ -85,25 +85,25 @@
 <!-------------------------------------------------------------------------------------------------->
 <!-- Container with content -->
 <!-------------------------------------------------------------------------------------------------->
-<div data-type="container" data-preview="https://i.imgur.com/g410Wfi.png" data-keditor-title="Lista de Artigos" data-keditor-categories="Texto;Cabeçalho;Imagem">
+<div data-type="container" data-preview="<?= $base_img; ?>articles_list.png" data-keditor-title="Lista de Artigos" data-keditor-categories="Texto;Cabeçalho;Imagem">
     <div class="row">
         <div class="col-sm-4 ui-resizable" data-type="container-content">
             <div data-type="component-text">
-                <img src="https://i.imgur.com/FbMgjfM.png" width="100%" height="" style="display: inline-block;" class="img-circle img-responsive">
+                <img src="http://i.imgur.com/FbMgjfM.png" width="100%" height="" style="display: inline-block;" class="img-circle img-responsive">
                 <h3 style="text-align: center;">Lorem ipsum</h3>
                 <p style="text-align: center;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel, alias, temporibus? Vero natus modi ipsa debitis, accusamus accusantium cum quam. Saepe atque quisquam pariatur voluptatem expedita reprehenderit et vitae.</p>
             </div>
         </div>
         <div class="col-sm-4 ui-resizable" data-type="container-content">
             <div data-type="component-text">
-                <img src="https://i.imgur.com/FbMgjfM.png" width="100%" height="" style="display: inline-block;" class="img-circle img-responsive">
+                <img src="http://i.imgur.com/FbMgjfM.png" width="100%" height="" style="display: inline-block;" class="img-circle img-responsive">
                 <h3 style="text-align: center;">Lorem ipsum</h3>
                 <p style="text-align: center;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, aut, earum. Quod, debitis, delectus. Maxime eius ipsam sit dolorum perspiciatis obcaecati consectetur, explicabo reprehenderit repellat tempore eos ducimus!</p>
             </div>
         </div>
         <div class="col-sm-4 ui-resizable" data-type="container-content">
             <div data-type="component-text">
-                <img src="https://i.imgur.com/FbMgjfM.png" width="100%" height="" style="display: inline-block;" class="img-circle img-responsive">
+                <img src="http://i.imgur.com/FbMgjfM.png" width="100%" height="" style="display: inline-block;" class="img-circle img-responsive">
                 <h3 style="text-align: center;">Lorem ipsum</h3>
                 <p style="text-align: center;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil voluptatibus dicta corrupti aliquam, natus voluptatem pariatur quidem nostrum nisi corporis id ratione exercitationem et recusandae incidunt assumenda soluta qui odit.</p>
             </div>
@@ -114,9 +114,9 @@
 <div data-type="container" data-preview="<?= $base_img; ?>featured_article.png" data-keditor-title="Artigo de Destaque" data-keditor-categories="Texto;Cabeçalho;Imagem">
     <div class="row">
         <div class="col-sm-6" data-type="container-content">
-            <div data-type="component-photo">
+            <div data-type="component-text">
                 <div class="photo-panel" style="text-align: center;">
-                    <img src="<?= $base_img; ?>sydney_australia_squared.jpg" width="100%" height="" style="display: inline-block; height: 334px; width: 334px;" class="img-responsive img-circle">
+                    <img src="<?= $base_img; ?>photo.png" width="100%" height="" style="display: inline-block; height: 334px; width: 334px;" class="img-responsive img-circle">
                 </div>
             </div>
         </div>

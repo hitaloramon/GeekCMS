@@ -280,9 +280,9 @@
     <script src="<?php echo BASE; ?>/assets/plugins/moment/moment.min.js"></script>
     <script src="<?php echo BASE; ?>/assets/plugins/bootstrap-select/bootstrap-select.min.js"></script>
     <script src="<?php echo BASE; ?>/assets/plugins/ruler/ruler.js"></script>
+    <script src="<?php echo BASE; ?>/assets/plugins/editor/ckeditor/ckeditor.js"></script>
     <script src="<?php echo BASE; ?>/assets/plugins/editor/js/keditor.js"></script>
     <script src="<?php echo BASE; ?>/assets/plugins/editor/js/keditor-components.js"></script>
-    <script src="<?php echo BASE; ?>/assets/plugins/editor/ckeditor/ckeditor.js" data-type="ckeditor-script"></script>
     
     <?php echo Asset::outputScripts('footer'); ?>
     <script src="<?php echo BASE; ?>/assets/js/geekcms.js"></script>

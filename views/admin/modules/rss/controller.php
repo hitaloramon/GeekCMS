@@ -5,17 +5,17 @@
 ?>
 <?php
     $rss = new ModRss();
-    $permission->hasPermission('mod/rss', 'view');
+   $this->permission->hasPermission('mod/rss', 'view');
     switch ($mod_action) {
         case 'add':
-            $permission->hasPermission('mod/rss', 'add');
+           $this->permission->hasPermission('mod/rss', 'add');
             if(isset($_POST) && !empty($_POST)){
                 $rss->insert($_POST);
                 exit;
             }
         break;
         case 'edit':
-            $permission->hasPermission('mod/rss', 'edit');
+           $this->permission->hasPermission('mod/rss', 'edit');
             $data['rss'] = $rss->getRss($mod_id);
             if(isset($_POST) && !empty($_POST)){
                 $rss->update($_POST, $mod_id);
@@ -23,7 +23,7 @@
             }
         break;
         case 'delete':
-            $permission->hasPermission('mod/rss', 'delete');
+           $this->permission->hasPermission('mod/rss', 'delete');
             $rss->delete($mod_id);
             exit;
         break;

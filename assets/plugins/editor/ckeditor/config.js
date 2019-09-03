@@ -8,6 +8,8 @@ CKEDITOR.editorConfig = function( config ) {
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
 
+	config.defaultLanguage = 'pt-br';
+
 	config.filebrowserBrowseUrl = localStorage.getItem('SITEURL') + '/libs/filemanager/dialog.php?type=2&editor=ckeditor&fldr=uploads';
 	config.filebrowserImageBrowseUrl = localStorage.getItem('SITEURL') + '/libs/filemanager/dialog.php?type=2&editor=ckeditor&fldr=uploads';
 	config.filebrowserFlashBrowseUrl = localStorage.getItem('SITEURL') + '/libs/filemanager/dialog.php?type=2&editor=ckeditor&fldr=uploads';
