@@ -186,7 +186,7 @@ function mysqlDate(date){
     return dateVar.toISOString().split("T")[0].substr(0, 10).split('-').reverse().join('/');
 }
 
-$('#form-geek').submit(function(event){
+$('#form-geek button[type="submit"]').click(function(event) {
     event.preventDefault();
     $("#btn_submit").prop("disabled", true);
     $('.form-control-feedback').html('');

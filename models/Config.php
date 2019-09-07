@@ -46,6 +46,8 @@
             }else{
                 $data['transaction_notify'] = implode(',', $data['transaction_notify']);
             }
+
+            $data['site_footer'] = htmlentities($data['site_footer']);
             
             if($data > 0){
                 foreach ($data as $configKey => $configValue) {

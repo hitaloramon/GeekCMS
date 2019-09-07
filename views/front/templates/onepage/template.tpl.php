@@ -3,7 +3,8 @@
 	 die('Acesso direto negado');
  }
 ?>
-<?php $body = $this->renderPage($viewData); ?>
+<?php $body = $this->renderPage($viewData['body']); ?>
+<?php $footer = $this->renderPage($this->config['site_footer']); ?>
 <!DOCTYPE html>
 <html lang="<?php echo str_replace("_", "-", $this->config['site_locale']); ?>">
 <head>
@@ -131,6 +132,11 @@
  	</div> <!--  page wrapper Close Tag -->
 	</div> <!-- Main Wrapper Close Tag -->
 	<div class="footer3 font-14">
+		<?php if(!empty($footer)): ?>
+			<div class="container p-t-20">
+				<?php echo $footer; ?>
+			</div>
+		<?php endif; ?>
 		<div class="f3-bottom-bar mt-4">
 			<div class="container">
 				<div class="font-medium text-center text-white"><?php echo $this->config['site_name']; ?> <?php echo date('Y'); ?> © Todos os Direitos Reservados.</div>

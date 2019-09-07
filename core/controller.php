@@ -51,42 +51,91 @@
             }
         }
 
-        public function renderPage($viewData = array()){
-            $body = html_entity_decode($viewData['body']);
+        public function renderPage($body){
+            $body = html_entity_decode($body);
             preg_match_all("/{{(.*?)}}/", $body, $matches);
             if ($matches[1]) {
-                foreach ($matches[1] as $key => $widget) {
-                    $widget = explode('|', $widget);
-                    if (file_exists('views/front/widgets/'.$widget[0].'/'.$this->config['site_theme'].'/main.php')) {
-                        ob_start();
-                        include ('views/front/widgets/'.$widget[0].'/'.$this->config['site_theme'].'/main.php');
-                        $contents = ob_get_contents();
-                        ob_clean();
-                        $body = str_replace($matches[0][$key], $contents, $body);
-                        if(file_exists('views/front/widgets/'.$widget[0].'/'.$this->config['site_theme'].'/js/script.js')){
-                            Asset::add('script', ['name' => $widget[0], 'url'  => ''.BASE.'/views/front/widgets/'.$widget[0].'/'.$this->config['site_theme'].'/js/script.js']);
-                        }
+                foreach ($matches[1] as $key => $result) {
+                    $info = explode('|', $result);
 
-                        if(file_exists('views/front/widgets/'.$widget[0].'/'.$this->config['site_theme'].'/css/style.css')){
-                            Asset::add('style', ['name' => $widget[0], 'url'  => ''.BASE.'/views/front/widgets/'.$widget[0].'/'.$this->config['site_theme'].'/css/style.js']);
-                        }
-                    } else {
-                        if (file_exists('views/front/widgets/'.$widget[0].'/main.php')) {
+                    // Check is Widget
+                    if($info[0] == 'widget'){
+                        if (file_exists('views/front/widgets/'.$info[1].'/'.$this->config['site_theme'].'/main.php')) {
                             ob_start();
-                            include ('views/front/widgets/'.$widget[0].'/main.php');
+                            include ('views/front/widgets/'.$info[1].'/'.$this->config['site_theme'].'/main.php');
                             $contents = ob_get_contents();
                             ob_clean();
                             $body = str_replace($matches[0][$key], $contents, $body);
-                            
-                            if(file_exists('views/front/widgets/'.$widget[0].'/js/script.js')){
-                                Asset::add('script', ['name' => $widget[0], 'url'  => ''.BASE.'/views/front/widgets/'.$widget[0].'/js/script.js']);
+                            if(file_exists('views/front/widgets/'.$info[1].'/'.$this->config['site_theme'].'/js/script.js')){
+                                Asset::add('script', ['name' => $info[1], 'url'  => ''.BASE.'/views/front/widgets/'.$info[1].'/'.$this->config['site_theme'].'/js/script.js']);
                             }
-
-                            if(file_exists('views/front/widgets/'.$widget[0].'/css/style.css')){
-                                Asset::add('style', ['name' => $widget[0], 'url'  => ''.BASE.'/views/front/widgets/'.$widget[0].'/css/style.css']);
+    
+                            if(file_exists('views/front/widgets/'.$info[1].'/'.$this->config['site_theme'].'/css/style.css')){
+                                Asset::add('style', ['name' => $info[1], 'url'  => ''.BASE.'/views/front/widgets/'.$info[1].'/'.$this->config['site_theme'].'/css/style.js']);
+                            }
+                        } else {
+                            if (file_exists('views/front/widgets/'.$info[1].'/main.php')) {
+                                ob_start();
+                                include ('views/front/widgets/'.$info[1].'/main.php');
+                                $contents = ob_get_contents();
+                                ob_clean();
+                                $body = str_replace($matches[0][$key], $contents, $body);
+                                
+                                if(file_exists('views/front/widgets/'.$info[1].'/js/script.js')){
+                                    Asset::add('script', ['name' => $info[1], 'url'  => ''.BASE.'/views/front/widgets/'.$info[1].'/js/script.js']);
+                                }
+    
+                                if(file_exists('views/front/widgets/'.$info[1].'/css/style.css')){
+                                    Asset::add('style', ['name' => $info[1], 'url'  => ''.BASE.'/views/front/widgets/'.$info[1].'/css/style.css']);
+                                }
                             }
                         }
                     }
+
+                    // Check is Module
+                    if($info[0] == 'module'){
+                        if (file_exists('views/front/modules/'.$info[1].'/'.$this->config['site_theme'].'/main.php')) {
+                            ob_start();
+                            include ('views/front/modules/'.$info[1].'/'.$this->config['site_theme'].'/main.php');
+                            $contents = ob_get_contents();
+                            ob_clean();
+                            $body = str_replace($matches[0][$key], $contents, $body);
+                            if(file_exists('views/front/modules/'.$info[1].'/'.$this->config['site_theme'].'/js/script.js')){
+                                Asset::add('script', ['name' => $info[1], 'url'  => ''.BASE.'/views/front/modules/'.$info[1].'/'.$this->config['site_theme'].'/js/script.js']);
+                            }
+    
+                            if(file_exists('views/front/modules/'.$info[1].'/'.$this->config['site_theme'].'/css/style.css')){
+                                Asset::add('style', ['name' => $info[1], 'url'  => ''.BASE.'/views/front/modules/'.$info[1].'/'.$this->config['site_theme'].'/css/style.js']);
+                            }
+                        } else {
+                            if (file_exists('views/front/modules/'.$info[1].'/main.php')) {
+                                ob_start();
+                                include ('views/front/modules/'.$info[1].'/main.php');
+                                $contents = ob_get_contents();
+                                ob_clean();
+                                $body = str_replace($matches[0][$key], $contents, $body);
+                                
+                                if(file_exists('views/front/modules/'.$info[1].'/js/script.js')){
+                                    Asset::add('script', ['name' => $info[1], 'url'  => ''.BASE.'/views/front/modules/'.$info[1].'/js/script.js']);
+                                }
+    
+                                if(file_exists('views/front/modules/'.$info[1].'/css/style.css')){
+                                    Asset::add('style', ['name' => $info[1], 'url'  => ''.BASE.'/views/front/modules/'.$info[1].'/css/style.css']);
+                                }
+                            }
+                        }
+                    }
+
+                    if($info[0] == 'page'){
+                        if(file_exists('views/front/templates/'.$this->config['site_theme'].'/pages/'.$info[1].'.php')){
+                            ob_start();
+                            include ('views/front/templates/'.$this->config['site_theme'].'/pages/'.$info[1].'.php');
+                            $contents = ob_get_contents();
+                            ob_clean();
+                            $body = str_replace($matches[0][$key], $contents, $body);
+                        }
+                    }
+                    
                 }
                 
             }

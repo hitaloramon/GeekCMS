@@ -1,10 +1,11 @@
 <?php $base_img = $this->config['site_url'].'/'.$this->config['site_dir'].'/views/front/templates/'.$this->config['site_theme'].'/snippets/preview/';?>
 <?php $widget_img = $this->config['site_url'].'/'.$this->config['site_dir'].'/views/front/widgets/';?>
+<?php $module_img = $this->config['site_url'].'/'.$this->config['site_dir'].'/views/admin/modules/';?>
 
 <!-------------------------------------------------------------------------------------------------->
 <!-- Containers -->
 <!-------------------------------------------------------------------------------------------------->
-<div data-type="container" data-preview="<?= $base_img; ?>row_12.png" data-keditor-title="Container" data-keditor-categories="Colunas">
+<div data-type="container" data-preview="<?= $base_img; ?>container.svg" data-keditor-title="Container" data-keditor-categories="Colunas">
     <div class="container">
         <div class="row">
             <div class="col-sm-12" data-type="container-content">
@@ -13,14 +14,14 @@
     </div>
 </div>
 
-<div data-type="container" data-preview="<?= $base_img; ?>row_12.png" data-keditor-title="1 Coluna" data-keditor-categories="Colunas">
+<div data-type="container" data-preview="<?= $base_img; ?>row_12.svg" data-keditor-title="1 Coluna" data-keditor-categories="Colunas">
     <div class="row">
         <div class="col-sm-12" data-type="container-content">
         </div>
     </div>
 </div>
 
-<div data-type="container" data-preview="<?= $base_img; ?>row_6_6.png" data-keditor-title="2 Colunas (50% - 50%)" data-keditor-categories="Colunas">
+<div data-type="container" data-preview="<?= $base_img; ?>row_6_6.svg" data-keditor-title="2 Colunas (50% - 50%)" data-keditor-categories="Colunas">
     <div class="row">
         <div class="col-sm-6" data-type="container-content">
         </div>
@@ -29,7 +30,7 @@
     </div>
 </div>
 
-<div data-type="container" data-preview="<?= $base_img; ?>row_4_8.png" data-keditor-title="2 Colunas (33% - 67%)" data-keditor-categories="Colunas">
+<div data-type="container" data-preview="<?= $base_img; ?>row_4_8.svg" data-keditor-title="2 Colunas (33% - 67%)" data-keditor-categories="Colunas">
     <div class="row">
         <div class="col-sm-4" data-type="container-content">
         </div>
@@ -38,7 +39,7 @@
     </div>
 </div>
 
-<div data-type="container" data-preview="<?= $base_img; ?>row_8_4.png" data-keditor-title="2 Colunas (67% - 33%)" data-keditor-categories="Colunas">
+<div data-type="container" data-preview="<?= $base_img; ?>row_8_4.svg" data-keditor-title="2 Colunas (67% - 33%)" data-keditor-categories="Colunas">
     <div class="row">
         <div class="col-sm-8" data-type="container-content">
         </div>
@@ -47,7 +48,7 @@
     </div>
 </div>
 
-<div data-type="container" data-preview="<?= $base_img; ?>row_4_4_4.png" data-keditor-title="3 Colunas (33% - 33% - 33%)" data-keditor-categories="Colunas">
+<div data-type="container" data-preview="<?= $base_img; ?>row_4_4_4.svg" data-keditor-title="3 Colunas (33% - 33% - 33%)" data-keditor-categories="Colunas">
     <div class="row">
         <div class="col-sm-4" data-type="container-content">
         </div>
@@ -58,7 +59,7 @@
     </div>
 </div>
 
-<div data-type="container" data-preview="<?= $base_img; ?>row_3_6_3.png" data-keditor-title="3 Colunas (25% - 50% - 25%)" data-keditor-categories="Colunas">
+<div data-type="container" data-preview="<?= $base_img; ?>row_3_6_3.svg" data-keditor-title="3 Colunas (25% - 50% - 25%)" data-keditor-categories="Colunas">
     <div class="row">
         <div class="col-sm-3" data-type="container-content">
         </div>
@@ -69,7 +70,7 @@
     </div>
 </div>
 
-<div data-type="container" data-preview="<?= $base_img; ?>row_3_3_3_3.png" data-keditor-title="4 Colunas (25% - 25% - 25% - 25%)" data-keditor-categories="Colunas">
+<div data-type="container" data-preview="<?= $base_img; ?>row_3_3_3_3.svg" data-keditor-title="4 Colunas (25% - 25% - 25% - 25%)" data-keditor-categories="Colunas">
     <div class="row">
         <div class="col-sm-3" data-type="container-content">
         </div>
@@ -132,13 +133,6 @@
 <!-------------------------------------------------------------------------------------------------->
 <!-- Components -->
 <!-------------------------------------------------------------------------------------------------->
-<div data-type="component-text" data-preview="<?= $base_img; ?>page_header.png" data-keditor-title="Page header" data-keditor-categories="Texto;Cabeçalho;Bootstrap">
-    <div class="page-header">
-        <h1 style="margin-bottom: 30px; font-size: 50px;"><b class="text-uppercase">Cras justo odio</b> <small>Donec id elit non mi</small></h1>
-        <p class="lead"><em>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</em></p>
-    </div>
-</div>
-
 <div data-type="component-text" data-preview="<?= $base_img; ?>text.png" data-keditor-title="Bloco de Texto" data-keditor-categories="Texto">
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro labore architecto fuga tempore omnis aliquid, rerum numquam deleniti ipsam earum velit aliquam deserunt, molestiae officiis mollitia accusantium suscipit fugiat esse magnam eaque cumque, iste corrupti magni? Illo dicta saepe, maiores fugit aliquid consequuntur aut, rem ex iusto dolorem molestias obcaecati eveniet vel voluptatibus recusandae illum, voluptatem! Odit est possimus nesciunt.</p>
 </div>
@@ -200,11 +194,6 @@
     <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
 </div>
 
-<div data-type="component-text" data-preview="<?= $base_img; ?>heading_2.png" data-keditor-title="Cabeçalho 2" data-keditor-categories="Texto;Cabeçalho">
-    <h2>Heading text 2</h2>
-    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-</div>
-
 <div data-type="component-text" data-preview="<?= $base_img; ?>media_panel.png" data-keditor-title="Media Panel" data-keditor-categories="Mídia;Imagem;Bootstrap">
     <div class="media">
         <div class="media-left">
@@ -219,13 +208,64 @@
     </div>
 </div>
 
-<?php foreach ($viewData as $widget): ?>
+<div data-type="component-text" data-preview="<?= $base_img; ?>media_panel.png" data-keditor-title="Teste" data-keditor-categories="Mídia;Imagem;Bootstrap">
+    <a href="#" class="btn btn-info">Botão</a>
+</div>
+
+
+<!-------------------------------------------------------------------------------------------------->
+<!-- Widgets -->
+<!-------------------------------------------------------------------------------------------------->
+<?php foreach ($viewData['widget'] as $widget): ?>
     <div data-type="component-component" data-preview="<?= $widget_img.$widget['widget_alias'].'/thumb.svg';?>" data-keditor-title="<?= $widget['title']; ?>" data-keditor-categories="Componentes">
-        <div class="widget" data-widget="<?= $widget['title']; ?>">{{<?= $widget['widget_alias']; ?>|<?= $widget['widget_data']; ?>}}</div>
+        <div class="widget" data-widget="<?= $widget['title']; ?>">{{widget|<?= $widget['widget_alias']; ?>|<?= $widget['widget_data']; ?>}}</div>
     </div>
 <?php endforeach ?>
 
-<!-- <div data-type="component-nonExisting" data-preview="snippets/preview/text.png" data-website="website01" data-blog="blog01" data-article="article01" data-tags="tag01,tag02" data-keditor-title="Text block with dynamic content" data-keditor-categories="Text;Dynamic component">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro labore architecto fuga tempore omnis aliquid, rerum numquam deleniti ipsam earum velit aliquam deserunt, molestiae officiis mollitia accusantium suscipit fugiat esse magnam eaque cumque, iste corrupti magni? Illo dicta saepe, maiores fugit aliquid consequuntur aut, rem ex iusto dolorem molestias obcaecati eveniet vel voluptatibus recusandae illum, voluptatem! Odit est possimus nesciunt.</p>
-    <div data-dynamic-href="snippets/dynamic_content.html"></div>
-</div> -->
+<!-------------------------------------------------------------------------------------------------->
+<!-- Modules -->
+<!-------------------------------------------------------------------------------------------------->
+<?php foreach ($viewData['module'] as $module): ?>
+    <div data-type="component-component" data-preview="<?= $module_img.$module['module_alias'].'/thumb.svg';?>" data-keditor-title="<?= $module['title']; ?>" data-keditor-categories="Módulos">
+        <div class="widget" data-widget="<?= $module['title']; ?>">{{module|<?= $module['module_alias']; ?>|<?= $module['id']; ?>}}</div>
+    </div>
+<?php endforeach ?>
+
+<!-------------------------------------------------------------------------------------------------->
+<!-- System Pages  -->
+<!-------------------------------------------------------------------------------------------------->
+<div data-type="component-component" data-preview="<?= $base_img; ?>page.svg" data-keditor-title="Página de Ativação" data-keditor-categories="Páginas">
+    <div class="container">
+        <div class="widget" data-widget="Página de Ativação">{{page|activate}}</div>
+    </div>
+</div>
+
+<div data-type="component-component" data-preview="<?= $base_img; ?>page.svg" data-keditor-title="Página de Perfil" data-keditor-categories="Páginas">
+    <div class="container">
+        <div class="widget" data-widget="Página de Perfil">{{page|profile}}</div>
+    </div>
+</div>
+
+<div data-type="component-component" data-preview="<?= $base_img; ?>page.svg" data-keditor-title="Página de Cadastro" data-keditor-categories="Páginas">
+    <div class="container">
+        <div class="widget" data-widget="Página de Cadastro">{{page|register}}</div>
+    </div>
+</div>
+
+<div data-type="component-component" data-preview="<?= $base_img; ?>page.svg" data-keditor-title="Página de Login" data-keditor-categories="Páginas">
+    <div class="container">
+        <div class="widget" data-widget="Página de Login">{{page|login}}</div>
+    </div>
+</div>
+
+<div data-type="component-component" data-preview="<?= $base_img; ?>page.svg" data-keditor-title="Página de Pesquisa" data-keditor-categories="Páginas">
+    <div class="container">
+        <div class="widget" data-widget="Página de Pesquisa">{{page|search}}</div>
+    </div>
+</div>
+
+<div data-type="component-component" data-preview="<?= $base_img; ?>page.svg" data-keditor-title="Página de Conta" data-keditor-categories="Páginas">
+    <div class="container">
+        <div class="widget" data-widget="Página de Conta">{{page|account}}</div>
+    </div>
+</div>

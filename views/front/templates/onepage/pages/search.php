@@ -15,17 +15,21 @@
       $page = new Page();
       $search = $page->pageSearch($_GET['busca']);
       if(is_array($search)):
+        echo '<div class="container">';
         echo '<h3 class="page-title m-t-40 m-b-40">Resultados da busca para: "'.$_GET['busca'].'"</h3>Total de Resultados: ';
         echo count($search);
-        foreach ($search as $s): 
+        foreach ($search as $s):
     ?>
-          <h4 class="title"><a href="<?php echo BASE .'/'. $s['slug']; ?>"><?php echo $s['title']; ?></a></h4>
+          <h4 class="title">
+            <a href="<?php echo BASE .'/'. $s['slug']; ?>"><?php echo $s['title']; ?></a>
+          </h4>
           <?php 
-            $body = strip_tags(html_entity_decode($s['body']));
-            echo strlen($body) >= 400 ? substr($body, 0, 390) . '<a href="'.BASE .'/'. $s['slug'].'"> [Leia Mais]</a>' : $body;
+            $body_search = strip_tags(html_entity_decode($s['body']));
+            echo strlen($body_search) >= 400 ? substr($body_search, 0, 390) . '...<br><a href="'.BASE .'/'. $s['slug'].'"> [Leia Mais]</a>' : $body_search;
           ?>
           <hr>
     <?php endforeach; ?> 
+    <?php echo '</div>'; ?>
     <?php endif; ?>
   <?php else: ?>
     <div class="m-t-40 m-b-40">

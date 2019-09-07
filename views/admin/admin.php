@@ -41,7 +41,6 @@
     <script src="<?php echo BASE; ?>/assets/plugins/jqueryui/jquery-ui.min.js"></script>
     <script>
         function responsive_filemanager_callback(field_id){
-            alert('entrou');
             if(field_id){
                 console.log(field_id);
                 var url=jQuery('#'+field_id).val();
@@ -202,23 +201,6 @@
                         </ul>
                     </div>
                 </li>
-                <li class="<?php menuAdminActive(['widget']); ?>"><a href="javascript:void(0)"><i class="mdi mdi-widgets"></i></a>
-                    <div class="sidebarmenu">
-                        <h3 class="menu-title">Componentes</h3>
-                        <ul class="sidebar-menu">
-                            <li><a href="<?php echo BASE_ADMIN; ?>/widget/add">Adicionar Componente</a></li>
-                            <li><a href="<?php echo BASE_ADMIN; ?>/widget">Gerenciar Componente</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="<?php menuAdminActive(['layout']); ?>"><a href="javascript:void(0)"><i class="mdi mdi-page-layout-body"></i></a>
-                    <div class="sidebarmenu">
-                        <h3 class="menu-title">Layout</h3>
-                        <ul class="sidebar-menu">
-                            <li><a href="<?php echo BASE_ADMIN; ?>/layout">Gerenciar Layout</a></li>
-                        </ul>
-                    </div>
-                </li>
                 <li class="<?php menuAdminActive(['user']); ?>"><a href="javascript:void(0)"><i class="mdi mdi-account-multiple"></i></a>
                     <div class="sidebarmenu">
                         <h3 class="menu-title">Usuários</h3>
@@ -294,17 +276,81 @@
                 containerSettingEnabled: true,
                 containerSettingInitFunction: function (form, keditor) {
 
-                        // Padding
-                        form.append(
-                            '<div class="form-horizontal">' +
-                            '   <div class="form-group">' +
-                            '       <div class="col-sm-12">' +
-                            '           <label>Espaçamento</label>' +
-                            '           <input type="number" class="form-control config-padding" />' +
-                            '       </div>' +
-                            '   </div>' +
-                            '</div>'
-                        );
+                        form.append(`
+                        <div id="accordion">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                    <a class="btn" data-toggle="collapse" data-target="#spaceCollapse" aria-expanded="false" aria-controls="spaceCollapse">Dimensões</a>
+                                </h5>
+                                </div>
+
+                                <div id="spaceCollapse" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <div class="form-horizontal">
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <label>Espaçamento</label>
+                                                    <input type="number" class="form-control config-padding" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingTwo">
+                                <h5 class="mb-0">
+                                    <a class="btn btn-link collapsed" data-toggle="collapse" data-target="#backgroundCollapse" aria-expanded="false" aria-controls="backgroundCollapse">Decoração</a>
+                                </h5>
+                                </div>
+                                <div id="backgroundCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <div class="form-horizontal">
+                                            <div class="form-group">
+                                                <div class="col-sm-12 mb-2">
+                                                    <label>Cor de Fundo</label>
+                                                    <input type="text" placeholder="Hexadecimal ou RGB" class="form-control config-bg-color" />
+                                                </div>
+                                                <div class="col-sm-12 mb-2">
+                                                    <label>Imagem de Fundo</label>
+                                                    <input type="text" placeholder="URL da Imagem" class="form-control config-bg-img" />
+                                                </div>
+                                                <div class="col-sm-12 mb-2">
+                                                    <label>Repetir</label>
+                                                    <select class="config-bg-repeat form-control">
+                                                        <option value="no-repeat">Não repetir</option>
+                                                        <option value="repeat">Repetir</option>
+                                                        <option value="repeat-x">Repetir em X</option>
+                                                        <option value="repeat-y">Repetir em Y</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-12 mb-2">
+                                                    <label>Tamanho</label>
+                                                    <select class="config-bg-size form-control">
+                                                        <option value="auto">Auto</option>
+                                                        <option value="cover">Cover</option>
+                                                        <option value="contain">Contain</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `);
+
+                        // // Padding
+                        // form.append(
+                        //     '<div class="form-horizontal">' +
+                        //     '   <div class="form-group">' +
+                        //     '       <div class="col-sm-12">' +
+                        //     '           <label>Espaçamento</label>' +
+                        //     '           <input type="number" class="form-control config-padding" />' +
+                        //     '       </div>' +
+                        //     '   </div>' +
+                        //     '</div>'
+                        // );
 
                         form.find('.config-padding').on('change', function () {
                             var container = keditor.getSettingContainer();
@@ -319,38 +365,38 @@
                         });
 
                         
-                        // Background
-                        form.append(
-                            '<div class="form-horizontal">' +
-                            '   <div class="form-group">' +
-                            '       <div class="col-sm-12 mb-2">' +
-                            '           <label>Cor de Fundo</label>' +
-                            '           <input type="text" class="form-control config-bg-color" />' +
-                            '       </div>' +
-                            '       <div class="col-sm-12 mb-2">' +
-                            '           <label>Imagem de Fundo</label>' +
-                            '           <input type="text" placeholder="URL da Imagem" class="form-control config-bg-img" />' +
-                            '       </div>' +
-                            '       <div class="col-sm-12 mb-2">' +
-                            '           <label>Repetir</label>' +
-                            '           <select class="config-bg-repeat form-control">'+
-                            '               <option value="no-repeat">Não repetir</option>'+
-                            '               <option value="repeat">Repetir</option>'+
-                            '               <option value="repeat-x">Repetir em X</option>'+
-                            '               <option value="repeat-y">Repetir em Y</option>'+
-                            '           </select>' +
-                            '       </div>' +
-                            '       <div class="col-sm-12 mb-2">' +
-                            '           <label>Tamanho</label>' +
-                            '           <select class="config-bg-size form-control">'+
-                            '               <option value="auto">Auto</option>'+
-                            '               <option value="cover">Cover</option>'+
-                            '               <option value="contain">Contain</option>'+
-                            '           </select>' +
-                            '       </div>' +
-                            '   </div>' +
-                            '</div>'
-                        );
+                        // // Background
+                        // form.append(
+                        //     '<div class="form-horizontal">' +
+                        //     '   <div class="form-group">' +
+                        //     '       <div class="col-sm-12 mb-2">' +
+                        //     '           <label>Cor de Fundo</label>' +
+                        //     '           <input type="text" class="form-control config-bg-color" />' +
+                        //     '       </div>' +
+                        //     '       <div class="col-sm-12 mb-2">' +
+                        //     '           <label>Imagem de Fundo</label>' +
+                        //     '           <input type="text" placeholder="URL da Imagem" class="form-control config-bg-img" />' +
+                        //     '       </div>' +
+                        //     '       <div class="col-sm-12 mb-2">' +
+                        //     '           <label>Repetir</label>' +
+                        //     '           <select class="config-bg-repeat form-control">'+
+                        //     '               <option value="no-repeat">Não repetir</option>'+
+                        //     '               <option value="repeat">Repetir</option>'+
+                        //     '               <option value="repeat-x">Repetir em X</option>'+
+                        //     '               <option value="repeat-y">Repetir em Y</option>'+
+                        //     '           </select>' +
+                        //     '       </div>' +
+                        //     '       <div class="col-sm-12 mb-2">' +
+                        //     '           <label>Tamanho</label>' +
+                        //     '           <select class="config-bg-size form-control">'+
+                        //     '               <option value="auto">Auto</option>'+
+                        //     '               <option value="cover">Cover</option>'+
+                        //     '               <option value="contain">Contain</option>'+
+                        //     '           </select>' +
+                        //     '       </div>' +
+                        //     '   </div>' +
+                        //     '</div>'
+                        // );
 
                         form.find('.config-bg-color').on('change', function () {
                             var container = keditor.getSettingContainer();
@@ -362,7 +408,6 @@
                             }
 
                             if(this.value != 'url("")'){
-                                console.log('entrou');
                                 row.css('background-color', this.value);
                             }
                         });

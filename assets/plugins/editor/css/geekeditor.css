@@ -59,9 +59,9 @@ pre.prettyprint {
 }
 
 .widget {
-    background-color: #e3e3e3;
+    background-color: #EBEFF3;
     padding: 20px;
-    margin: 0px -15px;
+    border: 1px dashed #C9D3DF;
     text-align: center;
 }
 
@@ -70,18 +70,38 @@ pre.prettyprint {
     display: grid;
 }
 
+.keditor-component:before{
+    border: 1px dashed #e3e3e3;
+}
+
+.keditor-container>.keditor-container-inner:before{
+    left: -17px;
+    right: -17px;
+}
+
+.keditor-container-content{
+    padding: 0px;
+}
 
 .keditor-content-area{
     padding: 40px;
 }
 
-.keditor-component .keditor-toolbar{
-    background-color: rgb(36, 42, 51);
-    left: -15px;
+.keditor-modal-header, .keditor-modal-header .keditor-snippets-filter, .keditor-modal-header .keditor-snippets-search{
+    background: #1b1d27;
+    color: white;
 }
 
-.keditor-modal-header .keditor-snippets-filter, .keditor-modal-header .keditor-snippets-search {
-    background-color: #FFF;
+.keditor-container>.keditor-toolbar{
+    left: -36px;
+}
+
+.keditor-ui.keditor-setting-form.active .card{
+    margin: 0px;
+}
+
+.keditor-sidebar-body .keditor-setting-form{
+    padding: 0;
 }
 
 .keditor-ui .fas {
@@ -90,7 +110,6 @@ pre.prettyprint {
 
 .keditor-component .keditor-toolbar{
     background-color: rgb(27, 29, 39);
-    left: 0px;
     top: -22px;
     border-radius: 5px 5px 0px 0px;
 }

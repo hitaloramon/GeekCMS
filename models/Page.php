@@ -66,7 +66,7 @@
 
         public function getWidgetLayoutFront($slug, $typepage = true){
             $array = array();
-            $data = ($typepage) ? "l.page_slug = '" . $slug . "'" : "l.modalias = '" . $modalias . "'";
+            $data = ($typepage) ? "l.page_slug = '" . $slug . "'" : "l.modalias = ''";
             $array = $this->db->fetchAll("SELECT l.*, w.title, w.body, w.widget_alias, w.widget_data, w.hasconfig, w.system, w.show_title, w.show_order, w.container FROM layout AS l INNER JOIN widgets AS w ON w.id = l.plug_id WHERE {$data} AND w.active = 1 ORDER BY l.position ASC");
             return ($array) ? $array : 0;
         }
@@ -102,6 +102,26 @@
                 $array_data['membership_id'] = implode(',', $array_data['membership_id']);
             }
 
+            // Check Module
+            preg_match_all("/{{(module.*?)}}/", $array_data['body'], $matches);
+
+            if(!empty($matches[1])){
+                $matches = explode('|', $matches[1][0]);
+                $array_data['module_name'] = $matches[1];
+                $array_data['module_id'] = $matches[2];
+            }
+
+            // Check Page Type
+            preg_match_all("/{{(page.*?)}}/", $array_data['body'], $matches);
+            if($array_data['type_page'] != 'home'){
+                if(!empty($matches[1])){
+                    $matches = explode('|', $matches[1][0]);
+                    $array_data['type_page'] = $matches[1];
+                }else{
+                    $array_data['type_page'] = 'normal';
+                }
+            }
+
             $validator = new Gump('pt-br');
     
             // Regras para validar os campos
@@ -110,7 +130,6 @@
                 'caption'       => 'max_len,200',
                 'active'        => 'required|integer|max_len,1',
                 'access'        => 'required|integer|max_len,1',
-                'module_id'     => 'required|integer',
                 'is_admin'      => 'required|integer|max_len,1',
                 'description'   => 'required',
                 'type_page'     => 'required',
@@ -127,6 +146,7 @@
                 'membership_id' => 'trim|sanitize_string',
                 'access'        => 'trim|sanitize_numbers',
                 'module_id'     => 'trim|sanitize_numbers',
+                'module_name'   => 'trim|sanitize_string',
                 'is_admin'      => 'trim|sanitize_numbers',
                 'description'   => 'trim|sanitize_string',
                 'keywords'      => 'trim|sanitize_string',
@@ -143,10 +163,8 @@
                     unset($array_data[$key]);
                 }
 
-                if($array_data['module_id'] != 0){
-                    $array_data['module_name'] = $this->db->fetchOne("SELECT modalias FROM modules WHERE id = {$array_data['module_id']}");
-                }else{
-                    $array_data['module_name'] = '';
+                if(!empty($array_data['module_name']) && !empty($array_data['module_id'])){
+                    $this->db->update('pages', ['module_name' => '', 'module_id' => 0], ['module_name = ?' => $array_data['module_name']]);
                 }
 
                 $array_data['created_by'] = $_SESSION['user_id'];
@@ -155,8 +173,8 @@
                 }
 
                 if($array_data['type_page'] != 'home' || $array_data['type_page'] != 'normal'){
-                    $type_page = 'page_'.$array_data['type_page'];
-                    $this->db->query("UPDATE config SET value = '{$array_data['slug']}' WHERE name = '$type_page'");
+                    $this->db->update('pages', ['type_page' => 'normal'], ['type_page = ?'=> $array_data['type_page']]);
+                    $this->db->query("UPDATE config SET value = '{$array_data['slug']}' WHERE name = 'page_{$array_data['type_page']}'");
                 }
 
                 $checkSlug = $this->db->fetchRow("SELECT id FROM pages WHERE slug = '{$array_data['slug']}'");
@@ -187,6 +205,26 @@
 
 
         public function pageUpdate($array_data, $id){
+
+            // Check Modules
+            preg_match_all("/{{(module.*?)}}/", $array_data['body'], $matches);
+            if(!empty($matches[1])){
+                $matches = explode('|', $matches[1][0]);
+                $array_data['module_name'] = $matches[1];
+                $array_data['module_id'] = $matches[2];
+            }
+
+            // Check Page Type
+            preg_match_all("/{{(page.*?)}}/", $array_data['body'], $matches);
+            if($array_data['type_page'] != 'home'){
+                if(!empty($matches[1])){
+                    $matches = explode('|', $matches[1][0]);
+                    $array_data['type_page'] = $matches[1];
+                }else{
+                    $array_data['type_page'] = 'normal';
+                }
+            }
+
             if(empty($array_data['slug'])){
                 $array_data['slug'] = $array_data['title'];
             }
@@ -206,7 +244,6 @@
                 'caption'       => 'max_len,200',
                 'type_page'     => 'required',
                 'active'        => 'required|integer|max_len,1',
-                'module_id'     => 'required|integer',
                 'is_admin'      => 'required|integer|max_len,1',
                 'access'        => 'required|integer|max_len,1',
                 'description'   => 'required',
@@ -223,6 +260,7 @@
                 'membership_id' => 'trim|sanitize_string',
                 'access'        => 'trim|sanitize_numbers',
                 'module_id'     => 'trim|sanitize_numbers',
+                'module_name'   => 'trim|sanitize_string',
                 'is_admin'      => 'trim|sanitize_numbers',
                 'description'   => 'trim|sanitize_string',
                 'keywords'      => 'trim|sanitize_string',
@@ -239,19 +277,13 @@
                     unset($array_data[$key]);
                 }
 
-                if($array_data['module_id'] != 0){
-                    $array_data['module_name'] = $this->db->fetchOne("SELECT modalias FROM modules WHERE id = {$array_data['module_id']}");
-                }else{
-                    $array_data['module_name'] = '';
-                }
-
-                if($array_data['type_page'] == 'home'){
-                    $this->db->update('pages', ['type_page' => 'normal'], ['type_page = ?'=> 'home']);
+                if(!empty($array_data['module_name']) && !empty($array_data['module_id'])){
+                    $this->db->update('pages', ['module_name' => '', 'module_id' => 0], ['module_name = ?' => $array_data['module_name']]);
                 }
 
                 if($array_data['type_page'] != 'home' || $array_data['type_page'] != 'normal'){
-                    $type_page = 'page_'.$array_data['type_page'];
-                    $this->db->query("UPDATE config SET value = '{$array_data['slug']}' WHERE name = '$type_page'");
+                    $this->db->update('pages', ['type_page' => 'normal'], ['type_page = ?'=> $array_data['type_page']]);
+                    $this->db->query("UPDATE config SET value = '{$array_data['slug']}' WHERE name = 'page_{$array_data['type_page']}'");
                 }
 
                 $this->db->update('pages', $array_data, ['id = ?'=> $id]);

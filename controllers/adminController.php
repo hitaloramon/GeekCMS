@@ -734,7 +734,9 @@ class adminController extends controller{
         $this->user->verifyLogin();
 
         $widget = new Widget();
-        $data = $widget->getWidget();
+        $module = new Modules();
+        $data['widget'] = $widget->getWidget();
+        $data['module'] = $module->getModules(true);
 
         $this->loadSnippets('snippets', $data);
     }

@@ -64,20 +64,7 @@
                                         <small class="form-control-feedback" id="type_page-feedback"></small>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Módulo</label>
-                                        <select class="form-control custom-select" id="module_id" name="module_id">
-                                            <option value="0">Nenhum</option>
-                                            <?php $modules = new Modules(); $modules = $modules->getModules(true); ?>
-                                            <?php foreach($modules as $mod): ?>
-                                                <option value="<?php echo $mod['id']; ?>"><?php echo $mod['title']; ?></option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                        <small class="form-control-feedback" id="module_id-feedback"></small>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Acesso</label>
                                         <select class="form-control custom-select" id="access" name="access" onchange="checkOptions(this.value)">
@@ -88,7 +75,7 @@
                                         <small class="form-control-feedback" id="access-feedback"></small>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Plano de Acesso</label>
                                         <select class="selectpicker" name="membership_id[]" id="membership_id" multiple data-style="form-control custom-select" title="Selecione">
@@ -201,34 +188,15 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Tipo de Página</label>
+                                        <label class="control-label">Página Inicial</label>
                                         <select class="form-control custom-select" id="type_page" name="type_page">
-                                            <option value="normal" <?php getSelected('normal', $data['type_page']); ?>>Normal</option>
-                                            <option value="activate" <?php getSelected('activate', $data['type_page']); ?>>Ativação</option>
-                                            <option value="register" <?php getSelected('register', $data['type_page']); ?>>Cadastro</option>
-                                            <option value="account" <?php getSelected('account', $data['type_page']); ?>>Conta</option>
-                                            <option value="login" <?php getSelected('login', $data['type_page']); ?>>Login</option>
-                                            <option value="home" <?php getSelected('home', $data['type_page']); ?>>Página Inicial</option>
-                                            <option value="search" <?php getSelected('search', $data['type_page']); ?>>Pesquisa</option>
-                                            <option value="profile" <?php getSelected('profile', $data['type_page']); ?>>Perfil</option>
+                                            <option value="normal" <?php getSelected('normal', $data['type_page']); ?>>Não</option>
+                                            <option value="home" <?php getSelected('home', $data['type_page']); ?>>Sim</option>
                                         </select>
                                         <small class="form-control-feedback" id="type_page-feedback"></small>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Módulo</label>
-                                        <select class="form-control custom-select" id="module_id" name="module_id">
-                                            <option value="0">Nenhum</option>
-                                            <?php $modules = new Modules(); $modules = $modules->getModules(true); ?>
-                                            <?php foreach($modules as $mod): ?>
-                                                <option value="<?php echo $mod['id']; ?>" <?php getSelected($mod['id'], $data['module_id']); ?>><?php echo $mod['title']; ?></option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                        <small class="form-control-feedback" id="module_id-feedback"></small>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Acesso</label>
                                         <select class="form-control custom-select" id="access" name="access" onchange="checkOptions(this.value)">
@@ -240,7 +208,7 @@
                                     </div>
                                 </div>
                                 <?php $data['membership_id'] = explode(',', $data['membership_id']); ?>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Plano de Acesso</label>
                                         <select class="selectpicker" name="membership_id[]" id="membership_id" multiple data-style="form-control custom-select" title="Selecione">

@@ -30,6 +30,7 @@
                                     <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#options" role="tab"><i class="fas fa-users-cog"></i> <span class="hidden-xs-down">Opções</span></a> </li>
                                     <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#locale" role="tab"><i class="fas fa-globe-americas"></i> <span class="hidden-xs-down">Localização</span></a> </li>
                                     <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#social" role="tab"><i class="fas fa-hashtag"></i> <span class="hidden-xs-down">Social</span></a> </li>
+                                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#layout" role="tab"><i class="fas fa-columns"></i> <span class="hidden-xs-down">Layout</span></a> </li>
                                     <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#panel" role="tab"><i class="fas fa-tint"></i> <span class="hidden-xs-down">Painel</span></a> </li>
                                 </ul>
                                 <!-- Tab panes -->
@@ -74,36 +75,7 @@
                                                     <small class="form-control-feedback" id="site_dir-feedback"></small>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Tema do Site</label>
-                                                    <select class="form-control custom-select" id="site_theme" name="site_theme">
-                                                        <?php getTemplates('views/front/templates/', $this->config['site_theme'])?>
-                                                    </select>
-                                                    <small class="form-control-feedback" id="site_theme-feedback"></small>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label">Logo</label>
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" id="site_logo" required name="site_logo" value="<?php echo $this->config['site_logo']; ?>">
-                                                        <span class="input-group-append">
-                                                            <button onclick="javascript:open_popup('<?php echo BASE; ?>/libs/filemanager/dialog.php?type=1&popup=1&field_id=site_logo&relative_url=1')" class="btn btn-secondary" type="button"><i class="mdi mdi-folder"></i></button>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label">Favicon</label>
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" id="site_favicon" required name="site_favicon" value="<?php echo $this->config['site_favicon']; ?>">
-                                                        <span class="input-group-append">
-                                                            <button onclick="javascript:open_popup('<?php echo BASE; ?>/libs/filemanager/dialog.php?type=1&popup=1&field_id=site_favicon&relative_url=1')" class="btn btn-secondary" type="button"><i class="mdi mdi-folder"></i></button>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label class="control-label">Google Analytics</label>
                                                     <textarea class="form-control" name="site_analytics" id="site_analytics" rows="10"><?php echo $this->config['site_analytics']; ?></textarea>
@@ -373,6 +345,47 @@
                                                 <?php endif; ?>
                                             </div>
                                             <div id="social_fields" class="row w-100"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane" id="layout" role="tabpanel">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Tema do Site</label>
+                                                    <select class="form-control custom-select" id="site_theme" name="site_theme">
+                                                        <?php getTemplates('views/front/templates/', $this->config['site_theme'])?>
+                                                    </select>
+                                                    <small class="form-control-feedback" id="site_theme-feedback"></small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Logo</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" id="site_logo" required name="site_logo" value="<?php echo $this->config['site_logo']; ?>">
+                                                        <span class="input-group-append">
+                                                            <button onclick="javascript:open_popup('<?php echo BASE; ?>/libs/filemanager/dialog.php?type=1&popup=1&field_id=site_logo&relative_url=1')" class="btn btn-secondary" type="button"><i class="mdi mdi-folder"></i></button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Favicon</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" id="site_favicon" required name="site_favicon" value="<?php echo $this->config['site_favicon']; ?>">
+                                                        <span class="input-group-append">
+                                                            <button onclick="javascript:open_popup('<?php echo BASE; ?>/libs/filemanager/dialog.php?type=1&popup=1&field_id=site_favicon&relative_url=1')" class="btn btn-secondary" type="button"><i class="mdi mdi-folder"></i></button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Visualização do Tema</label>
+                                                    <textarea class="form-control" rows="10"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 m-t-20" style="height:400px">
+                                                <div id="geekeditor" data-fieldname="site_footer"></div>
+                                            </div>
                                         </div>
                                     </div>
 

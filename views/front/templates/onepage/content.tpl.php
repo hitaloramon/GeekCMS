@@ -9,7 +9,6 @@
         <div class="row">
             <div class="col-12">
                 <?php echo $body; ?>
-                <?php $this->renderModule($viewData); ?>
             </div>
         </div>
     </div>

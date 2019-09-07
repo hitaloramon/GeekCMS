@@ -70,8 +70,8 @@
         <div class="filtr-container">
             <?php foreach ($modules as $m): ?>
                 <div class="col-auto filtr-item" data-category="1" data-sort="<?php echo $m['title']; ?>">
-                    <a href="<?php echo BASE_ADMIN.'/module/view/'.$m['modalias']; ?>">
-                        <img class="img-responsive" src="<?php echo BASE.'/views/admin/modules/'.$m['modalias'].'/thumb.svg';?>" alt="<?php echo $m['title']; ?>">
+                    <a href="<?php echo BASE_ADMIN.'/module/view/'.$m['module_alias']; ?>">
+                        <img class="img-responsive" src="<?php echo BASE.'/views/admin/modules/'.$m['module_alias'].'/thumb.svg';?>" alt="<?php echo $m['title']; ?>">
                     </a>
                     <div class="text-center m-t-10 m-b-20"><?php echo $m['title']; ?></div>
                 </div>
@@ -86,6 +86,6 @@
 
 <script>
 function actionFormatter(value, row) {
-   return '<a href="module/edit/'+row['id']+'" data-toggle="tooltip" data-original-title="Editar"> <i class="mdi mdi-pencil m-r-10"></i></a><a href="module/view/'+row['modalias']+'" data-toggle="tooltip" data-original-title="Visualizar"> <i class="mdi mdi-eye m-r-10"></i></a>';
+   return '<a href="module/edit/'+row['id']+'" data-toggle="tooltip" data-original-title="Editar"> <i class="mdi mdi-pencil m-r-10"></i></a><a href="module/view/'+row['module_alias']+'" data-toggle="tooltip" data-original-title="Visualizar"> <i class="mdi mdi-eye m-r-10"></i></a>';
 }
 </script>
