@@ -384,7 +384,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-12 m-t-20" style="height:400px">
-                                                <div id="geekeditor" data-fieldname="site_footer"></div>
+                                                <div id="geekeditor" data-title="Rodapé" data-fieldname="site_footer"></div>
                                             </div>
                                         </div>
                                     </div>

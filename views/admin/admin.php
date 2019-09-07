@@ -270,8 +270,10 @@
     <script src="<?php echo BASE; ?>/assets/js/geekcms.js"></script>
     <script type="text/javascript" data-keditor="script">
         $(function () {
+            var titleEditor = $('#geekeditor').attr('data-title') == undefined ? 'Conteúdo' : $('#geekeditor').attr('data-title');
+            console.log(titleEditor);
             $('#geekeditor').keditor({
-                title: 'Conteúdo',
+                title: titleEditor,
                 snippetsUrl: '<?php echo BASE_ADMIN; ?>/snippetspage',
                 containerSettingEnabled: true,
                 containerSettingInitFunction: function (form, keditor) {
