@@ -353,7 +353,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label">Tema do Site</label>
-                                                    <select class="form-control custom-select" id="site_theme" name="site_theme">
+                                                    <select class="form-control custom-select" id="site_theme" name="site_theme" onchange="templatePreview(this.value);">
                                                         <?php getTemplates('views/front/templates/', $this->config['site_theme'])?>
                                                     </select>
                                                     <small class="form-control-feedback" id="site_theme-feedback"></small>
@@ -378,10 +378,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Visualização do Tema</label>
-                                                    <textarea class="form-control" rows="10"></textarea>
-                                                </div>
+                                                <div class="col-md-12 mb-2">Visualização do Tema</div>
+                                                <iframe id="template_preview" src="<?php echo BASE; ?>" class="template-frame" scrolling="vertical"></iframe>
                                             </div>
                                             <div class="col-md-12 m-t-20" style="height:400px">
                                                 <div id="geekeditor" data-title="Rodapé" data-fieldname="site_footer"></div>
@@ -455,6 +453,10 @@ function maintenanceCheck(value){
     } else {
         $('#row_maintenance').css("display", "none");
     }
+}
+
+function templatePreview(template){
+    $('#template_preview').attr("src", "<?php echo BASE; ?>?theme="+template);
 }
 
 

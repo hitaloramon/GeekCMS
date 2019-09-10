@@ -1,13 +1,6 @@
 .geek-help{
     font-size: 12px;
 }
-.geek-layout i{
-    color: #000;
-}
-.geek-layout-main{
-    min-height: 120px;
-}
-
 .fixed-table-toolbar .columns label{
     color: #5b5b5b !important;
 }
@@ -20,6 +13,24 @@
     left: 2px;
 }
 
+.template-frame {
+    position: absolute;
+    width: 70vw;
+    height: 460px;
+    border-radius: 10px;
+    border: 2px solid #ced4da;
+    -ms-transform: scale(0.50);
+    -moz-transform: scale(0.50);
+    -o-transform: scale(0.50);
+    -webkit-transform: scale(0.50);
+    transform: scale(0.50);
+    
+    -ms-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
 
 /* Sortable items */
 .setspace, .remove, .btnAdd, .allpages{

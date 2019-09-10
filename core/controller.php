@@ -31,7 +31,11 @@
 
 
         public function loadTemplate($viewData = array()){
-            include 'views/front/templates/'.$this->config['site_theme'].'/template.tpl.php';
+            if(isset($_GET['theme']) && is_dir("views/front/templates/{$_GET['theme']}")){
+                include 'views/front/templates/'.$_GET['theme'].'/template.tpl.php';
+            }else{
+                include 'views/front/templates/'.$this->config['site_theme'].'/template.tpl.php';
+            }
         }
 
         public function loadTemplateInAdmin($viewName, $viewData = array()){
