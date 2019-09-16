@@ -26,7 +26,7 @@
 
         public function saveConfig($data){
 
-            if(!empty($social_url)){
+            if(!empty($data['social_url'])){
                 $social = array_combine(array_keys($data['social_url']), array_map(function ($icon, $name, $url) {
                     return compact('icon', 'name', 'url');
                 }, $data['social_icon'], $data['social_name'], $data['social_url']));

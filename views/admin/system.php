@@ -320,7 +320,6 @@
                                                                 <div class="input-group">
                                                                     <div class="input-group-prepend">
                                                                         <button name="social_icon[]" class="btn btn-outline-secondary social_picker" data-rows="4" data-cols="5" data-selected-class="btn-info w-100" data-unselected-class="w-100" data-arrow-class="btn-default" data-icon="<?php echo $s['icon']; ?>" role="iconpicker" data-iconset="fontawesome5" data-search-text="Pesquisar" data-label-footer="{0} - {1} de {2} icones"></button>
-                                                                        <input type="hidden" id="icon" name="icon">
                                                                     </div>
                                                                     <input type="text" class="form-control" id="social_name" name="social_name[]" placeholder="Nome da Rede Social" value="<?php echo $s['name']; ?>">
                                                                 </div>
@@ -478,7 +477,6 @@ function social_fields() {
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <button name="social_icon[]" class="btn btn-outline-secondary social_picker" data-rows="4" data-cols="5" data-selected-class="btn-info w-100" data-unselected-class="w-100" data-arrow-class="btn-default" data-icon="<?php echo $s['icon']; ?>" role="iconpicker" data-iconset="fontawesome5" data-search-text="Pesquisar" data-label-footer="{0} - {1} de {2} icones"></button>
-                                        <input type="hidden" id="icon" name="icon">
                                     </div>
                                     <input type="text" class="form-control" id="social_name" name="social_name[]" placeholder="Nome da Rede Social" value="">
                                 </div>
