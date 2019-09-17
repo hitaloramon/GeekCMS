@@ -132,3 +132,7 @@ a.cke_button_on{
 .cke_combo_text{
     color: #CCC !important;
 }
+
+.cke_button_label{
+    color: #CCC !important;
+}
