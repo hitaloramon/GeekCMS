@@ -27,20 +27,6 @@
                             <div class="row p-t-20">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Login</label>
-                                        <input type="text" id="username" name="username" required class="form-control">
-                                        <small class="form-control-feedback" id="username-feedback"></small>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Senha</label>
-                                        <input type="text" id="password" name="password" required class="form-control">
-                                        <small class="form-control-feedback" id="password-feedback"></small>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
                                         <label class="control-label">Nome</label>
                                         <input type="text" id="fname" name="fname" class="form-control">
                                         <small class="form-control-feedback" id="fname-feedback"></small>
@@ -62,6 +48,13 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label class="control-label">Senha</label>
+                                        <input type="text" id="password" name="password" required class="form-control">
+                                        <small class="form-control-feedback" id="password-feedback"></small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
                                         <label class="control-label">Nível</label>
                                         <select class="form-control custom-select" id="userlevel" name="userlevel">
                                             <option value="0" selected="">Usuário</option>
@@ -72,7 +65,7 @@
                                         <small class="form-control-feedback" id="userlevel-feedback"></small>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Status</label>
                                         <select class="form-control custom-select" id="active" name="active">
@@ -84,7 +77,7 @@
                                         <small class="form-control-feedback" id="active-feedback"></small>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Plano de Acesso</label>
                                         <select class="form-control custom-select" id="membership_id" name="membership_id">
@@ -136,20 +129,6 @@
                             <div class="row p-t-20">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Login</label>
-                                        <input type="text" id="username" name="username" required class="form-control" value="<?php echo $viewData['user']['username']; ?>">
-                                        <small class="form-control-feedback" id="username-feedback"></small>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Senha</label>
-                                        <input type="text" id="password" name="password" class="form-control">
-                                        <small class="form-control-feedback" id="password-feedback"></small>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
                                         <label class="control-label">Nome</label>
                                         <input type="text" id="fname" name="fname" class="form-control" value="<?php echo $viewData['user']['fname']; ?>">
                                         <small class="form-control-feedback" id="fname-feedback"></small>
@@ -171,6 +150,13 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label class="control-label">Senha</label>
+                                        <input type="text" id="password" name="password" class="form-control">
+                                        <small class="form-control-feedback" id="password-feedback"></small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label class="control-label">Nível</label>
                                         <select class="form-control custom-select" id="userlevel" name="userlevel">
                                             <option value="0">Usuário</option>
@@ -181,7 +167,7 @@
                                         <small class="form-control-feedback" id="active-feedback"></small>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Inscrito na Newsletter</label>
                                         <select class="form-control custom-select" id="newsletter" name="newsletter">
@@ -191,7 +177,7 @@
                                         <small class="form-control-feedback" id="newsletter-feedback"></small>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Status</label>
                                         <select class="form-control custom-select" id="active" name="active">
@@ -203,7 +189,7 @@
                                         <small class="form-control-feedback" id="active-feedback"></small>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Plano de Acesso</label>
                                         <div class="input-group">
@@ -402,7 +388,6 @@
                                         <tr>
                                             <th data-checkbox="true"></th>
                                             <th data-field="id" data-sortable="true">ID</th>
-                                            <th data-field="username" data-visible="false" data-sortable="true">Login</th>
                                             <th data-field="fname" data-sortable="true">Nome</th>
                                             <th data-field="email" data-sortable="true">Email</th>
                                             <th data-field="title" data-align="center" data-sortable="true">Membro</th>

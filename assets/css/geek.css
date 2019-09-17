@@ -7,10 +7,10 @@
 
 .custom-control-label::before{
     background-color: #cecece;
-    left: 2px;
+    left: -20px;
 }
 .custom-control-label::after{
-    left: 2px;
+    left: -20px;
 }
 
 .template-frame {
