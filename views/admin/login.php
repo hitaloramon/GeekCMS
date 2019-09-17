@@ -36,10 +36,10 @@
                          <div class="text-danger text-center"><?php echo $error; ?></div>
                     <?php endif; ?>
                     <div class="form-group ">
-                        <div class="col-xs-12"><input class="form-control" type="text" name="login" required="" placeholder="Login"> </div>
+                        <div class="col-xs-12"><input class="form-control" type="email" name="email" required placeholder="email"> </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-xs-12"><input class="form-control" type="password" name="password" required="" placeholder="Senha"> </div>
+                        <div class="col-xs-12"><input class="form-control" type="password" name="password" required placeholder="Senha"> </div>
                     </div>
                     <div class="form-group text-center">
                         <div class="col-xs-12 p-b-20"><button class="btn btn-block btn-lg btn-info btn-rounded" type="submit">Entrar</button></div>

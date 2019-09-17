@@ -77,8 +77,8 @@
               <div class="col-md-12">
                 <div id="msg-login" class="alert alert-danger d-none"></div>
                 <div class="form-group has-feedback">
-                  <label for="username">Login: </label>
-                  <input type="text" class="form-control" name="login" autocomplete="off" required>
+                  <label for="email">Email: </label>
+                  <input type="email" class="form-control" name="email" autocomplete="off" required>
                 </div>
               </div>
               <div class="col-md-12">

@@ -10,12 +10,6 @@
 <form id="form-register" method="post" action="<?php echo BASE; ?>/controller/register">
   <div id="msg-register"></div>
     <div class="row">
-      <div class="col-md-12">
-        <div class="form-group has-feedback">
-          <label for="username">Login: </label>
-          <input type="text" class="form-control" id="username" required name="username">
-        </div>
-      </div>
       <div class="col-md-6">
         <div class="form-group has-feedback">
           <label for="fname">Nome: </label>
@@ -28,6 +22,12 @@
           <input type="text" class="form-control" id="lname" required name="lname">
         </div>
       </div>
+      <div class="col-md-12">
+        <div class="form-group has-feedback">
+          <label for="email">Email: </label>
+          <input type="email" class="form-control" id="email" required name="email">
+        </div>
+      </div>
       <div class="col-md-6">
         <div class="form-group has-feedback">
           <label for="password">Senha: </label>
@@ -38,12 +38,6 @@
         <div class="form-group has-feedback">
           <label for="confirm_password">Confirmar Senha: </label>
           <input type="password" class="form-control" id="confirm_password" required name="confirm_password" autocomplete="off">
-        </div>
-      </div>
-      <div class="col-md-12">
-        <div class="form-group has-feedback">
-          <label for="email">Email: </label>
-          <input type="email" class="form-control" id="email" required name="email">
         </div>
       </div>
       <?php $custom = new CustomFields(); ?>

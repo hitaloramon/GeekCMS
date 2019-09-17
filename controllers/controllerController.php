@@ -10,7 +10,7 @@ class controllerController extends controller{
     }
 
     public function login(){
-        if(isset($_POST['login']) && !empty($_POST['login'])){
+        if(isset($_POST['email']) && !empty($_POST['email'])){
             $u = new User();
             $data = $u->loginCheck($_POST);
             echo $data;

@@ -555,7 +555,8 @@ class adminController extends controller{
     public function login(){
         $data = array('error' => '');
 
-        if(isset($_POST['login']) && !empty($_POST['login'])){
+        if(isset($_POST['email']) && !empty($_POST['email'])){
+
 
             $data = json_decode($this->user->loginCheck($_POST), true);
 

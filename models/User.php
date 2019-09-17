@@ -23,19 +23,19 @@
             $array_data = $validator->sanitize($array_data);
 
             $rules = array(
-                'login'    => 'required|alpha_numeric|max_len,50|min_len,3',
+                'email'    => 'required|valid_email',
                 'password' => 'required'
             );
             
             $filters = array(
-                'login' 	  => 'trim|sanitize_string',
+                'email' 	  => 'trim|sanitize_email',
                 'password'	  => 'trim|sha1'
             );
             
             $array_data = $validator->filter($array_data, $filters);
             $validated = $validator->validate($array_data, $rules);
 
-            $validator->set_field_name("login", "Login");
+            $validator->set_field_name("email", "Email");
             $validator->set_field_name("password", "Senha");
 
             if($validated === true){
@@ -47,7 +47,7 @@
                 }
                 
                 extract($array_data);
-                $result = $this->db->fetchRow("SELECT * FROM users WHERE username = '$login' AND password = '$password'");
+                $result = $this->db->fetchRow("SELECT * FROM users WHERE email = '$email' AND password = '$password'");
                 
                 if($result > 0){
 
@@ -123,7 +123,7 @@
         }
 
         public function getUserDatatable(){
-            $array = $this->db->fetchAll("SELECT u.id, u.username, u.email, u.fname, u.active, m.title, p.name FROM users AS u LEFT JOIN memberships AS m ON u.membership_id = m.id LEFT JOIN permissions_groups AS p ON u.userlevel = p.id");
+            $array = $this->db->fetchAll("SELECT u.id, u.email, u.fname, u.active, m.title, p.name FROM users AS u LEFT JOIN memberships AS m ON u.membership_id = m.id LEFT JOIN permissions_groups AS p ON u.userlevel = p.id");
             echo json_encode($array);
         }
 
@@ -134,7 +134,6 @@
     
             // Regras para validar os campos
             $rules = array(
-                'username'      => 'required|alpha_dash|max_len,50|min_len,3',
                 'password'      => 'required|max_len,50|min_len,1',
                 'fname'         => 'required',
                 'lname'         => 'required',
@@ -147,7 +146,6 @@
             
             // Regras para filtra e limpar os campos
             $filters = array(
-                'username'      => 'trim|sanitize_string',
                 'password'      => 'trim|sha1',
                 'fname'         => 'trim|sanitize_string',
                 'lname'         => 'trim|sanitize_string',
@@ -171,7 +169,7 @@
                     $array_data['mem_expire'] = calculateDays($member['period'], $member['days']);
                 }
 
-                $checkUser = $this->db->fetchRow("SELECT * FROM users WHERE username = '{$array_data['username']}' OR email = '{$array_data['email']}'");
+                $checkUser = $this->db->fetchRow("SELECT * FROM users WHERE email = '{$array_data['email']}'");
 
                 if($checkUser == false){
                     $this->db->insert('users', $array_data);
@@ -211,7 +209,6 @@
     
             // Regras para validar os campos
             $rules = array(
-                'username'          => 'required|alpha_dash|max_len,50|min_len,3',
                 'password'          => 'required|max_len,50|min_len,1',
                 'confirm_password'  => 'required|max_len,50|min_len,1',
                 'fname'             => 'required',
@@ -221,11 +218,10 @@
             
             // Regras para filtra e limpar os campos
             $filters = array(
-                'username'      => 'trim|sanitize_string',
                 'password'      => 'trim|sha1',
                 'fname'         => 'trim|sanitize_string',
                 'lname'         => 'trim|sanitize_string',
-                'email'         => 'trim|sanitize_string',
+                'email'         => 'trim|sanitize_email',
                 'active'        => 'trim|sanitize_string',
                 'captcha'       => 'trim|sanitize_numbers',
                 'mem_expire'    => 'trim|sanitize_numbers'
@@ -239,7 +235,7 @@
                 exit;
             }
 
-            $validator->set_field_name("username", "Login");
+            $validator->set_field_name("email", "Email");
             $validator->set_field_name("fname", "Nome");
             $validator->set_field_name("lname", "Sobrenome");
             $validator->set_field_name("password", "Senha");
@@ -261,7 +257,7 @@
                     exit;
                 }
 
-                $checkUser = $this->db->fetchRow("SELECT id FROM users WHERE username = '{$array_data['username']}' OR email = '{$array_data['email']}'");
+                $checkUser = $this->db->fetchRow("SELECT id FROM users WHERE email = '{$array_data['email']}'");
 
                 if($checkUser == false){
                     unset($array_data['confirm_password']);
@@ -294,7 +290,6 @@
 
                         $body = html_entity_decode($email_model['body']);
                         $body = str_replace("[NAME]", $array_data['fname'], $body);
-                        $body = str_replace("[USERNAME]", $array_data['username'], $body);
                         $body = str_replace("[PASSWORD]", $password, $body);
                         $body = str_replace("[SITE_NAME]", $config['site_name'], $body);
                         $body = str_replace("[SITE_URL]", BASE, $body);
@@ -311,7 +306,6 @@
 
                         $body = html_entity_decode($email_model['body']);
                         $body = str_replace("[NAME]", $array_data['fname'], $body);
-                        $body = str_replace("[USERNAME]", $array_data['username'], $body);
                         $body = str_replace("[PASSWORD]", $password, $body);
                         $body = str_replace("[SITE_NAME]", $config['site_name'], $body);
                         $body = str_replace("[SITE_URL]", BASE, $body);
@@ -395,7 +389,6 @@
     
             // Regras para validar os campos
             $rules = array(
-                'username'      => 'required|alpha_dash|max_len,50|min_len,3',
                 'password'      => 'max_len,50|min_len,1',
                 'fname'         => 'required',
                 'lname'         => 'required',
@@ -407,11 +400,10 @@
             
             // Regras para filtra e limpar os campos
             $filters = array(
-                'username'      => 'trim|sanitize_string',
                 'password'      => 'trim|sha1',
                 'fname'         => 'trim|sanitize_string',
                 'lname'         => 'trim|sanitize_string',
-                'email'         => 'trim|sanitize_string',
+                'email'         => 'trim|sanitize_email',
                 'userlevel'     => 'trim|sanitize_numbers',
                 'membership_id' => 'trim|sanitize_numbers',
                 'mem_expire'    => 'trim|sanitize_numbers',
