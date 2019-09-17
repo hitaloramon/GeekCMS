@@ -43,115 +43,6 @@ class adminController extends controller{
         $stats->clearStats();
     }
 
-    public function layout($id = null){
-        $this->user->verifyLogin();
-
-        $layout = new Layout;
-
-        if(isset($_POST) && !empty($_POST)){
-            switch ($_GET['action']) {
-                case 'load':
-                    $pageid = intval($_POST['page_id']);
-                    $pos = $_POST['position'];
-                    
-                    $widgetrow = $layout->load($pageid);
-
-                    if (is_array($widgetrow)){
-                        print '<div id="plavailable" class="row mb40">';
-                            foreach ($widgetrow as $mrow):
-                            print '<div class="col-md-6"><a data-id="'.$mrow['id'].'" data-alias="'.$mrow['widget_alias'].'" data-position="'.$pos.'" class="list plugin-list">'.$mrow['title'].'</a></div>';
-                            endforeach;
-                        print '<div>';
-                    }else{
-                        print 'Sem Widgets';
-                    }
-                break;
-                case 'columm':
-                    $this->permission->hasPermission('layout', 'edit');
-                    $plug_id = intval($_POST['id']);
-                    $cols = intval($_POST['cols']);
-                    $page_id = intval($_POST['page_id']);
-                    $data = array('space' => $cols);
-                    
-                    $layout->layoutUpdate($data, $plug_id, $page_id);
-                break;
-                case 'allpages':
-                    $this->permission->hasPermission('layout', 'edit');
-                    $page_id = intval($_POST['page_id']);
-                    $place = $_POST['place'];
-
-                    $Pages = $layout->getConfigPage($page_id);
-                    foreach ($Pages as $p) {
-                        $Layout = $layout->getConfigAllPages($page_id, $place);
-                        if(!empty($Layout)){
-                            foreach ($Layout as $L) {
-                                $data = array(
-                                    'plug_id' => $L['plug_id'],
-                                    'page_id' => $p['id'],
-                                    'page_slug' => $p['slug'], //  slug talvez não será necessário. assim como o is_content na tabela
-                                    'place' => $L['place'],
-                                    'plug_name' => $L['plug_name'],
-                                    'space' => $L['space'],
-                                    'position' => $L['position']
-                                );
-
-                                $layout->layoutDelete(["plug_id = ?" => $L['plug_id'], "page_id = ?" => $p['id'], "place = ?" => $place]);
-                                $layout->layoutInsert($data);
-                            }
-                        }else{
-                            $layout->layoutDelete(["page_id = ?" => $p['id']]);
-                        }
-
-                    }
-
-                    $json['heading'] = "Sucesso";
-                    $json['text'] =  "Configuração aplicada com sucesso!";
-                    $json['icon'] = 'success';
-                    echo json_encode($json);
-                break;
-                case 'delete':
-                    $this->permission->hasPermission('layout', 'delete');
-                    $plug_id = intval($_POST['id']);
-                    $page_id = intval($_POST['page_id']);
-                    $layout->layoutDelete(['plug_id = ?' => $plug_id, 'page_id = ?' => $page_id]);
-                break;
-                default:
-                    $this->permission->hasPermission('layout', 'edit');
-                    $sort = $_GET['layout'];
-                    @$sorted = str_replace("list-", "", $_POST[$sort]);
-
-                    if($sorted){
-                        foreach ($sorted as $plug_id){
-                            list($order, $plug_id, $alias, $space) = explode("|", $plug_id);
-                            $stylename = explode("-", $sort);
-                            $page_id = $stylename[1];
-
-                            $data = array(
-                                'plug_id' => $plug_id,
-                                'page_id' => (isset($_GET['pageslug'])) ? $page_id : 0,
-                                'page_slug' => (isset($_GET['pageslug'])) ? $_GET['pageslug'] : NULL,
-                                'place' => $stylename[0],
-                                'position' => $order,
-                                'space' => $space
-                            );
-                        
-                            //$layout->layoutDelete(['plug_id = ?' => $plug_id, 'page_id = ?' => $page_id]);
-                            $layout->layoutInsert($data);
-                        };
-                    };
-                break;
-            }
-        }else{
-            $id = ($id == null) ? 1 : $id ;
-
-            $result = $layout->getLayout($id);
-            $data = array('pageid' => (int)$id, 'layout' => $result);
-            $this->loadTemplateInAdmin('admin/layout', $data);
-        }
-    }
-
-
-
     public function page($action = null, int $id = null){
         $this->user->verifyLogin();
         
@@ -334,53 +225,6 @@ class adminController extends controller{
         $this->loadTemplateInAdmin('admin/user', $data);
     }
 
-    public function widget($action = null, $id = null){
-        $this->user->verifyLogin();
-        
-        $data = array('action' => $action);
-
-        $widget = new Widget();
-
-        switch ($action):
-            case 'add':
-                $this->permission->hasPermission('widget', 'add');
-                if(isset($_POST) && !empty($_POST)){
-                    $widget->widgetInsert($_POST);
-                    exit;
-                }
-            break;
-            case 'edit':
-                $this->permission->hasPermission('widget', 'edit');
-                $data['widget'] = $widget->getWidget($id);
-                if(isset($_POST) && !empty($_POST)){
-                    $widget->widgetUpdate($_POST, $id);
-                    exit;
-                }
-            break;
-            case 'delete':
-                $this->permission->hasPermission('widget', 'delete');
-                $widget->widgetDelete($id);
-                exit;
-            break;
-            case 'view':
-                $this->permission->hasPermission('widget', 'edit');
-                if(file_exists('views/admin/widget/'.$id.'/main_admin.php')){
-                    $data['widget'] = $widget;
-                }else{
-                    header('Location:'.BASE.'/404.php');
-                }
-            break;
-            case 'datatable':
-                $this->permission->hasPermission('widget', 'view');
-                $widget->getWidgetDataTable();
-                exit;
-            break;
-        endswitch;
-
-        $this->permission->hasPermission('widget', 'view');
-        $this->loadTemplateInAdmin('admin/widget', $data);
-    }
-
     public function module($action = null, $module = null, $mod_action = null, $mod_id = null){
         $this->user->verifyLogin();
 
@@ -549,12 +393,12 @@ class adminController extends controller{
         $data['model'] = $emailmodel->getModel($id);
 
         if(isset($_POST) && !empty($_POST)){
-            //$this->permission->hasPermission('emailmodel', 'edit');
+            $this->permission->hasPermission('emailmodel', 'edit');
             $emailmodel->update($_POST, $id);
             exit;
         }
 
-        //$this->permission->hasPermission('system', 'view');
+        $this->permission->hasPermission('emailmodel', 'view');
         $this->loadTemplateInAdmin('admin/emailmodel', $data);
     }
 
