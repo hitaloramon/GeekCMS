@@ -32,18 +32,6 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group has-feedback">
-                        <label for="username">Login: </label>
-                        <input type="text" class="form-control" disabled value="<?php echo $user_data['username'];?>">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group has-feedback">
-                        <label for="password">Senha: </label>
-                        <input type="password" class="form-control" id="password" name="password">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group has-feedback">
                         <label for="fname">Nome: </label>
                         <input type="text" class="form-control" id="fname" required name="fname" value="<?php echo $user_data['fname'];?>">
                       </div>
@@ -58,6 +46,18 @@
                       <div class="form-group has-feedback">
                         <label for="email">Email: </label>
                         <input type="email" class="form-control" id="email" required name="email" value="<?php echo $user_data['email'];?>">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group has-feedback">
+                        <label for="password">Senha: </label>
+                        <input type="password" class="form-control" id="password" name="password">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group has-feedback">
+                        <label for="birthday">Nascimento: </label>
+                        <input type="date" class="form-control" id="birthday" name="birthday" required value="<?php echo $user_data['birthday'];?>">
                       </div>
                     </div>
                     <div class="col-md-6">

@@ -686,6 +686,7 @@
                 'lname'         => 'required',
                 'email'         => 'required|valid_email',
                 'newsletter'    => 'required|max_len,1',
+                'birthday'      => 'required',
                 'captcha'       => 'required'
             );
             
@@ -696,6 +697,7 @@
                 'lname'         => 'trim|sanitize_string',
                 'email'         => 'trim|sanitize_string',
                 'newsletter'    => 'trim|sanitize_numbers',
+                'birthday'      => 'trim',
                 'captcha'       => 'trim|sanitize_numbers'
             );
 
