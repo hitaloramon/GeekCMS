@@ -84,7 +84,6 @@
                     <p>Link do Site: [SITE_URL]</p>
                     <p>Nome do Site: [SITE_NAME]</p>
                     <p>Nome do Usuário: [NAME]</p>
-                    <p>Login do Usuário [USERNAME]</p>
                     <p>Email do Usuário: [EMAIL]</p>
                     <p>Token: [TOKEN]</p>
                     <p>IP do Usuário: [IP]</p>
