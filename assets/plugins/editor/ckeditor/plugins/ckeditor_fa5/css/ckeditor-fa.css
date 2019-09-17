@@ -1,3 +1,6 @@
+body{
+  margin: 0px !important;
+}
 .cke_reset_all .fas:before,
 .cke_reset_all .fab:before,
 .cke_reset_all .fal:before,
