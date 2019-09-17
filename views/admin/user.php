@@ -42,7 +42,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Endereço de Email</label>
-                                        <input type="text" id="email" name="email" class="form-control">
+                                        <input type="email" id="email" name="email" class="form-control">
                                         <small class="form-control-feedback" id="email-feedback"></small>
                                     </div>
                                 </div>
@@ -144,7 +144,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Endereço de Email</label>
-                                        <input type="text" id="email" name="email" class="form-control" value="<?php echo $viewData['user']['email']; ?>">
+                                        <input type="email" id="email" name="email" class="form-control" value="<?php echo $viewData['user']['email']; ?>">
                                         <small class="form-control-feedback" id="email-feedback"></small>
                                     </div>
                                 </div>
