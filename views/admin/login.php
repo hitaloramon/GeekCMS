@@ -36,7 +36,7 @@
                          <div class="text-danger text-center"><?php echo $error; ?></div>
                     <?php endif; ?>
                     <div class="form-group ">
-                        <div class="col-xs-12"><input class="form-control" type="email" name="email" required placeholder="email"> </div>
+                        <div class="col-xs-12"><input class="form-control" type="email" name="email" required placeholder="Email"> </div>
                     </div>
                     <div class="form-group">
                         <div class="col-xs-12"><input class="form-control" type="password" name="password" required placeholder="Senha"> </div>
