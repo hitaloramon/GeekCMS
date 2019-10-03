@@ -3,7 +3,7 @@
 	 die('Acesso direto negado');
  }
 ?>
-<?php switch($viewData['action']): ?>
+<?php switch($viewData['action']): case 'view': ?>
 <?php case 'view': ?>
     <?php //require_once('views/admin/modules/'.$module.'/main_admin.php'); ?>
 <?php break; ?>

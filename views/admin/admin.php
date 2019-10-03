@@ -240,8 +240,8 @@
 
     <?php $this->loadView($viewName, $viewData); ?>
 
+    <script src="<?php echo BASE; ?>/assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="<?php echo BASE; ?>/assets/plugins/mask/jquery.mask.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="<?php echo BASE; ?>/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="<?php echo BASE; ?>/assets/js/perfect-scrollbar.jquery.min.js"></script>
     <script src="<?php echo BASE; ?>/assets/js/sidebarmenu.js"></script>
@@ -254,6 +254,7 @@
     <script src="<?php echo BASE; ?>/assets/plugins/bootstrap-table/locale/bootstrap-table-pt-BR.min.js"></script>
     <script src="<?php echo BASE; ?>/assets/plugins/bootstrap-table/extensions/export/tableExport.min.js"></script>
     <script src="<?php echo BASE; ?>/assets/plugins/bootstrap-table/extensions/export/bootstrap-table-export.min.js"></script>
+    <script src="<?php echo BASE; ?>/assets/plugins/bootstrap-table/extensions/auto-refresh/bootstrap-table-auto-refresh.min.js"></script>
     <script src="<?php echo BASE; ?>/assets/plugins/bootstrap-iconpicker/js/bootstrap-iconpicker.bundle.min.js"></script>
     <script src="<?php echo BASE; ?>/assets/plugins/chartjs/chart.min.js"></script>
     <script src="<?php echo BASE; ?>/assets/plugins/jquery-asColorPicker/libs/jquery-asColor.js"></script>

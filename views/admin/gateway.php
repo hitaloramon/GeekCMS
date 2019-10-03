@@ -3,8 +3,7 @@
 	 die('Acesso direto negado');
  }
 ?>
-<?php switch($viewData['action']): ?>
-<?php case 'config': ?>
+<?php switch($viewData['action']): case 'config':  ?>
 <div class="page-wrapper">
     <div class="container-fluid">
         <div class="row page-titles">

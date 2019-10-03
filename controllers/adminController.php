@@ -36,11 +36,19 @@ class adminController extends controller{
         $this->loadTemplateInAdmin('admin/home', $data);
     }
 
-    public function clearstats(){
+    public function stats($action = null){
         $this->user->verifyLogin();
 
         $stats = new Stats();
-        $stats->clearStats();
+        switch ($action):
+            case 'clear':
+                $stats->clearStats();
+            break;
+            case 'datatable':
+                echo json_encode($stats->getOnlineData());
+                exit;
+            break;
+        endswitch;
     }
 
     public function page($action = null, int $id = null){

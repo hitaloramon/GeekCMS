@@ -85,26 +85,25 @@
 
             if (function_exists('curl_version')){
                 $curl = curl_init();  
-                curl_setopt($curl, CURLOPT_URL, 'http://ip-api.com/json/'.$this->ip);
+                curl_setopt($curl, CURLOPT_URL, 'https://geoip-db.com/json/'.$this->ip);
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
                 $stats = json_decode(curl_exec($curl), true);
                 curl_close($curl);
             }else{
-                $stats = json_decode(file_get_contents('http://ip-api.com/json/'.$this->ip), true);
+                $stats = json_decode(file_get_contents('https://geoip-db.com/json/'.$this->ip), true);
             }
 
-            if($stats['status'] == 'success'){
+            if(is_array($stats)){
                 $data = array(
                     'ip'           => $this->ip,
                     'browser'      => $this->browser,
                     'device'       => $this->device,
                     'os'           => $this->os,
-                    'country'      => $stats['country'],
-                    'country_code' => $stats['countryCode'],
-                    'region'       => $stats['regionName'],
-                    'region_code'  => $stats['region'],
+                    'country'      => $stats['country_name'],
+                    'country_code' => $stats['country_code'],
+                    'region'       => $stats['state'],
                     'city'         => $stats['city'],
-                    'reference'         =>  $this->referer,
+                    'reference'    =>  $this->referer,
                     'date'         => date('Y-m-d H:i:s')
                 );
 
@@ -149,6 +148,10 @@
 
         public function getStatsDevice(){
             return $this->db->fetchAll("SELECT S.device, COUNT(*) total, ROUND((COUNT(*) / total * 100), 2) as percentage FROM (SELECT COUNT(*) total FROM stats) t JOIN stats as S GROUP BY S.device ORDER BY percentage DESC");
+        }
+
+        public function getOnlineData(){
+            return $this->db->fetchAll("SELECT * FROM stats WHERE YEAR(date) = YEAR(CURDATE()) AND date > NOW() - INTERVAL 5 MINUTE GROUP BY ip");
         }
 
     }

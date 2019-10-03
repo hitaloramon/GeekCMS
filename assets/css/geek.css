@@ -1,3 +1,7 @@
+#toolbar .lstick {
+    margin-left: -10px;
+}
+
 .geek-help{
     font-size: 12px;
 }

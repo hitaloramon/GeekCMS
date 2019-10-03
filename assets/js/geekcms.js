@@ -66,6 +66,9 @@ function requestFullScreen(el = 'body') {
 
 }
 
+$(document).ready(function() {
+    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+});
 function deleteInfo(handler, url){
     $.confirm({
         title: 'Apagar Conteúdo',

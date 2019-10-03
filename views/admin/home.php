@@ -68,7 +68,7 @@
                     <div class="card-body">
                         <div class="d-flex no-block">
                             <div>
-                                <h4 class="card-title"><span class="lstick"></span>Estatísticas de Visitas</h4>
+                                <h4 class="card-title"><span class="lstick"></span>Visitantes Online</h4>
                             </div>
                             <div class="ml-auto">
                                 <div class="card-actions">
@@ -82,6 +82,36 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div id="toolbar">
+                                <h4 class="card-title"><span class="lstick"></span>Estatísticas de Visitas</h4>
+                            </div>
+                            <div class="table-responsive p-10">
+                                <table id="table" data-toggle="table" data-url="<?php echo BASE_ADMIN;?>/stats/datatable" data-show-refresh="true" data-auto-refresh="true" data-auto-refresh-interval="30" data-show-columns="true" data-toolbar="#toolbar" data-advanced-search="true" data-pagination="true" data-mobile-responsive="true" data-search="true" class="table display table-hover w-100">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="ip" data-sortable="true" data-align="center">IP</th>
+                                            <th data-field="device" data-sortable="true" data-align="center">Dispositivo</th>
+                                            <th data-field="os" data-sortable="true" data-align="center">Sistema Operacional</th>
+                                            <th data-field="country" data-sortable="true" data-align="center">País</th>
+                                            <th data-field="region" data-sortable="true" data-align="center">Região</th>
+                                            <th data-field="city" data-sortable="true" data-align="center">Cidade</th>
+                                            <th data-field="reference" data-sortable="true" data-align="center" data-formatter="linkFormatter">Origem</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div> <!--table -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-lg-6">
                 <div class="card" style="min-height: 95%;">
@@ -151,6 +181,9 @@
     </div>
 </div>
 <script>
+function linkFormatter(value, row) {
+   return '<a href="'+row['reference']+'" target="_blank" data-toggle="tooltip" data-placement="top" title="'+row['reference']+'" data-original-title="'+row['reference']+'"> Link</a>';
+}
 window.onload = function() {
     var ctx = document.getElementById("statistics").getContext('2d');
     var myChart = new Chart(ctx, {
@@ -212,7 +245,7 @@ function clearStats(){
                 action: function(){
                     $.ajax({
                         type: 'post',
-                        url: "admin/clearstats",
+                        url: "stats/clear",
                         success: function (response) {
                             response = JSON.parse(response);
                             $.toast({
