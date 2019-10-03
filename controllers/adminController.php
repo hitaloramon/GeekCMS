@@ -20,7 +20,6 @@ class adminController extends controller{
         $stats = new Stats();
         $data['totalhits'] = $stats->getTotalHits();
         $data['uniquevisits'] = $stats->getUniqueVisits();
-        $data['online'] = $stats->getOnline();
         $data['today'] = $stats->getVisitsToday();
         $data['browser'] = $stats->getStatsBrowser();
         $data['device'] = $stats->getStatsDevice();
