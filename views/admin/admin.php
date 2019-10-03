@@ -39,16 +39,6 @@
     <script type="text/javascript"> localStorage.setItem('SITEURL', '<?php echo BASE; ?>');</script>
     <script src="<?php echo BASE; ?>/assets/plugins/jquery/jquery.min.js"></script>
     <script src="<?php echo BASE; ?>/assets/plugins/jqueryui/jquery-ui.min.js"></script>
-    <script>
-        function responsive_filemanager_callback(field_id){
-            if(field_id){
-                console.log(field_id);
-                var url=jQuery('#'+field_id).val();
-                //alert('update '+field_id+" with "+url);
-                //your code
-            }
-        }
-    </script>
     <?php echo Asset::outputScripts('header'); ?>
     
 </head>
