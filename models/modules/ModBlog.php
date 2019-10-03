@@ -503,6 +503,18 @@
                     unset($array_data[$key]);
                 }
 
+                $data = array(
+                    'title'   => 'Comentário Adicionado',
+                    'msg'     => 'Uma resposta de comentário foi adicionado por '. $array_data['name'],
+                    'icon'    => 'fas fa-comment',
+                    'color'   => 'success',
+                    'link'    => 'module/view/blog/comments',
+                    'status'  => 1
+                );
+
+                $notification = new Notification();
+                $notification->insert($data);
+
                 $this->db->insert('mod_blog_comments', $array_data);
 
                 $json['heading'] = "Sucesso";

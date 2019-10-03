@@ -79,7 +79,6 @@ if (!defined("_VALID_PHP")) {
 							$menu_array = $menu->getMenu(true);
 							echo $menu->bootstrap_menu($menu_array);
 							?>
-							<li class="nav-item"><a class="btn btn-warning" href="https://central.meupost.net"><i class="fas fa-lock"></i> Entrar</a></li>
 						</ul>
 					</div>
 				</nav>

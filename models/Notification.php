@@ -41,6 +41,7 @@
                 'msg'    => 'trim|sanitize_string',
                 'icon'   => 'trim|sanitize_string',
                 'color'  => 'trim|sanitize_string',
+                'link'   => 'trim|sanitize_string',
                 'status' => 'trim|sanitize_numbers'
             );
             
