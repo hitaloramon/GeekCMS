@@ -117,7 +117,20 @@
         }
 
         public function getStats(){
-            return $this->db->fetchAll("SELECT idMonth, COUNT(DISTINCT ip) as visits, COUNT(id) as hits FROM stats RIGHT JOIN (SELECT 1 as idMonth UNION SELECT 2 as idMonth UNION SELECT 3 as idMonth UNION SELECT 4 as idMonth UNION SELECT 5 as idMonth UNION SELECT 6 as idMonth UNION SELECT 7 as idMonth UNION SELECT 8 as idMonth UNION SELECT 9 as idMonth UNION SELECT 10 as idMonth UNION SELECT 11 as idMonth UNION SELECT 12 as idMonth) as Month ON Month.idMonth = MONTH(date) AND YEAR(date) = YEAR(CURDATE()) GROUP BY Month.idMonth");
+            return $this->db->fetchAll("SELECT idMonth, COUNT(DISTINCT ip) as visits, COUNT(id) as hits FROM stats 
+            RIGHT JOIN (SELECT 1 as idMonth 
+            UNION SELECT 2 as idMonth 
+            UNION SELECT 3 as idMonth 
+            UNION SELECT 4 as idMonth 
+            UNION SELECT 5 as idMonth 
+            UNION SELECT 6 as idMonth 
+            UNION SELECT 7 as idMonth 
+            UNION SELECT 8 as idMonth 
+            UNION SELECT 9 as idMonth 
+            UNION SELECT 10 as idMonth 
+            UNION SELECT 11 as idMonth 
+            UNION SELECT 12 as idMonth) as Month ON Month.idMonth = MONTH(date) AND YEAR(date) = YEAR(CURDATE()) 
+            GROUP BY Month.idMonth");
         }
 
         public function clearStats(){
@@ -136,10 +149,6 @@
         public function getTotalHits(){
             $result = $this->db->fetchRow("SELECT COUNT(id) as total FROM stats WHERE YEAR(date) = YEAR(CURDATE())");
             return ($result['total']) ? $result['total'] : 0;
-        }
-
-        public function getOnline(){
-            return $this->db->fetchOne("SELECT COUNT(DISTINCT ip) as online FROM stats WHERE YEAR(date) = YEAR(CURDATE()) AND date > NOW() - INTERVAL 5 MINUTE");
         }
 
         public function getVisitsToday(){

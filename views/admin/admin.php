@@ -281,13 +281,33 @@
                         form.append(`
                         <div id="accordion">
                             <div class="card">
-                                <div class="card-header" id="headingOne">
+                                <div class="card-header">
+                                <h5 class="mb-0">
+                                    <a class="btn" data-toggle="collapse" data-target="#selectorsCollapse" aria-expanded="false" aria-controls="selectorsCollapse">Seletores</a>
+                                </h5>
+                                </div>
+
+                                <div id="selectorsCollapse" class="collapse" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <div class="form-horizontal">
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <label>ID</label>
+                                                    <input type="text" class="form-control config-id" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
                                 <h5 class="mb-0">
                                     <a class="btn" data-toggle="collapse" data-target="#spaceCollapse" aria-expanded="false" aria-controls="spaceCollapse">Dimensões</a>
                                 </h5>
                                 </div>
 
-                                <div id="spaceCollapse" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div id="spaceCollapse" class="collapse" data-parent="#accordion">
                                     <div class="card-body">
                                         <div class="form-horizontal">
                                             <div class="form-group">
@@ -301,12 +321,12 @@
                                 </div>
                             </div>
                             <div class="card">
-                                <div class="card-header" id="headingTwo">
+                                <div class="card-header">
                                 <h5 class="mb-0">
-                                    <a class="btn btn-link collapsed" data-toggle="collapse" data-target="#backgroundCollapse" aria-expanded="false" aria-controls="backgroundCollapse">Decoração</a>
+                                    <a class="btn btn-link collapsed" data-toggle="collapse" data-target="#backgroundCollapse" aria-expanded="false" aria-controls="backgroundCollapse">Estilos</a>
                                 </h5>
                                 </div>
-                                <div id="backgroundCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                <div id="backgroundCollapse" class="collapse" data-parent="#accordion">
                                     <div class="card-body">
                                         <div class="form-horizontal">
                                             <div class="form-group">
@@ -342,17 +362,17 @@
                             </div>
                         `);
 
-                        // // Padding
-                        // form.append(
-                        //     '<div class="form-horizontal">' +
-                        //     '   <div class="form-group">' +
-                        //     '       <div class="col-sm-12">' +
-                        //     '           <label>Espaçamento</label>' +
-                        //     '           <input type="number" class="form-control config-padding" />' +
-                        //     '       </div>' +
-                        //     '   </div>' +
-                        //     '</div>'
-                        // );
+                        form.find('.config-id').on('change', function () {
+                            var container = keditor.getSettingContainer();
+                            var row = container.find('.row');
+                            if (!container.hasClass('keditor-sub-container')) {
+                                row = row.filter(function () {
+                                    return $(this).parents('.keditor-container').length === 1;
+                                });
+                            }
+
+                            row.attr('id', this.value);
+                        });
 
                         form.find('.config-padding').on('change', function () {
                             var container = keditor.getSettingContainer();
@@ -365,40 +385,6 @@
 
                             row.css('padding', this.value + 'px');
                         });
-
-                        
-                        // // Background
-                        // form.append(
-                        //     '<div class="form-horizontal">' +
-                        //     '   <div class="form-group">' +
-                        //     '       <div class="col-sm-12 mb-2">' +
-                        //     '           <label>Cor de Fundo</label>' +
-                        //     '           <input type="text" class="form-control config-bg-color" />' +
-                        //     '       </div>' +
-                        //     '       <div class="col-sm-12 mb-2">' +
-                        //     '           <label>Imagem de Fundo</label>' +
-                        //     '           <input type="text" placeholder="URL da Imagem" class="form-control config-bg-img" />' +
-                        //     '       </div>' +
-                        //     '       <div class="col-sm-12 mb-2">' +
-                        //     '           <label>Repetir</label>' +
-                        //     '           <select class="config-bg-repeat form-control">'+
-                        //     '               <option value="no-repeat">Não repetir</option>'+
-                        //     '               <option value="repeat">Repetir</option>'+
-                        //     '               <option value="repeat-x">Repetir em X</option>'+
-                        //     '               <option value="repeat-y">Repetir em Y</option>'+
-                        //     '           </select>' +
-                        //     '       </div>' +
-                        //     '       <div class="col-sm-12 mb-2">' +
-                        //     '           <label>Tamanho</label>' +
-                        //     '           <select class="config-bg-size form-control">'+
-                        //     '               <option value="auto">Auto</option>'+
-                        //     '               <option value="cover">Cover</option>'+
-                        //     '               <option value="contain">Contain</option>'+
-                        //     '           </select>' +
-                        //     '       </div>' +
-                        //     '   </div>' +
-                        //     '</div>'
-                        // );
 
                         form.find('.config-bg-color').on('change', function () {
                             var container = keditor.getSettingContainer();
@@ -452,6 +438,8 @@
                     },
                     containerSettingShowFunction: function (form, container, keditor) {
                         var row = container.find('.row');
+                        var id = row.prop('id') || '';
+                        console.log(row);
                         var padding = row.prop('style').padding || '';
                         var padding = padding != '' ? padding.replace('px','') : '';
                         var backgroundColor = row.prop('style').backgroundColor || '';
@@ -461,6 +449,7 @@
                         var backgroundSize = row.prop('style').backgroundSize || '';
 
 
+                        form.find('.config-id').val(id);
                         form.find('.config-padding').val(padding);
                         form.find('.config-bg-color').val(backgroundColor);
                         form.find('.config-bg-img').val(backgroundImage);
@@ -468,6 +457,7 @@
                         form.find('.config-bg-size').val(backgroundSize);
                     },
                     containerSettingHideFunction: function (form, keditor) {
+                        form.find('.config-id').val('');
                         form.find('.config-padding').val(0);
                         form.find('.config-bg-color').val('');
                         form.find('.config-bg-img').val('');

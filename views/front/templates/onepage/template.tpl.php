@@ -46,10 +46,10 @@ if (!defined("_VALID_PHP")) {
 				<div class="container">
 					<nav class="navbar navbar-expand-lg font-14">
 						<a class="navbar-brand hidden-xs-up" href="#">Menu</a>
-						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#header13top" aria-controls="header13top" aria-expanded="false" aria-label="Toggle">
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#top" aria-controls="top" aria-expanded="false" aria-label="Toggle">
 							<span class="sl-icon-options"></span>
 						</button>
-						<div class="collapse navbar-collapse" id="header13top">
+						<div class="collapse navbar-collapse" id="top">
 							<ul class="navbar-nav">
 								<li class="nav-item"><a class="nav-link"><i class="fas fa-clock"></i> Atendimento: Segunda a Sexta das 09:00 às 18:00.</a></li>
 							</ul>

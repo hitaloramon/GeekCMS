@@ -69,10 +69,18 @@
                     else {
                         if($submenu == 0){
                             $menu_html .= '<li class="nav-item">'. PHP_EOL;
-                            $menu_html .= '<a class="nav-link" href="'.BASE.'/'.$element['page_slug'].'"><i class="'.$element['icon'].'"></i> ' . $element['name'] . '</a>'. PHP_EOL;
+                            if($element['content_type'] == 'web'){
+                                $menu_html .= '<a class="nav-link" href="'.$element['link'].'" target="'.$element['target'].'"><i class="'.$element['icon'].'"></i> ' . $element['name'] . '</a>'. PHP_EOL;
+                            }else{
+                                $menu_html .= '<a class="nav-link" href="'.BASE.'/'.$element['page_slug'].'"><i class="'.$element['icon'].'"></i> ' . $element['name'] . '</a>'. PHP_EOL;
+                            }
                         }else{
                             $menu_html .= '<li>'. PHP_EOL;
-                            $menu_html .= '<a class="dropdown-item" href="'.BASE.'/'.$element['page_slug'].'"><i class="'.$element['icon'].'"></i> ' . $element['name'] . '</a>'. PHP_EOL;
+                            if($element['content_type'] == 'web'){
+                                $menu_html .= '<a class="nav-link" href="'.$element['link'].'" target="'.$element['target'].'"><i class="'.$element['icon'].'"></i> ' . $element['name'] . '</a>'. PHP_EOL;
+                            }else{
+                                $menu_html .= '<a class="dropdown-item" href="'.BASE.'/'.$element['page_slug'].'"><i class="'.$element['icon'].'"></i> ' . $element['name'] . '</a>'. PHP_EOL;
+                            }
                         }
                     }
                     if(in_array($element['id'], $parents)){
