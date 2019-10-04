@@ -231,7 +231,7 @@
             <div class="container-fluid">
                 <?php $this->loadView($viewName, $viewData); ?>
             </div>
-            <footer class="footer text-center"> Desenvolvido com GeekCMS. Todos os Direitos Reservados </footer>
+            <footer class="footer text-center">GeekCMS © <?= date('Y'); ?>. Todos os Direitos Reservados </footer>
         </div>
 
     <script src="<?php echo BASE; ?>/assets/plugins/bootstrap/js/popper.min.js"></script>
