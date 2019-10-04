@@ -3,18 +3,6 @@ body {
     height: 100%;
 }
 
-[data-keditor="html"] {
-    height: 100%;
-}
-
-#content-area {
-    min-height: 100%;
-}
-
-#content-area .keditor-content-area {
-    min-height: 100%;
-}
-
 #header,
 #body,
 #footer {

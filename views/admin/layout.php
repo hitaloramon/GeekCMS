@@ -3,225 +3,219 @@
 	 die('Acesso direto negado');
  }
 ?>
-<div class="page-wrapper">
-    <div class="container-fluid" >
-
-        <div class="d-flex no-block">
-            <div><h3 class="text-themecolor">Layout</h3></div>
-            <div class="w-25 ml-auto m-b-15">
-                <select class="selectpicker" name="page" id="page" data-style="custom-select w-100"  data-live-search="true" title="Selecione" onchange="if(this.value != '0') window.location = '<?php echo BASE_ADMIN ?>/layout/'+this[this.selectedIndex].value; else window.location = '<?php echo BASE_ADMIN ?>/layout';">
-                    <?php $p = new Page(); $p = $p->getAllPages(); foreach ($p as $page): ?>
-                        <?php if($page['id'] == $viewData['pageid']){ $slug = $page['slug']; } ?>
-                        <option value="<?php echo $page['id']; ?>" data-tokens="<?php echo $page['title']; ?>" <?php getSelected($viewData['pageid'], $page['id']); ?>><?php echo $page['title']; ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-            <div class="m-t-5"><a class="right-side-toggle m-l-15" href="javascript:void(0)"><i class="mdi mdi-help"></i></a></div>
+    <div class="d-flex no-block">
+        <div><h3 class="text-themecolor">Layout</h3></div>
+        <div class="w-25 ml-auto m-b-15">
+            <select class="selectpicker" name="page" id="page" data-style="custom-select w-100"  data-live-search="true" title="Selecione" onchange="if(this.value != '0') window.location = '<?php echo BASE_ADMIN ?>/layout/'+this[this.selectedIndex].value; else window.location = '<?php echo BASE_ADMIN ?>/layout';">
+                <?php $p = new Page(); $p = $p->getAllPages(); foreach ($p as $page): ?>
+                    <?php if($page['id'] == $viewData['pageid']){ $slug = $page['slug']; } ?>
+                    <option value="<?php echo $page['id']; ?>" data-tokens="<?php echo $page['title']; ?>" <?php getSelected($viewData['pageid'], $page['id']); ?>><?php echo $page['title']; ?></option>
+                <?php endforeach; ?>
+            </select>
         </div>
-
- 
-        <div class="row text-center geek-layout">
-            <div class="col-md-12">
-                <div class="ribbon-wrapper card">
-                    <div class="ribbon ribbon-info">Superior</div>
-                    <div class="ribbon ribbon-right">
-                        <a class="btnAdd" data-position="top" data-toggle="tooltip" data-placement="left" data-original-title="Adicionar"><i class="mdi mdi-plus"></i></a>
-                        <a class="allpages" data-position="top" data-toggle="tooltip" data-placement="left" data-original-title="Aplicar em Todas as Páginas"><i class="mdi mdi-checkbox-multiple-marked"></i></a>
-                    </div>
-                    <p class="ribbon-content">
-                        <ul data-position="top" id="top-<?php echo $viewData['pageid'];?>" class="row sortable-list top-position">
-                            <?php if($layout): ?>
-                            <?php foreach ($layout as $trow): ?>
-                            <?php if ($trow['place'] == "top"): ?>
-                            <li class="sortable-item col-md-<?php echo $trow['space']; ?>" id="list-<?php echo $trow['widget_id'];?>" data-id="<?php echo $trow['widget_id'];?>" data-alias="<?php echo $trow['widget_alias'];?>" data-space="<?php echo $trow['space'];?>">
-                                <div class="d-flex no-block">
-                                    <div class="p-2"><?php echo $trow['title'];?></div>
-                                    <div class="ml-auto p-2">
-                                        <a class="setspace"><i class="fa fa-edit"></i></a>
-                                        <a class="remove m-l-10"><i class="fa fa-times text-danger"></i></a>
-                                    </div>
-                                </div>
-                            </li>
-                            <?php endif; ?>
-                            <?php endforeach; ?>
-                            <?php unset($trow);?>
-                            <?php endif; ?>
-                        </ul>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="ribbon-wrapper card">
-                    <div class="ribbon ribbon-info">Esquerda</div>
-                    <div class="ribbon ribbon-right">
-                        <a class="btnAdd" data-position="left" data-toggle="tooltip" data-placement="left" data-original-title="Adicionar"><i class="mdi mdi-plus"></i></a>
-                        <a class="allpages" data-position="left" data-toggle="tooltip" data-placement="left" data-original-title="Aplicar em Todas as Páginas"><i class="mdi mdi-checkbox-multiple-marked"></i></a>
-                    </div>
-                    <p class="ribbon-content">
-                        <ul data-position="left" id="left-<?php echo $viewData['pageid'];?>" class="row sortable-list left-position">
-                            <?php if($layout): ?>
-                            <?php foreach ($layout as $trow): ?>
-                            <?php if ($trow['place'] == "left"): ?>
-                            <li class="sortable-item col-md-<?php echo $trow['space']; ?>" id="list-<?php echo $trow['widget_id'];?>" data-id="<?php echo $trow['widget_id'];?>" data-alias="<?php echo $trow['widget_alias'];?>" data-space="<?php echo $trow['space'];?>">
-                                <div class="d-flex no-block">
-                                    <div class="p-2"><?php echo $trow['title'];?></div>
-                                    <div class="ml-auto p-2">
-                                        <a class="setspace"></a>
-                                        <a class="remove m-l-10"><i class="fa fa-times text-danger"></i></a>
-                                    </div>
-                                </div>
-                            </li>
-                            <?php endif; ?>
-                            <?php endforeach; ?>
-                            <?php unset($trow);?>
-                            <?php endif; ?>
-                        </ul>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-4 h-100">
-                <div class="ribbon-wrapper card geek-layout-main">
-                    <p class="ribbon-content">Conteúdo Principal</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="ribbon-wrapper card">
-                    <div class="ribbon ribbon-info">Direita</div>
-                    <div class="ribbon ribbon-right">
-                        <a class="btnAdd" data-position="right" data-toggle="tooltip" data-placement="left" data-original-title="Adicionar"><i class="mdi mdi-plus"></i></a>
-                        <a class="allpages" data-position="right" data-toggle="tooltip" data-placement="left" data-original-title="Aplicar em Todas as Páginas"><i class="mdi mdi-checkbox-multiple-marked"></i></a>
-                    </div>
-                    <p class="ribbon-content">
-                        <ul data-position="right" id="right-<?php echo $viewData['pageid'];?>" class="row sortable-list right-position">
-                            <?php if($layout): ?>
-                            <?php foreach ($layout as $trow): ?>
-                            <?php if ($trow['place'] == "right"): ?>
-                            <li class="sortable-item col-md-<?php echo $trow['space']; ?>" id="list-<?php echo $trow['widget_id'];?>" data-id="<?php echo $trow['widget_id'];?>" data-alias="<?php echo $trow['widget_alias'];?>" data-space="<?php echo $trow['space'];?>">
-                                <div class="d-flex no-block">
-                                    <div class="p-2"><?php echo $trow['title'];?></div>
-                                    <div class="ml-auto p-2">
-                                        <a class="setspace"></a>
-                                        <a class="remove m-l-10"><i class="fa fa-times text-danger"></i></a>
-                                    </div>
-                                </div>
-                            </li>
-                            <?php endif; ?>
-                            <?php endforeach; ?>
-                            <?php unset($trow);?>
-                            <?php endif; ?>
-                        </ul>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="ribbon-wrapper card">
-                    <div class="ribbon ribbon-info">Inferior</div>
-                    <div class="ribbon ribbon-right">
-                        <a class="btnAdd" data-position="bottom" data-toggle="tooltip" data-placement="left" data-original-title="Adicionar"><i class="mdi mdi-plus"></i></a>
-                        <a class="allpages" data-position="bottom" data-toggle="tooltip" data-placement="left" data-original-title="Aplicar em Todas as Páginas"><i class="mdi mdi-checkbox-multiple-marked"></i></a>
-                    </div>
-                    <p class="ribbon-content">
-                        <ul data-position="bottom" id="bottom-<?php echo $viewData['pageid'];?>" class="row sortable-list bottom-position">
-                            <?php if($layout): ?>
-                            <?php foreach ($layout as $trow): ?>
-                            <?php if ($trow['place'] == "bottom"): ?>
-                            <li class="sortable-item col-md-<?php echo $trow['space']; ?>" id="list-<?php echo $trow['widget_id'];?>" data-id="<?php echo $trow['widget_id'];?>" data-alias="<?php echo $trow['widget_alias'];?>" data-space="<?php echo $trow['space'];?>">
-                                <div class="d-flex no-block">
-                                    <div class="p-2"><?php echo $trow['title'];?></div>
-                                    <div class="ml-auto p-2">
-                                        <a class="setspace"><i class="fa fa-edit"></i></a>
-                                        <a class="remove m-l-10"><i class="fa fa-times text-danger"></i></a>
-                                    </div>
-                                </div>
-                            </li>
-                            <?php endif; ?>
-                            <?php endforeach; ?>
-                            <?php unset($trow);?>
-                            <?php endif; ?>
-                        </ul>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="ribbon-wrapper card">
-                    <div class="ribbon ribbon-info">Rodapé</div>
-                    <div class="ribbon ribbon-right">
-                        <a class="btnAdd" data-position="footer" data-toggle="tooltip" data-placement="right" data-original-title="Adicionar"><i class="mdi mdi-plus"></i></a>
-                        <a class="allpages" data-position="footer" data-toggle="tooltip" data-placement="left" data-original-title="Aplicar em Todas as Páginas"><i class="mdi mdi-checkbox-multiple-marked"></i></a>
-                    </div>
-                    <p class="ribbon-content">
-                        <ul data-position="footer" id="footer-<?php echo $viewData['pageid']; ?>" class="row sortable-list footer-position">
-                            <?php if($layout): ?>
-                            <?php foreach ($layout as $trow): ?>
-                            <?php if ($trow['place'] == "footer"): ?>
-                            <li class="sortable-item col-md-<?php echo $trow['space']; ?>" id="list-<?php echo $trow['widget_id'];?>" data-id="<?php echo $trow['widget_id'];?>" data-alias="<?php echo $trow['widget_alias'];?>" data-space="<?php echo $trow['space'];?>">
-                                <div class="d-flex no-block">
-                                    <div class="p-2"><?php echo $trow['title'];?></div>
-                                    <div class="ml-auto p-2">
-                                        <a class="setspace"><i class="fa fa-edit"></i></a>
-                                        <a class="remove m-l-10"><i class="fa fa-times text-danger"></i></a>
-                                    </div>
-                                </div>
-                            </li>
-                            <?php endif; ?>
-                            <?php endforeach; ?>
-                            <?php unset($trow);?>
-                            <?php endif; ?>
-                        </ul>
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="widget-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Escolha um Widget para incluir.</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" id="widget-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="right-sidebar">
-            <div class="slimscrollright">
-                <div class="rpanel-title"> Ajuda <span><i class="mdi mdi-close right-side-toggle"></i></span> </div>
-                <div class="r-panel-body geek-help">
-                    <b>Gerenciar Layout</b>
-                    <p>Primeiro, selecione a página que você deseja gerenciar o layout. A página inicial é selecionada por padrão.</p>
-                    <hr>
-                    <b>Seções do Layout</b>
-                    <p>Há cinco áreas disponíveis no total, que você pode usar para atribuir seus plugins. Área Superior, Inferior, Esquerda, Direita e Rodapé. Cada área pode conter um ou mais plugins.</p>
-                    <hr>
-                    <b>Ordenar Plugins</b>
-                    <p>Você alterar a ordem dos plugins arrastando-os para cima ou para baixo, além de poder mover os plugins de uma área para outra.</p>
-                    <hr>
-                    <b>Inserindo Plugins</b>
-                    <p>Para inserir um novo plugin clique no icone <i class="fa fa-plus"></i> da área que deseja adicionar. Uma nova janela será aberta e você pode selecionar um ou mais plugins não utilizados.</p>
-                    <hr>
-                    <b>Removendo Plugins</b>
-                    <p>Para remover plugin(s), clique no ícone <i class="fa fa-times"></i> do plugin correspondente para remover.</p>
-                    <hr>
-                    <b>Aplicando a Configuração</b>
-                    <p>Clicando no icone <i class="fa fa-check-square-o"></i> você pode aplicar a configuração de uma área para todas as páginas existentes.</i></p>
-                    <hr>
-                    <b>Colunas dos Plugins</b>
-                    <p>A área de Plugins Superior e inferior pode ser estendidos com o número de colunas. Por exemplo, se você tem 2 plugins atribuídos a área inferior, por padrão cada plugin terá 100% do espaço disponível. Você pode atribuir manualmente o número máximo de espaço ocupado por cada plugin. Por exemplo, o primeiro plugin pode levar 5 colunas, o segundo plugin pode ter 7 colunas. O total não deve exceder 12 colunas. O Primeiro plugin pode ter 3 colunas, o segundo 5 colunas e o terceiro 4 colunas. Você pode misturar e combinar qualquer colunas, mas tenha em mente que 12 é o número máximo. Cada vez que você adiciona ou remove um plugin, você precisará re-ajustar o número de colunas para cada plugin.</p>
-                </div>
-            </div>
-        </div>
-
+        <div class="m-t-5"><a class="right-side-toggle m-l-15" href="javascript:void(0)"><i class="mdi mdi-help"></i></a></div>
     </div>
-</div>
+
+
+    <div class="row text-center geek-layout">
+        <div class="col-md-12">
+            <div class="ribbon-wrapper card">
+                <div class="ribbon ribbon-info">Superior</div>
+                <div class="ribbon ribbon-right">
+                    <a class="btnAdd" data-position="top" data-toggle="tooltip" data-placement="left" data-original-title="Adicionar"><i class="mdi mdi-plus"></i></a>
+                    <a class="allpages" data-position="top" data-toggle="tooltip" data-placement="left" data-original-title="Aplicar em Todas as Páginas"><i class="mdi mdi-checkbox-multiple-marked"></i></a>
+                </div>
+                <p class="ribbon-content">
+                    <ul data-position="top" id="top-<?php echo $viewData['pageid'];?>" class="row sortable-list top-position">
+                        <?php if($layout): ?>
+                        <?php foreach ($layout as $trow): ?>
+                        <?php if ($trow['place'] == "top"): ?>
+                        <li class="sortable-item col-md-<?php echo $trow['space']; ?>" id="list-<?php echo $trow['widget_id'];?>" data-id="<?php echo $trow['widget_id'];?>" data-alias="<?php echo $trow['widget_alias'];?>" data-space="<?php echo $trow['space'];?>">
+                            <div class="d-flex no-block">
+                                <div class="p-2"><?php echo $trow['title'];?></div>
+                                <div class="ml-auto p-2">
+                                    <a class="setspace"><i class="fa fa-edit"></i></a>
+                                    <a class="remove m-l-10"><i class="fa fa-times text-danger"></i></a>
+                                </div>
+                            </div>
+                        </li>
+                        <?php endif; ?>
+                        <?php endforeach; ?>
+                        <?php unset($trow);?>
+                        <?php endif; ?>
+                    </ul>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="ribbon-wrapper card">
+                <div class="ribbon ribbon-info">Esquerda</div>
+                <div class="ribbon ribbon-right">
+                    <a class="btnAdd" data-position="left" data-toggle="tooltip" data-placement="left" data-original-title="Adicionar"><i class="mdi mdi-plus"></i></a>
+                    <a class="allpages" data-position="left" data-toggle="tooltip" data-placement="left" data-original-title="Aplicar em Todas as Páginas"><i class="mdi mdi-checkbox-multiple-marked"></i></a>
+                </div>
+                <p class="ribbon-content">
+                    <ul data-position="left" id="left-<?php echo $viewData['pageid'];?>" class="row sortable-list left-position">
+                        <?php if($layout): ?>
+                        <?php foreach ($layout as $trow): ?>
+                        <?php if ($trow['place'] == "left"): ?>
+                        <li class="sortable-item col-md-<?php echo $trow['space']; ?>" id="list-<?php echo $trow['widget_id'];?>" data-id="<?php echo $trow['widget_id'];?>" data-alias="<?php echo $trow['widget_alias'];?>" data-space="<?php echo $trow['space'];?>">
+                            <div class="d-flex no-block">
+                                <div class="p-2"><?php echo $trow['title'];?></div>
+                                <div class="ml-auto p-2">
+                                    <a class="setspace"></a>
+                                    <a class="remove m-l-10"><i class="fa fa-times text-danger"></i></a>
+                                </div>
+                            </div>
+                        </li>
+                        <?php endif; ?>
+                        <?php endforeach; ?>
+                        <?php unset($trow);?>
+                        <?php endif; ?>
+                    </ul>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4 h-100">
+            <div class="ribbon-wrapper card geek-layout-main">
+                <p class="ribbon-content">Conteúdo Principal</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="ribbon-wrapper card">
+                <div class="ribbon ribbon-info">Direita</div>
+                <div class="ribbon ribbon-right">
+                    <a class="btnAdd" data-position="right" data-toggle="tooltip" data-placement="left" data-original-title="Adicionar"><i class="mdi mdi-plus"></i></a>
+                    <a class="allpages" data-position="right" data-toggle="tooltip" data-placement="left" data-original-title="Aplicar em Todas as Páginas"><i class="mdi mdi-checkbox-multiple-marked"></i></a>
+                </div>
+                <p class="ribbon-content">
+                    <ul data-position="right" id="right-<?php echo $viewData['pageid'];?>" class="row sortable-list right-position">
+                        <?php if($layout): ?>
+                        <?php foreach ($layout as $trow): ?>
+                        <?php if ($trow['place'] == "right"): ?>
+                        <li class="sortable-item col-md-<?php echo $trow['space']; ?>" id="list-<?php echo $trow['widget_id'];?>" data-id="<?php echo $trow['widget_id'];?>" data-alias="<?php echo $trow['widget_alias'];?>" data-space="<?php echo $trow['space'];?>">
+                            <div class="d-flex no-block">
+                                <div class="p-2"><?php echo $trow['title'];?></div>
+                                <div class="ml-auto p-2">
+                                    <a class="setspace"></a>
+                                    <a class="remove m-l-10"><i class="fa fa-times text-danger"></i></a>
+                                </div>
+                            </div>
+                        </li>
+                        <?php endif; ?>
+                        <?php endforeach; ?>
+                        <?php unset($trow);?>
+                        <?php endif; ?>
+                    </ul>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="ribbon-wrapper card">
+                <div class="ribbon ribbon-info">Inferior</div>
+                <div class="ribbon ribbon-right">
+                    <a class="btnAdd" data-position="bottom" data-toggle="tooltip" data-placement="left" data-original-title="Adicionar"><i class="mdi mdi-plus"></i></a>
+                    <a class="allpages" data-position="bottom" data-toggle="tooltip" data-placement="left" data-original-title="Aplicar em Todas as Páginas"><i class="mdi mdi-checkbox-multiple-marked"></i></a>
+                </div>
+                <p class="ribbon-content">
+                    <ul data-position="bottom" id="bottom-<?php echo $viewData['pageid'];?>" class="row sortable-list bottom-position">
+                        <?php if($layout): ?>
+                        <?php foreach ($layout as $trow): ?>
+                        <?php if ($trow['place'] == "bottom"): ?>
+                        <li class="sortable-item col-md-<?php echo $trow['space']; ?>" id="list-<?php echo $trow['widget_id'];?>" data-id="<?php echo $trow['widget_id'];?>" data-alias="<?php echo $trow['widget_alias'];?>" data-space="<?php echo $trow['space'];?>">
+                            <div class="d-flex no-block">
+                                <div class="p-2"><?php echo $trow['title'];?></div>
+                                <div class="ml-auto p-2">
+                                    <a class="setspace"><i class="fa fa-edit"></i></a>
+                                    <a class="remove m-l-10"><i class="fa fa-times text-danger"></i></a>
+                                </div>
+                            </div>
+                        </li>
+                        <?php endif; ?>
+                        <?php endforeach; ?>
+                        <?php unset($trow);?>
+                        <?php endif; ?>
+                    </ul>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="ribbon-wrapper card">
+                <div class="ribbon ribbon-info">Rodapé</div>
+                <div class="ribbon ribbon-right">
+                    <a class="btnAdd" data-position="footer" data-toggle="tooltip" data-placement="right" data-original-title="Adicionar"><i class="mdi mdi-plus"></i></a>
+                    <a class="allpages" data-position="footer" data-toggle="tooltip" data-placement="left" data-original-title="Aplicar em Todas as Páginas"><i class="mdi mdi-checkbox-multiple-marked"></i></a>
+                </div>
+                <p class="ribbon-content">
+                    <ul data-position="footer" id="footer-<?php echo $viewData['pageid']; ?>" class="row sortable-list footer-position">
+                        <?php if($layout): ?>
+                        <?php foreach ($layout as $trow): ?>
+                        <?php if ($trow['place'] == "footer"): ?>
+                        <li class="sortable-item col-md-<?php echo $trow['space']; ?>" id="list-<?php echo $trow['widget_id'];?>" data-id="<?php echo $trow['widget_id'];?>" data-alias="<?php echo $trow['widget_alias'];?>" data-space="<?php echo $trow['space'];?>">
+                            <div class="d-flex no-block">
+                                <div class="p-2"><?php echo $trow['title'];?></div>
+                                <div class="ml-auto p-2">
+                                    <a class="setspace"><i class="fa fa-edit"></i></a>
+                                    <a class="remove m-l-10"><i class="fa fa-times text-danger"></i></a>
+                                </div>
+                            </div>
+                        </li>
+                        <?php endif; ?>
+                        <?php endforeach; ?>
+                        <?php unset($trow);?>
+                        <?php endif; ?>
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="widget-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Escolha um Widget para incluir.</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="widget-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="right-sidebar">
+        <div class="slimscrollright">
+            <div class="rpanel-title"> Ajuda <span><i class="mdi mdi-close right-side-toggle"></i></span> </div>
+            <div class="r-panel-body geek-help">
+                <b>Gerenciar Layout</b>
+                <p>Primeiro, selecione a página que você deseja gerenciar o layout. A página inicial é selecionada por padrão.</p>
+                <hr>
+                <b>Seções do Layout</b>
+                <p>Há cinco áreas disponíveis no total, que você pode usar para atribuir seus plugins. Área Superior, Inferior, Esquerda, Direita e Rodapé. Cada área pode conter um ou mais plugins.</p>
+                <hr>
+                <b>Ordenar Plugins</b>
+                <p>Você alterar a ordem dos plugins arrastando-os para cima ou para baixo, além de poder mover os plugins de uma área para outra.</p>
+                <hr>
+                <b>Inserindo Plugins</b>
+                <p>Para inserir um novo plugin clique no icone <i class="fa fa-plus"></i> da área que deseja adicionar. Uma nova janela será aberta e você pode selecionar um ou mais plugins não utilizados.</p>
+                <hr>
+                <b>Removendo Plugins</b>
+                <p>Para remover plugin(s), clique no ícone <i class="fa fa-times"></i> do plugin correspondente para remover.</p>
+                <hr>
+                <b>Aplicando a Configuração</b>
+                <p>Clicando no icone <i class="fa fa-check-square-o"></i> você pode aplicar a configuração de uma área para todas as páginas existentes.</i></p>
+                <hr>
+                <b>Colunas dos Plugins</b>
+                <p>A área de Plugins Superior e inferior pode ser estendidos com o número de colunas. Por exemplo, se você tem 2 plugins atribuídos a área inferior, por padrão cada plugin terá 100% do espaço disponível. Você pode atribuir manualmente o número máximo de espaço ocupado por cada plugin. Por exemplo, o primeiro plugin pode levar 5 colunas, o segundo plugin pode ter 7 colunas. O total não deve exceder 12 colunas. O Primeiro plugin pode ter 3 colunas, o segundo 5 colunas e o terceiro 4 colunas. Você pode misturar e combinar qualquer colunas, mas tenha em mente que 12 é o número máximo. Cada vez que você adiciona ou remove um plugin, você precisará re-ajustar o número de colunas para cada plugin.</p>
+            </div>
+        </div>
+    </div>
 
 <script>
 window.onload = function() {

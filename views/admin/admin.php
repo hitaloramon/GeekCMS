@@ -26,8 +26,7 @@
     <link href="<?php echo BASE; ?>/assets/plugins/ruler/ruler.min.css" rel="stylesheet">
     <link href="//cdn.materialdesignicons.com/3.4.93/css/materialdesignicons.min.css" rel="stylesheet" >
     <link href="<?php echo BASE; ?>/assets/plugins/bootstrap-iconpicker/css/bootstrap-iconpicker.min.css" rel="stylesheet" />
-    <!-- <link href="<?php echo BASE; ?>/assets/plugins/editor/grapes.min.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" data-type="keditor-style">
+    <link href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" rel="stylesheet" crossorigin="anonymous" data-type="keditor-style">
     <link href="<?php echo BASE; ?>/assets/plugins/editor/css/keditor.css" rel="stylesheet" data-type="keditor-style">
     <link href="<?php echo BASE; ?>/assets/plugins/editor/css/keditor-components.css" rel="stylesheet" data-type="keditor-style">
     <link href="<?php echo BASE; ?>/assets/plugins/editor/css/geekeditor.css" rel="stylesheet" data-type="keditor-style">
@@ -228,7 +227,12 @@
             </ul>
         </div>
 
-    <?php $this->loadView($viewName, $viewData); ?>
+        <div class="page-wrapper">
+            <div class="container-fluid">
+                <?php $this->loadView($viewName, $viewData); ?>
+            </div>
+            <footer class="footer text-center"> Desenvolvido com GeekCMS. Todos os Direitos Reservados </footer>
+        </div>
 
     <script src="<?php echo BASE; ?>/assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="<?php echo BASE; ?>/assets/plugins/mask/jquery.mask.min.js"></script>
