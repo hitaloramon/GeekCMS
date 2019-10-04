@@ -582,21 +582,19 @@ class adminController extends controller{
         header('Location: '.BASE_ADMIN);
     }
 
-    public function snippetspage(){
+    public function snippets($action = null){
         $this->user->verifyLogin();
 
-        $widget = new Widget();
-        $module = new Modules();
-        $data['widget'] = $widget->getWidget();
-        $data['module'] = $module->getModules(true);
+        if($action == 'email'){
+            $this->loadSnippets('snippetsemail');
+        }else{
+            $widget = new Widget();
+            $module = new Modules();
+            $data['widget'] = $widget->getWidget();
+            $data['module'] = $module->getModules(true);
 
-        $this->loadSnippets('snippets', $data);
-    }
-
-    public function snippetsemail(){
-        $this->user->verifyLogin();
-
-        $this->loadSnippets('snippets');
+            $this->loadSnippets('snippets', $data);
+        }
     }
 }
 ?>

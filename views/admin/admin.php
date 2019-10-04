@@ -268,7 +268,7 @@
             var titleEditor = $('#geekeditor').attr('data-title') == undefined ? 'Conteúdo' : $('#geekeditor').attr('data-title');
             $('#geekeditor').keditor({
                 title: titleEditor,
-                snippetsUrl: '<?php echo BASE_ADMIN; ?>/snippetspage',
+                snippetsUrl: '<?php echo BASE_ADMIN; ?>/snippets',
                 containerSettingEnabled: true,
                 containerSettingInitFunction: function (form, keditor) {
 

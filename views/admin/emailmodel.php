@@ -43,15 +43,8 @@
                                 <small class="form-control-feedback" id="subject-feedback"></small>
                             </div>
                         </div>
-                        <div id="geekfull" class="col-md-12 m-t-40" style="height:500px">
-                            <div class="d-flex no-block">
-                                <div><h5>Conteúdo</h5></div>
-                                <div class="ml-auto">
-                                    <a class="nav-link" href="#" onclick="requestFullScreen('#geekfull')"><i class="mdi mdi-fullscreen"></i></a>
-                                </div>
-                            </div>
+                        <div class="col-md-12 m-t-20" style="height:600px">
                             <div id="geekeditor" data-fieldname="body"><?php echo html_entity_decode($viewData['model']['body']); ?></div>
-                            <small class="form-control-feedback" id="body-feedback"></small>
                         </div>
                         <div class="col-md-12">
                             <hr>

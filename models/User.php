@@ -2,7 +2,6 @@
     if (!defined("_VALID_PHP")){
         die('Acesso direto negado');
     }
-
     class User extends model {
 
         public function verifyLogin(){
@@ -14,6 +13,16 @@
         
 
         public function loginCheck($array_data){
+            $ip = $_SERVER['REMOTE_ADDR'];
+            $result = $this->db->fetchAll("SELECT * FROM logs WHERE action = 'login_error' AND ip = '{$ip}' AND date > NOW() - INTERVAL 20 MINUTE ORDER BY id DESC");
+
+            if(count($result) >= 5){
+                $json['heading'] = "Erro";
+                $json['text'] =  "Houve muitas tentativas de logins inválidas. Você está bloqueado por 20 minutos!";
+                $json['icon'] = 'danger';
+                return json_encode($json);
+                exit;
+            }
 
             if(empty($array_data['password'])){
                 unset($array_data['password']);
@@ -95,6 +104,18 @@
                         break;
                     }
                 }else{
+                    $logs = new Logs();
+                    
+                    $data_logs = array(
+                        'action'        => 'login_error',
+                        'description'   => "O usuário {$array_data['email']} informou os dados de login inválidos",
+                        'type'          => 'system',
+                        'level'         => 'warning',
+                        'ip'            => $_SERVER['REMOTE_ADDR'],
+                    );
+                    
+                    $logs->insert($data_logs);
+
                     $json['heading'] = "Erro";
                     $json['text'] =  "Login ou senha inválidos";
                     $json['icon'] = 'danger';
