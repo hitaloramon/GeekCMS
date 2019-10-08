@@ -87,49 +87,51 @@ if (!defined("_VALID_PHP")) {
 		</div>
 		<div class="page-wrapper">
 			<?php
-			switch ($viewData['access']) {
-				case "1": // Publico
-					require_once 'content.tpl.php';
-					break;
-				case "2": // Registrado
-					if (isset($_SESSION['user_id']) && $_SESSION['user_id'] != null) :
-						require_once 'content.tpl.php';
-					else :
-						echo '<div class="main-container m-3">
-								<div class="container m-t-40 m-b-40">
-									<div class="alert alert-warning alert-dismissable fadeIn">
-										Você precisa está logado para visualizar essa página. <a href="' . BASE . '/' . $this->config['page_login'] . '">Clique Aqui</a> para ir para página de login.
-									</div>
+				$u = new User();
+				if($viewData['active'] == 1 || $u->isAdmin() == true){
+					switch ($viewData['access']) {
+						case "1": // Publico
+							require_once 'content.tpl.php';
+							break;
+						case "2": // Registrado
+							if (isset($_SESSION['user_id']) && $_SESSION['user_id'] != null) :
+								require_once 'content.tpl.php';
+							else :
+								echo '<div class="container m-t-40 m-b-40">
+											<div class="alert alert-warning alert-dismissable fadeIn">
+												Você precisa está logado para visualizar essa página. <a href="' . BASE . '/' . $this->config['page_login'] . '">Clique Aqui</a> para ir para página de login.
+											</div>
+										</div>';
+							endif;
+							break;
+						case "3": // Membro Associado
+							if (isset($_SESSION['user_id']) && $_SESSION['user_id'] != null) :
+								$membership_array = explode(",", $viewData['membership_id']);
+		
+								if ($u->validateMembership($membership_array) == true || $u->isAdmin() == true) {
+									require_once 'content.tpl.php';
+								} else {
+									echo '<div class="container m-t-40 m-b-40">
+												<div class="alert alert-warning alert-dismissable fadeIn">
+													Você precisa ter um plano de acesso válido para acessar essa página. Clique Aqui para ir para página de planos.
+												</div>
+											</div>';
+								} else :
+								echo 	'<div class="container m-t-40 m-b-40">
+											<div class="alert alert-warning alert-dismissable fadeIn">
+												Você precisa está logado para visualizar essa página. <a href="' . BASE . '/' . $this->config['page_login'] . '">Clique Aqui</a> para ir para página de login.
+											</div>
+										</div>';
+							endif;
+							break;
+					}
+				}else{
+					echo '<div class="container m-t-40 m-b-40">
+								<div class="alert alert-warning alert-dismissable fadeIn">
+									Essa página ainda não foi publicada.
 								</div>
 							</div>';
-					endif;
-					break;
-				case "3": // Membro Associado
-					if (isset($_SESSION['user_id']) && $_SESSION['user_id'] != null) :
-						$membership_array = explode(",", $viewData['membership_id']);
-						$u = new User();
-
-						if ($u->validateMembership($membership_array) == true || $u->isAdmin() == true) {
-							require_once 'content.tpl.php';
-						} else {
-							echo '<div class="main-container m-3">
-							<div class="container m-t-40 m-b-40">
-								<div class="alert alert-warning alert-dismissable fadeIn">
-									Você precisa ter um plano de acesso válido para acessar essa página. Clique Aqui para ir para página de planos.
-								</div>
-							</div>
-						  </div>';
-						} else :
-						echo '<div class="main-container m-3">
-						<div class="container m-t-40 m-b-40">
-							<div class="alert alert-warning alert-dismissable fadeIn">
-								Você precisa está logado para visualizar essa página. <a href="' . BASE . '/' . $this->config['page_login'] . '">Clique Aqui</a> para ir para página de login.
-							</div>
-						</div>
-					  </div>';
-					endif;
-					break;
-			}
+				}
 			?>
 		</div> <!--  page wrapper Close Tag -->
 	</div> <!-- Main Wrapper Close Tag -->

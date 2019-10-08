@@ -558,21 +558,23 @@
             if(isset($url[2]) && $url[2] == 'visualizar' && isset($url[3]) && !empty($url[3])){
 
                 $data = $this->getPostBySlug($url[3]);
-                $data = $data[0];
+                if(!empty($data)){
+                    $data = $data[0];
 
-                $meta .= '<title>'.$config['site_name'].' - '.$data['title'].'</title>'. PHP_EOL;
-                $meta .= '<meta name="keywords" content="'.$data['keywords'].'">'. PHP_EOL;
-                $meta .= '<meta name="description" content="'.$data['description'].'">'. PHP_EOL;
-                $meta .= '<meta property="og:url" content="'.DOMAIN.''.$_SERVER['REQUEST_URI'].'">'. PHP_EOL;
-                $meta .= '<meta property="og:title" content="'.$data['title'].'">'. PHP_EOL;
-                $meta .= '<meta property="og:site_name" content="'.$config['site_name'].'">'. PHP_EOL;
-                $meta .= '<meta property="og:description" content="'.$data['description'].'">'. PHP_EOL;
-                $meta .= '<meta property="og:image" content="'.BASE_UPLOADS.'/'.$data['thumb'].'">'. PHP_EOL;
-                $meta .= '<meta property="og:type" content="article">'. PHP_EOL;
-                $meta .= '<meta property="article:author" content="'.$data['author'].'">'. PHP_EOL;
-                $meta .= '<meta property="article:section" content="'.$data['category'].'">'. PHP_EOL;
-                $meta .= '<meta property="article:tag" content="'.$data['keywords'].'">'. PHP_EOL;
-                $meta .= '<meta property="article:published_time" content="'.$data['created'].'">'. PHP_EOL;
+                    $meta .= '<title>'.$config['site_name'].' - '.$data['title'].'</title>'. PHP_EOL;
+                    $meta .= '<meta name="keywords" content="'.$data['keywords'].'">'. PHP_EOL;
+                    $meta .= '<meta name="description" content="'.$data['description'].'">'. PHP_EOL;
+                    $meta .= '<meta property="og:url" content="'.DOMAIN.''.$_SERVER['REQUEST_URI'].'">'. PHP_EOL;
+                    $meta .= '<meta property="og:title" content="'.$data['title'].'">'. PHP_EOL;
+                    $meta .= '<meta property="og:site_name" content="'.$config['site_name'].'">'. PHP_EOL;
+                    $meta .= '<meta property="og:description" content="'.$data['description'].'">'. PHP_EOL;
+                    $meta .= '<meta property="og:image" content="'.BASE_UPLOADS.'/'.$data['thumb'].'">'. PHP_EOL;
+                    $meta .= '<meta property="og:type" content="article">'. PHP_EOL;
+                    $meta .= '<meta property="article:author" content="'.$data['author'].'">'. PHP_EOL;
+                    $meta .= '<meta property="article:section" content="'.$data['category'].'">'. PHP_EOL;
+                    $meta .= '<meta property="article:tag" content="'.$data['keywords'].'">'. PHP_EOL;
+                    $meta .= '<meta property="article:published_time" content="'.$data['created'].'">'. PHP_EOL;
+                }
                 
             }else{
                 $meta .= '<title>'.$config['site_name'].' - '.$viewData['title'].'</title>'. PHP_EOL;

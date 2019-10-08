@@ -162,10 +162,5 @@
         public function getStatsDevice(){
             return $this->db->fetchAll("SELECT S.device, COUNT(*) total, ROUND((COUNT(*) / total * 100), 2) as percentage FROM (SELECT COUNT(*) total FROM stats) t JOIN stats as S GROUP BY S.device ORDER BY percentage DESC");
         }
-
-        public function getOnlineData(){
-            return $this->db->fetchAll("SELECT * FROM stats WHERE YEAR(date) = YEAR(CURDATE()) AND date > NOW() - INTERVAL 5 MINUTE GROUP BY ip");
-        }
-
     }
 ?>

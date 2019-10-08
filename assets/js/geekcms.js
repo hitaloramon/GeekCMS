@@ -248,3 +248,261 @@ $('#toolbar').find('select').change(function () {
         exportDataType: $(this).val()
     })
 })
+
+
+
+
+// Editor 
+$(function () {
+    var titleEditor = $('#geekeditor').attr('data-title') == undefined ? 'Conteúdo' : $('#geekeditor').attr('data-title');
+    var SITEURL = localStorage.getItem('SITEURL');
+    $('#geekeditor').keditor({
+        title: titleEditor,
+        snippetsUrl: SITEURL + '/admin/snippets',
+        containerSettingEnabled: true,
+        containerSettingInitFunction: function (form, keditor) {
+
+                form.append(`
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header">
+                        <h5 class="mb-0">
+                            <a class="btn" data-toggle="collapse" data-target="#selectorsCollapse" aria-expanded="false" aria-controls="selectorsCollapse">Seletores</a>
+                        </h5>
+                        </div>
+
+                        <div id="selectorsCollapse" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <label>ID</label>
+                                            <input type="text" class="form-control config-id" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                        <h5 class="mb-0">
+                            <a class="btn" data-toggle="collapse" data-target="#spaceCollapse" aria-expanded="false" aria-controls="spaceCollapse">Dimensões</a>
+                        </h5>
+                        </div>
+
+                        <div id="spaceCollapse" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <h4 class="mb-3">Espaçamento</h4>
+                                        <label>Unidade</label>
+                                        <select id="padding-unit" class="form-control mb-2">
+                                            <option value="px">pixel</option>
+                                            <option value="%">porcentagem</option>
+                                        </select>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label>Superior</label>
+                                                <input type="number" class="form-control config-padding config-padding-top" value="0" min="0" />
+                                            </div>
+                                            <div class="col-6">
+                                                <label>Inferior</label>
+                                                <input type="number" class="form-control config-padding config-padding-bottom" value="0" min="0" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label>Esquerda</label>
+                                                <input type="number" class="form-control config-padding config-padding-left" value="0" min="0" />
+                                            </div>
+                                            <div class="col-6">
+                                                <label>Direita</label>
+                                                <input type="number" class="form-control config-padding config-padding-right" value="0" min="0" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                        <h5 class="mb-0">
+                            <a class="btn btn-link collapsed" data-toggle="collapse" data-target="#backgroundCollapse" aria-expanded="false" aria-controls="backgroundCollapse">Estilos</a>
+                        </h5>
+                        </div>
+                        <div id="backgroundCollapse" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <div class="col-sm-12 mb-2">
+                                            <label>Cor de Fundo</label>
+                                            <input type="text" placeholder="Hexadecimal ou RGB" class="form-control config-bg-color" />
+                                        </div>
+                                        <div class="col-sm-12 mb-2">
+                                            <label>Imagem de Fundo</label>
+                                            <input type="text" placeholder="URL da Imagem" class="form-control config-bg-img" />
+                                        </div>
+                                        <div class="col-sm-12 mb-2">
+                                            <label>Repetir</label>
+                                            <select class="config-bg-repeat form-control">
+                                                <option value="no-repeat">Não repetir</option>
+                                                <option value="repeat">Repetir</option>
+                                                <option value="repeat-x">Repetir em X</option>
+                                                <option value="repeat-y">Repetir em Y</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-12 mb-2">
+                                            <label>Tamanho</label>
+                                            <select class="config-bg-size form-control">
+                                                <option value="auto">Auto</option>
+                                                <option value="cover">Cover</option>
+                                                <option value="contain">Contain</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `);
+
+                form.find('.config-id').on('change', function () {
+                    var container = keditor.getSettingContainer();
+                    var row = container.find('.row');
+                    if (!container.hasClass('keditor-sub-container')) {
+                        row = row.filter(function () {
+                            return $(this).parents('.keditor-container').length === 1;
+                        });
+                    }
+
+                    row.attr('id', this.value);
+                });
+
+                form.find('.config-padding').on('change', function () {
+                    var container = keditor.getSettingContainer();
+                    var row = container.find('.row');
+                    if (!container.hasClass('keditor-sub-container')) {
+                        row = row.filter(function () {
+                            return $(this).parents('.keditor-container').length === 1;
+                        });
+                    }
+
+                    var unit = $("#padding-unit").val();
+                    var padding_top = $('.config-padding-top').val() + unit + ' ';
+                    var padding_right = $('.config-padding-right').val() + unit + ' ';
+                    var padding_bottom = $('.config-padding-bottom').val() + unit + ' ';
+                    var padding_left = $('.config-padding-left').val() + unit;
+
+                    var padding = padding_top + padding_right + padding_bottom + padding_left;
+                    console.log(padding);
+                    row.css('padding', padding);
+                });
+
+                form.find('.config-bg-color').on('change', function () {
+                    var container = keditor.getSettingContainer();
+                    var row = container.find('.row');
+                    if (!container.hasClass('keditor-sub-container')) {
+                        row = row.filter(function () {
+                            return $(this).parents('.keditor-container').length === 1;
+                        });
+                    }
+
+                    if(this.value != 'url("")'){
+                        row.css('background-color', this.value);
+                    }
+                });
+
+                form.find('.config-bg-img').on('change', function () {
+                    var container = keditor.getSettingContainer();
+                    var row = container.find('.row');
+                    if (!container.hasClass('keditor-sub-container')) {
+                        row = row.filter(function () {
+                            return $(this).parents('.keditor-container').length === 1;
+                        });
+                    }
+                
+                    row.css('background-image', 'url('+this.value+')');
+                });
+
+                form.find('.config-bg-repeat').on('change', function () {
+                    var container = keditor.getSettingContainer();
+                    var row = container.find('.row');
+                    if (!container.hasClass('keditor-sub-container')) {
+                        row = row.filter(function () {
+                            return $(this).parents('.keditor-container').length === 1;
+                        });
+                    }
+
+                    row.css('background-repeat', this.value);
+                });
+
+                form.find('.config-bg-size').on('change', function () {
+                    var container = keditor.getSettingContainer();
+                    var row = container.find('.row');
+                    if (!container.hasClass('keditor-sub-container')) {
+                        row = row.filter(function () {
+                            return $(this).parents('.keditor-container').length === 1;
+                        });
+                    }
+                    
+                    row.css('background-size', this.value);
+                });
+            },
+            containerSettingShowFunction: function (form, container, keditor) {
+                try {
+                    var row = container.find('.row');
+                    var id = row.prop('id') || '';
+                    var padding_top = row.prop('style').paddingTop || 0;
+                    var padding_right = row.prop('style').paddingRight || 0;
+                    var padding_bottom = row.prop('style').paddingBottom || 0;
+                    var padding_left = row.prop('style').paddingLeft || 0;
+
+                    var backgroundColor = row.prop('style').backgroundColor || '';
+                    var backgroundImage = row.prop('style').backgroundImage || '';
+                    var backgroundImage = backgroundImage != '' ? backgroundImage.match(/\((.*?)\)/)[1].replace(/('|")/g,'') : '';
+                    var backgroundRepeat = row.prop('style').backgroundRepeat || '';
+                    var backgroundSize = row.prop('style').backgroundSize || '';
+
+
+                    form.find('.config-id').val(id);
+
+                    form.find('#padding-unit').val(padding_top.replace(/[0-9]/g, ''));
+
+                    form.find('.config-padding-top').val(padding_top.replace(/[^\d]/g, ''));
+                    form.find('.config-padding-right').val(padding_right.replace(/[^\d]/g, ''));
+                    form.find('.config-padding-bottom').val(padding_bottom.replace(/[^\d]/g, ''));
+                    form.find('.config-padding-left').val(padding_left.replace(/[^\d]/g, ''));
+
+                    form.find('.config-bg-color').val(backgroundColor);
+                    form.find('.config-bg-img').val(backgroundImage);
+                    form.find('.config-bg-repeat').val(backgroundRepeat);
+                    form.find('.config-bg-size').val(backgroundSize);
+                } catch (error) {
+                    form.find('.config-id').val('');
+                    form.find('.config-padding-top').val(0);
+                    form.find('.config-padding-right').val(0);
+                    form.find('.config-padding-bottom').val(0);
+                    form.find('.config-padding-left').val(0);
+                    form.find('.config-bg-color').val('');
+                    form.find('.config-bg-img').val('');
+                    form.find('.config-bg-repeat').val('');
+                    form.find('.config-bg-size').val('');
+                    form.find('#padding-unit').val('px');
+                }
+            },
+            containerSettingHideFunction: function (form, keditor) {
+                form.find('.config-id').val('');
+                form.find('.config-padding-top').val(0);
+                form.find('.config-padding-right').val(0);
+                form.find('.config-padding-bottom').val(0);
+                form.find('.config-padding-left').val(0);
+                form.find('.config-bg-color').val('');
+                form.find('.config-bg-img').val('');
+                form.find('.config-bg-repeat').val('');
+                form.find('.config-bg-size').val('');
+                form.find('#padding-unit').val('px');
+            }
+    });
+});

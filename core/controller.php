@@ -64,33 +64,33 @@
 
                     // Check is Widget
                     if($info[0] == 'widget'){
-                        if (file_exists('views/front/widgets/'.$info[1].'/'.$this->config['site_theme'].'/main.php')) {
+                        if (file_exists("views/front/templates/{$this->config['site_theme']}/widgets/{$info[1]}/main.php")) {
                             ob_start();
-                            include ('views/front/widgets/'.$info[1].'/'.$this->config['site_theme'].'/main.php');
+                            include ("views/front/templates/{$this->config['site_theme']}/widgets/{$info[1]}/main.php");
                             $contents = ob_get_contents();
                             ob_clean();
                             $body = str_replace($matches[0][$key], $contents, $body);
-                            if(file_exists('views/front/widgets/'.$info[1].'/'.$this->config['site_theme'].'/js/script.js')){
-                                Asset::add('script', ['name' => $info[1], 'url'  => ''.BASE.'/views/front/widgets/'.$info[1].'/'.$this->config['site_theme'].'/js/script.js']);
+                            if(file_exists("views/front/templates/{$this->config['site_theme']}/widgets/{$info[1]}/js/script.js")){
+                                Asset::add('script', ['name' => $info[1], 'url'  => BASE."/views/front/templates/{$this->config['site_theme']}/widgets/{$info[1]}/js/script.js"]);
                             }
     
-                            if(file_exists('views/front/widgets/'.$info[1].'/'.$this->config['site_theme'].'/css/style.css')){
-                                Asset::add('style', ['name' => $info[1], 'url'  => ''.BASE.'/views/front/widgets/'.$info[1].'/'.$this->config['site_theme'].'/css/style.js']);
+                            if(file_exists("views/front/templates/{$this->config['site_theme']}/widgets/{$info[1]}/css/style.css")){
+                                Asset::add('style', ['name' => $info[1], 'url'  => BASE."/views/front/templates/{$this->config['site_theme']}/widgets/{$info[1]}/css/style.css"]);
                             }
                         } else {
-                            if (file_exists('views/front/widgets/'.$info[1].'/main.php')) {
+                            if (file_exists("views/front/widgets/{$info[1]}/main.php")) {
                                 ob_start();
-                                include ('views/front/widgets/'.$info[1].'/main.php');
+                                include ("views/front/widgets/{$info[1]}/main.php");
                                 $contents = ob_get_contents();
                                 ob_clean();
                                 $body = str_replace($matches[0][$key], $contents, $body);
                                 
-                                if(file_exists('views/front/widgets/'.$info[1].'/js/script.js')){
-                                    Asset::add('script', ['name' => $info[1], 'url'  => ''.BASE.'/views/front/widgets/'.$info[1].'/js/script.js']);
+                                if(file_exists("views/front/widgets/{$info[1]}/js/script.js")){
+                                    Asset::add('script', ['name' => $info[1], 'url'  => BASE."/views/front/widgets/{$info[1]}/js/script.js"]);
                                 }
     
-                                if(file_exists('views/front/widgets/'.$info[1].'/css/style.css')){
-                                    Asset::add('style', ['name' => $info[1], 'url'  => ''.BASE.'/views/front/widgets/'.$info[1].'/css/style.css']);
+                                if(file_exists("views/front/widgets/{$info[1]}/css/style.css")){
+                                    Asset::add('style', ['name' => $info[1], 'url'  => BASE."/views/front/widgets/{$info[1]}/css/style.css"]);
                                 }
                             }
                         }
@@ -98,42 +98,42 @@
 
                     // Check is Module
                     if($info[0] == 'module'){
-                        if (file_exists('views/front/modules/'.$info[1].'/'.$this->config['site_theme'].'/main.php')) {
+                        if (file_exists("views/front/templates/{$this->config['site_theme']}/modules/{$info[1]}/main.php")) {
                             ob_start();
-                            include ('views/front/modules/'.$info[1].'/'.$this->config['site_theme'].'/main.php');
+                            include ("views/front/templates/{$this->config['site_theme']}/modules/{$info[1]}/main.php");
                             $contents = ob_get_contents();
                             ob_clean();
                             $body = str_replace($matches[0][$key], $contents, $body);
-                            if(file_exists('views/front/modules/'.$info[1].'/'.$this->config['site_theme'].'/js/script.js')){
-                                Asset::add('script', ['name' => $info[1], 'url'  => ''.BASE.'/views/front/modules/'.$info[1].'/'.$this->config['site_theme'].'/js/script.js']);
+                            if(file_exists("views/front/templates/{$this->config['site_theme']}/modules/{$info[1]}/js/script.js")){
+                                Asset::add('script', ['name' => $info[1], 'url'  => BASE."/views/front/templates/{$this->config['site_theme']}/modules/{$info[1]}/js/script.js"]);
                             }
     
-                            if(file_exists('views/front/modules/'.$info[1].'/'.$this->config['site_theme'].'/css/style.css')){
-                                Asset::add('style', ['name' => $info[1], 'url'  => ''.BASE.'/views/front/modules/'.$info[1].'/'.$this->config['site_theme'].'/css/style.js']);
+                            if(file_exists("views/front/templates/{$this->config['site_theme']}/modules/{$info[1]}/css/style.css")){
+                                Asset::add('style', ['name' => $info[1], 'url'  => BASE."/views/front/templates/{$this->config['site_theme']}/modules/{$info[1]}/css/style.css"]);
                             }
                         } else {
-                            if (file_exists('views/front/modules/'.$info[1].'/main.php')) {
+                            if (file_exists("views/front/modules/{$info[1]}/main.php")) {
                                 ob_start();
-                                include ('views/front/modules/'.$info[1].'/main.php');
+                                include ("views/front/modules/{$info[1]}/main.php");
                                 $contents = ob_get_contents();
                                 ob_clean();
                                 $body = str_replace($matches[0][$key], $contents, $body);
                                 
-                                if(file_exists('views/front/modules/'.$info[1].'/js/script.js')){
-                                    Asset::add('script', ['name' => $info[1], 'url'  => ''.BASE.'/views/front/modules/'.$info[1].'/js/script.js']);
+                                if(file_exists("views/front/modules/{$info[1]}/js/script.js")){
+                                    Asset::add('script', ['name' => $info[1], 'url'  => BASE."/views/front/modules/{$info[1]}/js/script.js"]);
                                 }
     
-                                if(file_exists('views/front/modules/'.$info[1].'/css/style.css')){
-                                    Asset::add('style', ['name' => $info[1], 'url'  => ''.BASE.'/views/front/modules/'.$info[1].'/css/style.css']);
+                                if(file_exists("views/front/modules/{$info[1]}/css/style.css")){
+                                    Asset::add('style', ['name' => $info[1], 'url'  => BASE."/views/front/modules/{$info[1]}/css/style.css"]);
                                 }
                             }
                         }
                     }
 
                     if($info[0] == 'page'){
-                        if(file_exists('views/front/templates/'.$this->config['site_theme'].'/pages/'.$info[1].'.php')){
+                        if(file_exists("views/front/templates/{$this->config['site_theme']}/pages/{$info[1]}.php")){
                             ob_start();
-                            include ('views/front/templates/'.$this->config['site_theme'].'/pages/'.$info[1].'.php');
+                            include ("views/front/templates/{$this->config['site_theme']}/pages/{$info[1]}.php");
                             $contents = ob_get_contents();
                             ob_clean();
                             $body = str_replace($matches[0][$key], $contents, $body);
@@ -146,15 +146,6 @@
 
             return $body;
         }
-        
-
-        // public function renderPage($page = null){
-        //     if($page != 'normal' && $page != 'home'){
-        //         if(file_exists('views/front/templates/'.$this->config['site_theme'].'/pages/'.$page.'.php')){
-        //             include 'views/front/templates/'.$this->config['site_theme'].'/pages/'.$page.'.php';
-        //         }
-        //     }
-        // }
 
         public function renderMetatags($viewData = array()){
             $meta = '';

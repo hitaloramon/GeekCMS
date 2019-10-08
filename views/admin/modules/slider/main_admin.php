@@ -1,16 +1,13 @@
-<div class="page-wrapper">
-    <div class="container-fluid">
-        <div class="row page-titles">
-            <div class="col-md-12 align-self-center">
-                <h3 class="text-themecolor">Slider</h3>
-            </div>
-        </div>
 
-        <div id="msc-app" class="app-container"></div>
-        <?php require_once 'template.php'; ?>
-
+<div class="row page-titles">
+    <div class="col-md-12 align-self-center">
+        <h3 class="text-themecolor">Slider</h3>
     </div>
 </div>
+
+<div id="msc-app" class="app-container"></div>
+<?php require_once 'template.php'; ?>
+
 
 <script>
     var underscore = _.noConflict();

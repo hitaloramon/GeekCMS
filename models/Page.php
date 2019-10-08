@@ -31,7 +31,7 @@
 
         public function getPagesDatatable(){
             $array = array();
-            $array = $this->db->fetchAll("SELECT p.id, p.title, p.created, p.type_page, u.fname FROM pages AS p LEFT JOIN users AS u ON p.created_by = u.id ORDER BY p.id DESC");
+            $array = $this->db->fetchAll("SELECT p.id, p.title, p.active, p.created, p.type_page, u.fname FROM pages AS p LEFT JOIN users AS u ON p.created_by = u.id ORDER BY p.id DESC");
             echo json_encode($array);
         }
 
@@ -130,7 +130,6 @@
                 'caption'       => 'max_len,200',
                 'active'        => 'required|integer|max_len,1',
                 'access'        => 'required|integer|max_len,1',
-                'is_admin'      => 'required|integer|max_len,1',
                 'description'   => 'required',
                 'type_page'     => 'required',
                 'keywords'      => 'required'
@@ -147,7 +146,6 @@
                 'access'        => 'trim|sanitize_numbers',
                 'module_id'     => 'trim|sanitize_numbers',
                 'module_name'   => 'trim|sanitize_string',
-                'is_admin'      => 'trim|sanitize_numbers',
                 'description'   => 'trim|sanitize_string',
                 'keywords'      => 'trim|sanitize_string',
                 'body'          => 'htmlencode'
@@ -244,7 +242,6 @@
                 'caption'       => 'max_len,200',
                 'type_page'     => 'required',
                 'active'        => 'required|integer|max_len,1',
-                'is_admin'      => 'required|integer|max_len,1',
                 'access'        => 'required|integer|max_len,1',
                 'description'   => 'required',
                 'keywords'      => 'required'
@@ -261,7 +258,6 @@
                 'access'        => 'trim|sanitize_numbers',
                 'module_id'     => 'trim|sanitize_numbers',
                 'module_name'   => 'trim|sanitize_string',
-                'is_admin'      => 'trim|sanitize_numbers',
                 'description'   => 'trim|sanitize_string',
                 'keywords'      => 'trim|sanitize_string',
                 'body'          => 'htmlencode'

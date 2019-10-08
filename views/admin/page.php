@@ -61,7 +61,7 @@
                                     <small class="form-control-feedback" id="type_page-feedback"></small>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="control-label">Acesso</label>
                                     <select class="form-control custom-select" id="access" name="access" onchange="checkOptions(this.value)">
@@ -72,7 +72,7 @@
                                     <small class="form-control-feedback" id="access-feedback"></small>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="control-label">Plano de Acesso</label>
                                     <select class="selectpicker" name="membership_id[]" id="membership_id" multiple data-style="form-control custom-select" title="Selecione">
@@ -83,22 +83,14 @@
                                     <small class="form-control-feedback" id="membership_id-feedback"></small>
                                 </div>
                             </div>
-                            <div class="col-md-6 m-t-30">
-                                <label class="control-label">Publicar Página</label>
-                                <div class="m-t-10">
-                                    <input name="active" type="radio" id="active-yes" checked class="with-gap radio-col-light-blue" value="1" />
-                                    <label for="active-yes">Sim</label>
-                                    <input name="active" type="radio" id="active-no" class="with-gap radio-col-light-blue" value="0" />
-                                    <label for="active-no">Não</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6 m-t-30">
-                                <label class="control-label">Visibilidade</label>
-                                <div class="m-t-10">
-                                    <input name="is_admin" type="radio" id="is_admin-yes" class="with-gap radio-col-light-blue" value="1" />
-                                    <label for="is_admin-yes">Admin</label>
-                                    <input name="is_admin" type="radio" id="is_admin-no" checked class="with-gap radio-col-light-blue" value="0" />
-                                    <label for="is_admin-no">Público</label>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Publicar Página</label>
+                                    <select class="form-control custom-select" name="active" id="active">
+                                        <option value="1">Sim</option>
+                                        <option value="0">Não</option>
+                                    </select>
+                                    <small class="form-control-feedback" id="active-feedback"></small>
                                 </div>
                             </div>
                             <div class="col-md-6 m-t-30">
@@ -187,7 +179,7 @@
                                     <small class="form-control-feedback" id="type_page-feedback"></small>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="control-label">Acesso</label>
                                     <select class="form-control custom-select" id="access" name="access" onchange="checkOptions(this.value)">
@@ -199,7 +191,7 @@
                                 </div>
                             </div>
                             <?php $data['membership_id'] = explode(',', $data['membership_id']); ?>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="control-label">Plano de Acesso</label>
                                     <select class="selectpicker" name="membership_id[]" id="membership_id" multiple data-style="form-control custom-select" title="Selecione">
@@ -210,22 +202,14 @@
                                     <small class="form-control-feedback" id="membership_id-feedback"></small>
                                 </div>
                             </div>
-                            <div class="col-md-6 m-t-30">
-                                <label class="control-label">Publicar Página</label>
-                                <div class="m-t-10">
-                                    <input name="active" type="radio" id="active-yes" class="with-gap radio-col-light-blue" value="1" <?php getChecked('1', $data['active']); ?> />
-                                    <label for="active-yes">Sim</label>
-                                    <input name="active" type="radio" id="active-no" class="with-gap radio-col-light-blue" value="0" <?php getChecked('0', $data['active']); ?> />
-                                    <label for="active-no">Não</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6 m-t-30">
-                                <label class="control-label">Visibilidade</label>
-                                <div class="m-t-10">
-                                    <input name="is_admin" type="radio" id="is_admin-yes" class="with-gap radio-col-light-blue" value="1" <?php getChecked('1', $data['is_admin']); ?> />
-                                    <label for="is_admin-yes">Admin</label>
-                                    <input name="is_admin" type="radio" id="is_admin-no" class="with-gap radio-col-light-blue" value="0" <?php getChecked('0', $data['is_admin']); ?> />
-                                    <label for="is_admin-no">Público</label>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Publicar Página</label>
+                                    <select class="form-control custom-select" name="active" id="active">
+                                        <option value="1" <?php getSelected('1', $data['active']); ?>>Sim</option>
+                                        <option value="0" <?php getSelected('0', $data['active']); ?>>Não</option>
+                                    </select>
+                                    <small class="form-control-feedback" id="active-feedback"></small>
                                 </div>
                             </div>
                             <div class="col-md-6 m-t-30">
@@ -287,6 +271,7 @@
                                         <th data-field="id" data-sortable="true" data-width="50px">ID</th>
                                         <th data-field="title" data-sortable="true">Título</th>
                                         <th data-field="fname" data-sortable="true" data-width="150px" data-align="center">Criada Por</th>
+                                        <th data-field="active" data-formatter="statusFormatter" data-sortable="true" data-width="150px" data-align="center">Status</th>
                                         <th data-field="created" data-formatter="dateFormatter" data-sortable="true" data-width="150px" data-align="center">Criada em</th>
                                         <th data-formatter="actionFormatter" data-align="center" data-width="80px">Ações</th>
                                     </tr>
@@ -323,6 +308,18 @@ function actionFormatter(value, row) {
     }
    return '<a href="page/edit/'+row['id']+'" data-toggle="tooltip" data-original-title="Editar"> <i class="mdi mdi-pencil m-r-10"></i></a>' + btn;
 }
+
+function statusFormatter(value, row) {
+    switch (value) {
+        case '1':
+            return '<span class="label label-success label-rounded">Publicado</span>'
+        break;
+        case '0':
+            return '<span class="label label-warning label-rounded">Pendente</span>'
+        break;
+    }
+}
+
 
 function dateFormatter(value, row) {
    return mysqlDate(value);

@@ -235,11 +235,6 @@ class adminController extends controller{
     public function module($action = null, $module = null, $mod_action = null, $mod_id = null){
         $this->user->verifyLogin();
 
-        Asset::add('script', [
-            'name'    => 'filterizr',
-            'url'  => ''.BASE.'/assets/plugins/filterizr/jquery.filterizr.min.js',
-            'footer'  => true
-        ]);
 
         $data = array(
             'action'     => $action,
@@ -261,6 +256,13 @@ class adminController extends controller{
                 }
             break;
             default:
+                
+                Asset::add('script', [
+                    'name'    => 'filterizr',
+                    'url'  => ''.BASE.'/assets/plugins/filterizr/jquery.filterizr.min.js',
+                    'footer'  => true
+                ]);
+
                 $this->permission->hasPermission('module', 'view');
                 $modules = new Modules();
                 $data['modules'] = $modules->getModules();

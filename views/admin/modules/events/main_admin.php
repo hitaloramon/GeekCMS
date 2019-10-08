@@ -1,87 +1,80 @@
-<?php switch($viewData['action']): ?>
-<?php case 'view': ?>
 <?php 
     $events = new ModEvents; 
     $events = $events->getEvents();
 ?>
-<div class="page-wrapper">
-    <div class="container-fluid">
-        
-        <div class="d-flex no-block">
-            <div><h3 class="text-themecolor">Módulos</h3></div>
-            <div class="ml-auto">
-                <a class="nav-link right-side-toggle" href="javascript:void(0)"><i class="mdi mdi-help"></i></a>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex no-block">
-                            <div>
-                                <h4 class="card-title"><span class="lstick"></span>Eventos</h4>
+<div class="d-flex no-block">
+    <div><h3 class="text-themecolor">Módulos</h3></div>
+    <div class="ml-auto">
+        <a class="nav-link right-side-toggle" href="javascript:void(0)"><i class="mdi mdi-help"></i></a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex no-block">
+                    <div>
+                        <h4 class="card-title"><span class="lstick"></span>Eventos</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <h4 class="card-title m-t-30 m-b-20">Adicionar / Editar</h4>
+                        <form id="form-calendar">
+                            <div class="form-group">
+                                <label for="title">Título</label>
+                                <input type="hidden" class="form-control" id="id" name="id">
+                                <input type="text" class="form-control" id="title" name="title" required placeholder="Título do Evento">
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <h4 class="card-title m-t-30 m-b-20">Adicionar / Editar</h4>
-                                <form id="form-calendar">
-                                    <div class="form-group">
-                                        <label for="title">Título</label>
-                                        <input type="hidden" class="form-control" id="id" name="id">
-                                        <input type="text" class="form-control" id="title" name="title" required placeholder="Título do Evento">
-                                    </div>
-                                    <div class="form-group">
-                                        <h5 class="box-title">Cor do Evento</h5>
-                                        <input type="text" class="colorpicker form-control" required id="color" name="color" value="#3378df" />
-                                    </div>
-                                    <div class="form-group">
-                                        <h5 class="box-title">Cor do Texto</h5>
-                                        <input type="text" class="colorpicker form-control" required id="textColor" name="textColor" value="#f6f6f6" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="start">Data de Inicio</label>
-                                        <input type="datetime-local" class="form-control" id="start" name="start" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="end">Data de Término</label>
-                                        <input type="datetime-local" class="form-control" id="end" name="end">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Informações</label>
-                                        <textarea class="form-control" name="description" id="description" rows="5"></textarea>
-                                    </div>
-                                    <div class="text-center">
-                                        <button type="submit" class="m-t-10 btn waves-effect waves-light btn-rounded btn-outline-secondary">Enviar</button>
-                                        <button type="reset" class="m-t-10 btn waves-effect waves-light btn-rounded btn-outline-secondary">Limpar</button>
-                                    </div>
-                                </form>
+                            <div class="form-group">
+                                <h5 class="box-title">Cor do Evento</h5>
+                                <input type="text" class="colorpicker form-control" required id="color" name="color" value="#3378df" />
                             </div>
-                            <div class="col-md-9">
-                                <div id="calendar"></div>
+                            <div class="form-group">
+                                <h5 class="box-title">Cor do Texto</h5>
+                                <input type="text" class="colorpicker form-control" required id="textColor" name="textColor" value="#f6f6f6" />
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <label for="start">Data de Inicio</label>
+                                <input type="datetime-local" class="form-control" id="start" name="start" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="end">Data de Término</label>
+                                <input type="datetime-local" class="form-control" id="end" name="end">
+                            </div>
+                            <div class="form-group">
+                                <label>Informações</label>
+                                <textarea class="form-control" name="description" id="description" rows="5"></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="m-t-10 btn waves-effect waves-light btn-rounded btn-outline-secondary">Enviar</button>
+                                <button type="reset" class="m-t-10 btn waves-effect waves-light btn-rounded btn-outline-secondary">Limpar</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-9">
+                        <div id="calendar"></div>
                     </div>
                 </div>
             </div>
         </div>
-
-
-        <!-- .right-sidebar -->
-        <div class="right-sidebar">
-            <div class="slimscrollright">
-                <div class="rpanel-title"> Ajuda <span><i class="mdi mdi-close right-side-toggle"></i></span> </div>
-                <div class="r-panel-body geek-help">
-                    <h5>Eventos</h5>
-                    <p>Instruções:</p>
-                </div>
-            </div>
-        </div>
-
-
     </div>
 </div>
+
+
+<!-- .right-sidebar -->
+<div class="right-sidebar">
+    <div class="slimscrollright">
+        <div class="rpanel-title"> Ajuda <span><i class="mdi mdi-close right-side-toggle"></i></span> </div>
+        <div class="r-panel-body geek-help">
+            <h5>Eventos</h5>
+            <p>Instruções:</p>
+        </div>
+    </div>
+</div>
+
 <script>
 $('#form-calendar').submit(function(event){
     $.ajax({
@@ -227,7 +220,3 @@ $(document).ready(function() {
     });
 });
 </script>
-<?php break; ?>
-<?php default: ?>
-<?php break; ?>
-<?php endswitch;?>
