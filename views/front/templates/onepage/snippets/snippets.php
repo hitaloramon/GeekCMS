@@ -90,21 +90,21 @@
     <div class="row">
         <div class="col-sm-4 ui-resizable" data-type="container-content">
             <div data-type="component-text">
-                <img src="http://i.imgur.com/FbMgjfM.png" width="100%" height="" style="display: inline-block;" class="img-circle img-responsive">
+                <img src="https://i.imgur.com/FbMgjfM.png" width="100%" height="" style="display: inline-block;" class="img-circle img-responsive">
                 <h3 style="text-align: center;">Lorem ipsum</h3>
                 <p style="text-align: center;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel, alias, temporibus? Vero natus modi ipsa debitis, accusamus accusantium cum quam. Saepe atque quisquam pariatur voluptatem expedita reprehenderit et vitae.</p>
             </div>
         </div>
         <div class="col-sm-4 ui-resizable" data-type="container-content">
             <div data-type="component-text">
-                <img src="http://i.imgur.com/FbMgjfM.png" width="100%" height="" style="display: inline-block;" class="img-circle img-responsive">
+                <img src="https://i.imgur.com/FbMgjfM.png" width="100%" height="" style="display: inline-block;" class="img-circle img-responsive">
                 <h3 style="text-align: center;">Lorem ipsum</h3>
                 <p style="text-align: center;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, aut, earum. Quod, debitis, delectus. Maxime eius ipsam sit dolorum perspiciatis obcaecati consectetur, explicabo reprehenderit repellat tempore eos ducimus!</p>
             </div>
         </div>
         <div class="col-sm-4 ui-resizable" data-type="container-content">
             <div data-type="component-text">
-                <img src="http://i.imgur.com/FbMgjfM.png" width="100%" height="" style="display: inline-block;" class="img-circle img-responsive">
+                <img src="https://i.imgur.com/FbMgjfM.png" width="100%" height="" style="display: inline-block;" class="img-circle img-responsive">
                 <h3 style="text-align: center;">Lorem ipsum</h3>
                 <p style="text-align: center;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil voluptatibus dicta corrupti aliquam, natus voluptatem pariatur quidem nostrum nisi corporis id ratione exercitationem et recusandae incidunt assumenda soluta qui odit.</p>
             </div>
@@ -147,7 +147,7 @@
 
 <div data-type="component-audio" data-preview="<?= $base_img; ?>audio.png" data-keditor-title="Audio" data-keditor-categories="Mídia">
     <div class="audio-wrapper">
-        <audio src="http://www.noiseaddicts.com/samples_1w72b820/2558.mp3" controls style="width: 100%"></audio>
+        <audio src="" controls style="width: 100%"></audio>
     </div>
 </div>
 
@@ -177,7 +177,7 @@
 
 <div data-type="component-text" data-preview="<?= $base_img; ?>thumbnail_panel.png" data-keditor-title="Thumbnail Panel" data-keditor-categories="Texto;Imagem;Bootstrap">
     <div class="thumbnail">
-        <img src="snippets/img/somewhere_bangladesh.jpg" width="100%" height="" />
+        <img src="https://i.imgur.com/FbMgjfM.png" width="100%" height="" />
         <div class="caption">
             <h3>Thumbnail label</h3>
             <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>

@@ -298,44 +298,47 @@
 <?php break; ?>
 <?php endswitch;?>
 
-<script>
-function actionFormatter(value, row) {
-    var btn = '';
-    if(row['type_page'] == 'normal'){
-        btn = '<?php echo BASE_ADMIN; ?>/page/delete/' + row['id'];
-        btn = '<a href="#" onclick="deleteInfo(this, \''+btn+'\');" data-toggle="tooltip" data-original-title="Excluir"> <i class="mdi mdi-delete text-danger m-r-10"></i></a>'
+<?php View::startSection('footer-js'); ?>
+    <script>
+        function actionFormatter(value, row) {
+            var btn = '';
+            if(row['type_page'] == 'normal'){
+                btn = '<?php echo BASE_ADMIN; ?>/page/delete/' + row['id'];
+                btn = '<a href="#" onclick="deleteInfo(this, \''+btn+'\');" data-toggle="tooltip" data-original-title="Excluir"> <i class="mdi mdi-delete text-danger m-r-10"></i></a>'
 
-    }
-   return '<a href="page/edit/'+row['id']+'" data-toggle="tooltip" data-original-title="Editar"> <i class="mdi mdi-pencil m-r-10"></i></a>' + btn;
-}
+            }
 
-function statusFormatter(value, row) {
-    switch (value) {
-        case '1':
-            return '<span class="label label-success label-rounded">Publicado</span>'
-        break;
-        case '0':
-            return '<span class="label label-warning label-rounded">Pendente</span>'
-        break;
-    }
-}
+            return '<a href="page/edit/'+row['id']+'" data-toggle="tooltip" data-original-title="Editar"> <i class="mdi mdi-pencil m-r-10"></i></a>' + btn;
+        }
+
+        function statusFormatter(value, row) {
+            switch (value) {
+                case '1':
+                    return '<span class="label label-success label-rounded">Publicado</span>'
+                break;
+                case '0':
+                    return '<span class="label label-warning label-rounded">Pendente</span>'
+                break;
+            }
+        }
 
 
-function dateFormatter(value, row) {
-   return mysqlDate(value);
-}
+        function dateFormatter(value, row) {
+            return mysqlDate(value);
+        }
 
-$(document).ready(function () {
-    <?php if(isset($data['access'])){echo "checkOptions('".$data['access']."');";} ?>
-});
+        $(document).ready(function () {
+            <?php if(isset($data['access'])){echo "checkOptions('".$data['access']."');";} ?>
+        });
 
-function checkOptions(type_value) {
-    if(type_value == '1' || type_value == '2'){
-        $('#membership_id').prop("disabled", true);
-        $('#membership_id').selectpicker('refresh');
-    }else{
-        $('#membership_id').prop("disabled", false);
-        $('#membership_id').selectpicker('refresh');
-    }
-}
-</script>
+        function checkOptions(type_value) {
+            if(type_value == '1' || type_value == '2'){
+                $('#membership_id').prop("disabled", true);
+                $('#membership_id').selectpicker('refresh');
+            }else{
+                $('#membership_id').prop("disabled", false);
+                $('#membership_id').selectpicker('refresh');
+            }
+        }
+    </script>
+<?php View::endSection(); ?>

@@ -14,7 +14,7 @@
 
         public function loginCheck($array_data){
             $ip = $_SERVER['REMOTE_ADDR'];
-            $result = $this->db->fetchAll("SELECT * FROM logs WHERE action = 'login_error' AND ip = '{$ip}' AND date > NOW() - INTERVAL 20 MINUTE ORDER BY id DESC");
+            $result = $this->db->fetchAll("SELECT * FROM logs WHERE action = 'login_error' AND ip = '{$ip}' AND date > NOW() - INTERVAL 20 MINUTE ORDER BY id DESC LIMIT 6");
 
             if(count($result) >= 5){
                 $json['heading'] = "Erro";

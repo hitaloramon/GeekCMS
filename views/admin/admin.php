@@ -262,6 +262,7 @@
     <script src="<?php echo BASE; ?>/assets/plugins/editor/js/keditor-components.js"></script>
     
     <?php echo Asset::outputScripts('footer'); ?>
+    <?php echo View::getSection('footer-js'); ?>
     <script src="<?php echo BASE; ?>/assets/js/geekcms.js"></script>
 </body>
 </html>
