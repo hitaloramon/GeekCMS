@@ -1,3 +1,4 @@
+<h3 class="mb-4">Resultados para: <?= $url[1]; ?></h3>
 <?php foreach ($blog->searchPost($url[1]) as $post): ?>
     <div class="row m-b-30">
         <?php if(!empty($post['thumb'])): ?>

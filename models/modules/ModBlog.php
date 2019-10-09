@@ -337,7 +337,7 @@
             return $this->db->fetchAll("SELECT blog.*, category.name as category, pages.slug AS blogslug FROM mod_blog as blog
                                         LEFT JOIN mod_blog_categories AS category ON blog.category_id = category.id
                                         LEFT JOIN pages ON pages.module_name = 'blog'
-                                        WHERE body LIKE '%{$search}%' LIMIT {$offset},{$limit}");
+                                        WHERE blog.body LIKE '%{$search}%' LIMIT {$offset},{$limit}");
         }
 
         public function getPostByCategory($category, int $offset = 0, int $limit = 20){

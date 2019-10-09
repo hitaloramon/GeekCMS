@@ -204,13 +204,13 @@
                     <div class="sidebarmenu">
                         <h3 class="menu-title">Configurações</h3>
                         <ul class="sidebar-menu">
-                            <li><a href="<?php echo BASE_ADMIN; ?>/membership">Planos de Acesso</a></li>
+                            <li><a href="<?php echo BASE_ADMIN; ?>/filemanager">Arquivos</a></li>
                             <li><a href="<?php echo BASE_ADMIN; ?>/customfields">Campos Personalizados</a></li>
                             <li><a href="<?php echo BASE_ADMIN; ?>/gateway">Formas de Pagamento</a></li>
                             <li><a href="<?php echo BASE_ADMIN; ?>/backup">Gerenciar Backups</a></li>
-                            <li><a href="<?php echo BASE_ADMIN; ?>/filemanager">Arquivos</a></li>
                             <!-- <li><a href="<?php echo BASE_ADMIN; ?>/install">Instalador de Conteúdo</a></li> -->
                             <li><a href="<?php echo BASE_ADMIN; ?>/emailmodel">Modelo de Emails</a></li>
+                            <li><a href="<?php echo BASE_ADMIN; ?>/membership">Planos de Acesso</a></li>
                             <li><a href="<?php echo BASE_ADMIN; ?>/permissions">Permissões</a></li>
                             <li><a href="<?php echo BASE_ADMIN; ?>/system">Sistema</a></li>
                         </ul>

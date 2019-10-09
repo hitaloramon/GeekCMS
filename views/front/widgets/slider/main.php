@@ -7,7 +7,7 @@
     }
 ?>
 
-<script>
-    var msc_slider_data = <?php echo $slider['config']; ?>;
-    var my_slider = new MySlider();
-</script>
+    <script>
+        var msc_slider_data = <?php echo $slider['config']; ?>;
+        var my_slider = new MySlider();
+    </script>
