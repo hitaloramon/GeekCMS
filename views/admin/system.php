@@ -378,7 +378,9 @@
                                         <div class="col-md-12 mb-2">Visualização do Tema</div>
                                         <iframe id="template_preview" src="<?php echo BASE; ?>" class="template-frame" scrolling="vertical"></iframe>
                                     </div>
-                                    <div class="col-md-12 m-t-20" style="height:400px">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 m-t-20" style="height:400px; top:-200px">
                                         <div id="geekeditor" data-title="Rodapé" data-fieldname="site_footer"></div>
                                     </div>
                                 </div>

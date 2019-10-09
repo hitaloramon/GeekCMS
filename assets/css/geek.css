@@ -18,8 +18,8 @@
 }
 
 .template-frame {
-    position: absolute;
-    width: 70vw;
+    position: relative;
+    width: 200%;
     height: 460px;
     border-radius: 10px;
     border: 2px solid #ced4da;

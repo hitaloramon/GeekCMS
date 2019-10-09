@@ -55,6 +55,8 @@ class View {
     public function getSection($name){
         if(self::hasSection($name)){
             return self::$section[$name];
+        }else{
+            return false;
         }
     }
 

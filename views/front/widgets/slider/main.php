@@ -1,7 +1,7 @@
 <?php 
-    if(isset($widget[1])){
+    if(isset($info[2])){
         $ModSlider = new ModSlider();
-        $slider = $ModSlider->getSlider($widget[1]);
+        $slider = $ModSlider->getSlider($info[2]);
     
         $config = json_decode($slider['config'], true);
     }
