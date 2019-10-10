@@ -23,7 +23,7 @@
                                 <small class="form-control-feedback" id="title-feedback"></small>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label class="control-label">Ativo</label>
                                 <select class="form-control custom-select" id="active" name="active">
@@ -31,6 +31,16 @@
                                     <option value="0" <?php getSelected('0', $gateways['active']); ?>>Não</option>
                                 </select>
                                 <small class="form-control-feedback" id="type_page-feedback"></small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Ambiente</label>
+                                <select class="form-control custom-select" id="sandbox" name="sandbox">
+                                    <option value="1" <?php getSelected('1', $gateways['sandbox']); ?>>Sandbox</option>
+                                    <option value="0" <?php getSelected('0', $gateways['sandbox']); ?>>Produção</option>
+                                </select>
+                                <small class="form-control-feedback" id="sandbox-feedback"></small>
                             </div>
                         </div>
                         <div class="col-md-6">

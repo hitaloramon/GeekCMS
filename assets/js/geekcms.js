@@ -361,6 +361,13 @@ $(function () {
                                                 <option value="contain">Contain</option>
                                             </select>
                                         </div>
+                                        <div class="col-sm-12 mb-2">
+                                            <label>Tipo de Fundo</label>
+                                            <select class="config-bg-attachment form-control">
+                                                <option value="fixed">Fixo</option>
+                                                <option value="scroll">Rolagem</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -449,6 +456,18 @@ $(function () {
                     
                     row.css('background-size', this.value);
                 });
+
+                form.find('.config-bg-attachment').on('change', function () {
+                    var container = keditor.getSettingContainer();
+                    var row = container.find('.row');
+                    if (!container.hasClass('keditor-sub-container')) {
+                        row = row.filter(function () {
+                            return $(this).parents('.keditor-container').length === 1;
+                        });
+                    }
+                    
+                    row.css('background-attachment', this.value);
+                });
             },
             containerSettingShowFunction: function (form, container, keditor) {
                 try {
@@ -464,6 +483,7 @@ $(function () {
                     var backgroundImage = backgroundImage != '' ? backgroundImage.match(/\((.*?)\)/)[1].replace(/('|")/g,'') : '';
                     var backgroundRepeat = row.prop('style').backgroundRepeat || '';
                     var backgroundSize = row.prop('style').backgroundSize || '';
+                    var backgroundAttachment = row.prop('style').backgroundAttachment || '';
 
 
                     form.find('.config-id').val(id);
@@ -479,6 +499,7 @@ $(function () {
                     form.find('.config-bg-img').val(backgroundImage);
                     form.find('.config-bg-repeat').val(backgroundRepeat);
                     form.find('.config-bg-size').val(backgroundSize);
+                    form.find('.config-bg-attachment').val(backgroundAttachment);
                 } catch (error) {
                     form.find('.config-id').val('');
                     form.find('.config-padding-top').val(0);
@@ -489,6 +510,7 @@ $(function () {
                     form.find('.config-bg-img').val('');
                     form.find('.config-bg-repeat').val('');
                     form.find('.config-bg-size').val('');
+                    form.find('.config-bg-attachment').val('');
                     form.find('#padding-unit').val('px');
                 }
             },
@@ -502,6 +524,7 @@ $(function () {
                 form.find('.config-bg-img').val('');
                 form.find('.config-bg-repeat').val('');
                 form.find('.config-bg-size').val('');
+                form.find('.config-bg-attachment').val('');
                 form.find('#padding-unit').val('px');
             }
     });

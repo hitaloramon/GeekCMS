@@ -151,16 +151,6 @@
             $meta = '';
             $mod = 'Mod'.$viewData['module_name'];
 
-            $meta .= '<title>'.$this->config['site_name'].' - '.$viewData['title'].'</title>'. PHP_EOL;
-            $meta .= '<meta name="keywords" content="'.$viewData['keywords'].'">'. PHP_EOL;
-            $meta .= '<meta name="description" content="'.$viewData['description'].'">'. PHP_EOL;
-            $meta .= '<meta property="og:url" content="'.DOMAIN.''.$_SERVER['REQUEST_URI'].'">'. PHP_EOL;
-            $meta .= '<meta property="og:title" content="'.$viewData['title'].'">'. PHP_EOL;
-            $meta .= '<meta property="og:site_name" content="'.$this->config['site_name'].'">'. PHP_EOL;
-            $meta .= '<meta property="og:description" content="'.$viewData['description'].'">'. PHP_EOL;
-            $meta .= '<meta property="og:image" content="'.BASE_UPLOADS.'/'.$this->config['site_logo'].'">'. PHP_EOL;
-            $meta .= '<meta property="og:type" content="website">'. PHP_EOL;
-
             if($viewData['module_id'] != 0 && class_exists($mod)){
                  $module = new $mod();
                  if(method_exists($module, 'metatags')){
@@ -168,6 +158,34 @@
                  }
             }
             
+            if(empty($meta)){
+                $meta .= '<title>'.$this->config['site_name'].' - '.$viewData['title'].'</title>'. PHP_EOL;
+                $meta .= '<meta name="keywords" content="'.$viewData['keywords'].'">'. PHP_EOL;
+                $meta .= '<meta name="description" content="'.$viewData['description'].'">'. PHP_EOL;
+
+                $meta .= '<meta property="og:url" content="'.DOMAIN.''.$_SERVER['REQUEST_URI'].'">'. PHP_EOL;
+                $meta .= '<meta property="og:title" content="'.$viewData['title'].'">'. PHP_EOL;
+                $meta .= '<meta property="og:site_name" content="'.$this->config['site_name'].'">'. PHP_EOL;
+                $meta .= '<meta property="og:description" content="'.$viewData['description'].'">'. PHP_EOL;
+                $meta .= '<meta property="og:image" content="'.BASE_UPLOADS.'/'.$this->config['site_logo'].'">'. PHP_EOL;
+                $meta .= '<meta property="og:type" content="website">'. PHP_EOL;
+            }
+
+            $meta .= '<meta charset="UTF-8">'. PHP_EOL;
+            $meta .= '<meta name="theme-color" content="#0b6ac8">'. PHP_EOL;
+            $meta .= '<meta name="robots" content="index,follow">'. PHP_EOL;
+            $meta .= '<meta name="generator" content="Powered by GeekCMS">'. PHP_EOL;
+            $meta .= '<meta http-equiv="X-UA-Compatible" content="ie=edge">'. PHP_EOL;
+            $meta .= '<meta name="apple-mobile-web-app-capable" content="yes">'. PHP_EOL;
+            $meta .= '<meta name="viewport" content="width=device-width, initial-scale=1.0">'. PHP_EOL;
+            $meta .= '<meta name="author" content="'.$this->config['site_name'].'">'. PHP_EOL;
+            $meta .= '<meta name="dcterms.rights" content="'.$this->config['site_name'].' &copy; All Rights Reserved">'. PHP_EOL;
+            $meta .= '<meta name="viewport" content="width=device-width, initial-scale=1.0">'. PHP_EOL;
+
+            if (!empty($this->config['site_favicon'])){
+                $meta .= '<link rel="shortcut icon" href="'.BASE_UPLOADS.'/'.$this->config['site_favicon'].'" type="image/x-icon">';
+            }
+
             echo($meta);
         }
 

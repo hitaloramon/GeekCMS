@@ -12,13 +12,15 @@
   </div>
 </form>
 
-<script>
-  $("#form-blog-search").submit(function (e) {
-      e.preventDefault();
-      var search = $('#blogsearch').val();
-      var site_url = localStorage.getItem('SITEURL');
-      if(search.length >= 1){
-        window.location = site_url + '/blog/pesquisa/' + search;
-      }
-  });
-</script>
+<?php View::startSection('footer-js'); ?>
+  <script>
+    $("#form-blog-search").submit(function (e) {
+        e.preventDefault();
+        var search = $('#blogsearch').val();
+        var site_url = localStorage.getItem('SITEURL');
+        if(search.length >= 1){
+          window.location = site_url + '/blog/pesquisa/' + search;
+        }
+    });
+  </script>
+<?php View::endSection(); ?>

@@ -35,6 +35,7 @@
   </div>
 </div>
 
+<?php View::startSection('footer-js'); ?>
 <script>
 $("#form-contact").submit(function (e) {
     e.preventDefault();
@@ -51,7 +52,7 @@ $("#form-contact").submit(function (e) {
                 } else {
                     $('#msg-contact').html('<div class="alert alert-danger alert-dismissable fadeIn"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' + response.text);
                 }
-                $('body,html').animate({ scrollTop: 0 }, 500);
+                $('#msg-contact').animate({ scrollTop: 0 }, 500);
             } catch (e) {
                 $('#msg-contact').html('<div class="alert alert-danger alert-dismissable fadeIn"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' + response);
             }
@@ -59,3 +60,4 @@ $("#form-contact").submit(function (e) {
     });
 });
 </script>
+<?php View::endSection(); ?>

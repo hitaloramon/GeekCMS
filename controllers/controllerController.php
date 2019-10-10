@@ -56,6 +56,8 @@ class controllerController extends controller{
                 $json['text'] =  "Mensagem enviada com sucesso!";
                 $json['icon'] = 'success';
                 echo json_encode($json);
+
+                unset($_SESSION['captcha_code']);
             }
         }else{
             $json['heading'] = "Erro";

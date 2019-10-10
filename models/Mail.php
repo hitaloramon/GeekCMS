@@ -11,7 +11,7 @@
             $mail = new PHPMailer();
 
             try {
-                $mail->SMTPDebug = 1;
+                $mail->SMTPDebug = 0;
                 $mail->CharSet = "UTF-8";
 
                 if($this->config['site_mailer'] == 'SMTP') {
@@ -38,10 +38,10 @@
                 $mail->Subject = "{$subject}";
                 $mail->Body = "{$body}";
                 
-                if (!$mail->send()) {
-                    $msg = 'Erro ao enviar! Tente novamente mais tarde';
-                } else {
+                if ($mail->send()) {
                     $msg = 'Mensagem Enviada';
+                } else {
+                    $msg = 'Erro ao enviar! Tente novamente mais tarde';
                 }
 
             } catch (Exception $e) {

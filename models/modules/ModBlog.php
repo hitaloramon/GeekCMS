@@ -552,7 +552,7 @@
         }
 
         public function metatags($config, $viewData){
-            $meta = ''. PHP_EOL;;
+            $meta = '';
             $url = explode('index.php', $_SERVER['PHP_SELF']);
             $url = explode('/', $url[1]);
             if(isset($url[2]) && $url[2] == 'visualizar' && isset($url[3]) && !empty($url[3])){
@@ -576,16 +576,6 @@
                     $meta .= '<meta property="article:published_time" content="'.$data['created'].'">'. PHP_EOL;
                 }
                 
-            }else{
-                $meta .= '<title>'.$config['site_name'].' - '.$viewData['title'].'</title>'. PHP_EOL;
-                $meta .= '<meta name="keywords" content="'.$viewData['keywords'].'">'. PHP_EOL;
-                $meta .= '<meta name="description" content="'.$viewData['description'].'">'. PHP_EOL;
-                $meta .= '<meta property="og:url" content="'.DOMAIN.''.$_SERVER['REQUEST_URI'].'">'. PHP_EOL;
-                $meta .= '<meta property="og:title" content="'.$viewData['title'].'">'. PHP_EOL;
-                $meta .= '<meta property="og:site_name" content="'.$config['site_name'].'">'. PHP_EOL;
-                $meta .= '<meta property="og:description" content="'.$viewData['description'].'">'. PHP_EOL;
-                $meta .= '<meta property="og:image" content="'.BASE_UPLOADS.'/'.$config['site_logo'].'">'. PHP_EOL;
-                $meta .= '<meta property="og:type" content="website">'. PHP_EOL;
             }
 
             return $meta;

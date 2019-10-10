@@ -15,8 +15,7 @@ class gatewayController extends controller{
 
         $auth = http_build_query($auth);
 
-        $sandbox = true;
-        if ($sandbox) {
+        if ($gateway['sandbox']) {
             define("URL_PAGSEGURO", "https://ws.sandbox.pagseguro.uol.com.br/v2/");
         } else {
             define("URL_PAGSEGURO", "https://ws.pagseguro.uol.com.br/v2/");
@@ -24,7 +23,7 @@ class gatewayController extends controller{
 
         switch ($action):
             case 'session':
-                ini_set('display_errors', 'Off');
+               // ini_set('display_errors', 'Off');
 
                 $curl = curl_init();
                 
