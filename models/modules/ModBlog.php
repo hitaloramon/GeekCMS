@@ -7,7 +7,7 @@
 
         public function getCategories(int $id = null){
             if($id == null){
-                return $this->db->fetchAll("SELECT categories.*, pages.slug as blogslug FROM mod_blog_categories AS categories LEFT JOIN pages ON pages.module_name = 'blog' WHERE categories.active = 1 ORDER BY name ASC");
+                return $this->db->fetchAll("SELECT * FROM mod_blog_categories WHERE active = 1 ORDER BY name ASC");
             }else{
                 return $this->db->fetchRow("SELECT * FROM mod_blog_categories WHERE id = {$id}");
             }
@@ -315,10 +315,9 @@
         }
 
         public function getPosts(int $offset = 0, int $limit = 20){
-            return $this->db->fetchAll("SELECT blog.title, blog.slug, blog.thumb, blog.description, blog.created, users.fname AS author, category.name as category, category.slug AS category_slug, pages.slug AS blogslug FROM mod_blog AS blog 
+            return $this->db->fetchAll("SELECT blog.title, blog.slug, blog.thumb, blog.description, blog.created, users.fname AS author, category.name as category, category.slug AS category_slug FROM mod_blog AS blog 
                                         LEFT JOIN users AS users ON blog.user_id = users.id 
                                         LEFT JOIN mod_blog_categories AS category ON blog.category_id = category.id
-                                        LEFT JOIN pages ON pages.module_name = 'blog'
                                         WHERE blog.created < NOW() ORDER BY blog.created DESC LIMIT {$offset},{$limit}");
         }
 
@@ -334,18 +333,16 @@
 
         public function searchPost($search, int $offset = 0, int $limit = 20){
             $search = addslashes($search);
-            return $this->db->fetchAll("SELECT blog.*, category.name as category, pages.slug AS blogslug FROM mod_blog as blog
+            return $this->db->fetchAll("SELECT blog.*, category.name as category FROM mod_blog as blog
                                         LEFT JOIN mod_blog_categories AS category ON blog.category_id = category.id
-                                        LEFT JOIN pages ON pages.module_name = 'blog'
                                         WHERE blog.body LIKE '%{$search}%' LIMIT {$offset},{$limit}");
         }
 
         public function getPostByCategory($category, int $offset = 0, int $limit = 20){
             $category = addslashes($category);
-            return $this->db->fetchAll("SELECT blog.*, users.fname AS author, category.name AS category, pages.slug AS blogslug FROM mod_blog AS blog
+            return $this->db->fetchAll("SELECT blog.*, users.fname AS author, category.name AS category FROM mod_blog AS blog
                                         LEFT JOIN mod_blog_categories AS category ON category.slug = '{$category}' 
                                         LEFT JOIN users AS users ON blog.user_id = users.id
-                                        LEFT JOIN pages ON pages.module_name = 'blog'
                                         WHERE category_id = category.id LIMIT {$offset},{$limit}");
         }
 
@@ -362,17 +359,15 @@
                 if($hit == true){
                     $this->db->query("UPDATE mod_blog SET hits = hits + 1 WHERE slug = '{$slug}'");
                 }
-                return $this->db->fetchAll("SELECT blog.*, users.fname AS author, category.name AS category, category.slug AS category_slug, pages.slug AS blogslug FROM mod_blog AS blog 
+                return $this->db->fetchAll("SELECT blog.*, users.fname AS author, category.name AS category, category.slug AS category_slug FROM mod_blog AS blog 
                                             LEFT JOIN users AS users ON blog.user_id = users.id 
                                             LEFT JOIN mod_blog_categories AS category ON blog.category_id = category.id
-                                            LEFT JOIN pages ON pages.module_name = 'blog'
                                             WHERE blog.slug = '{$slug}'");
             }
         }
 
         public function getPopular(int $limit = 5){
-            return $this->db->fetchAll("SELECT blog.title, blog.slug, blog.thumb, pages.slug AS slugblog FROM mod_blog AS blog 
-                                        LEFT JOIN pages AS pages ON pages.module_name = 'blog' 
+            return $this->db->fetchAll("SELECT blog.title, blog.slug, blog.thumb FROM mod_blog AS blog
                                         WHERE blog.created < NOW() AND blog.active = 1 ORDER BY blog.hits DESC LIMIT {$limit}");
         }
 

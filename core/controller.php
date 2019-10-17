@@ -137,14 +137,14 @@
 
         public function renderMetatags($viewData = array()){
             $meta = '';
-            $mod = 'Mod'.$viewData['module_name'];
+            // $mod = 'Mod'.$viewData['module_name'];
 
-            if($viewData['module_id'] != 0 && class_exists($mod)){
-                 $module = new $mod();
-                 if(method_exists($module, 'metatags')){
-                    $meta = $module->metatags($this->config, $viewData);
-                 }
-            }
+            // if($viewData['module_id'] != 0 && class_exists($mod)){
+            //      $module = new $mod();
+            //      if(method_exists($module, 'metatags')){
+            //         $meta = $module->metatags($this->config, $viewData);
+            //      }
+            // }
             
             if(empty($meta)){
                 $meta .= '<title>'.$this->config['site_name'].' - '.$viewData['title'].'</title>'. PHP_EOL;

@@ -1,7 +1,7 @@
 <?php
-if (!defined("_VALID_PHP")) {
-	die('Acesso direto negado');
-}
+	if (!defined("_VALID_PHP")) {
+		die('Acesso direto negado');
+	}
 ?>
 <?php $body = $this->renderPage($viewData['body']); ?>
 <?php $footer = $this->renderPage($this->config['site_footer']); ?>
@@ -21,6 +21,44 @@ if (!defined("_VALID_PHP")) {
 </head>
 <body class="animated">
 	<div class="main-wrapper">
+		<?php if(isset($_SESSION['user_group']) && $_SESSION['user_group'] == 1): ?>
+		<div class="container-fluid bg-dark">
+			<div class="container">
+				<nav class="navbar navbar-expand-lg navbar-dark bg-dark h-25">
+					<a class="navbar-brand" href="#">Admin Painel</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarPage" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
+								<div class="dropdown-menu" aria-labelledby="navbarPage">
+									<a class="dropdown-item" href="<?php echo BASE_ADMIN; ?>/menu/add">Adicionar Menu</a>
+								</div>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarPage" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Página</a>
+								<div class="dropdown-menu" aria-labelledby="navbarPage">
+									<a class="dropdown-item" href="<?php echo BASE_ADMIN; ?>/page/edit/<?php echo $viewData['id']; ?>">Editar Página</a>
+									<a class="dropdown-item" href="<?php echo BASE_ADMIN; ?>/page/add">Adicionar Página</a>
+								</div>
+							</li>
+						</ul>
+						<ul class="navbar-nav">
+						<li class="nav-item">
+								<a class="nav-link" href="<?php echo BASE_ADMIN; ?>/system">Config.</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="<?php echo BASE; ?>/logout">Sair</a>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
+		<?php endif; ?>
+
 		<div class="header13 po-relative">
 
 			<div class="h13-topbar">

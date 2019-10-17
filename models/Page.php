@@ -102,13 +102,13 @@
                 $array_data['membership_id'] = implode(',', $array_data['membership_id']);
             }
 
-            // Check Module
-            preg_match_all("/{{(module.*?)}}/", $array_data['body'], $matches);
-
-            if(!empty($matches[1])){
-                $matches = explode('|', $matches[1][0]);
-                $array_data['module_name'] = $matches[1];
-                $array_data['module_id'] = $matches[2];
+            //Check Module
+            preg_match_all("/{{(module.*?)}}/", $array_data['body'], $modules);
+            $modules = array_shift($modules);
+            foreach ($modules as $m) {
+                $module = explode('|', $m);
+                $routes = new Routes();
+                $routes->updateRoutes($module[1], $array_data['slug']);
             }
 
             // Check Page Type
@@ -144,8 +144,6 @@
                 'active'        => 'trim|sanitize_numbers',
                 'membership_id' => 'trim|sanitize_string',
                 'access'        => 'trim|sanitize_numbers',
-                'module_id'     => 'trim|sanitize_numbers',
-                'module_name'   => 'trim|sanitize_string',
                 'description'   => 'trim|sanitize_string',
                 'keywords'      => 'trim|sanitize_string',
                 'body'          => 'htmlencode'
@@ -159,10 +157,6 @@
                 $array_diff = array_diff_key($array_data, $filters);
                 foreach ($array_diff as $key => $value) {
                     unset($array_data[$key]);
-                }
-
-                if(!empty($array_data['module_name']) && !empty($array_data['module_id'])){
-                    $this->db->update('pages', ['module_name' => '', 'module_id' => 0], ['module_name = ?' => $array_data['module_name']]);
                 }
 
                 $array_data['created_by'] = $_SESSION['user_id'];
@@ -205,11 +199,12 @@
         public function pageUpdate($array_data, $id){
 
             // Check Modules
-            preg_match_all("/{{(module.*?)}}/", $array_data['body'], $matches);
-            if(!empty($matches[1])){
-                $matches = explode('|', $matches[1][0]);
-                $array_data['module_name'] = $matches[1];
-                $array_data['module_id'] = $matches[2];
+            preg_match_all("/{{(module.*?)}}/", $array_data['body'], $modules);
+            $modules = array_shift($modules);
+            foreach ($modules as $m) {
+                $module = explode('|', $m);
+                $routes = new Routes();
+                $routes->updateRoutes($module[1], $array_data['slug']);
             }
 
             // Check Page Type
@@ -222,6 +217,7 @@
                     $array_data['type_page'] = 'normal';
                 }
             }
+            
 
             if(empty($array_data['slug'])){
                 $array_data['slug'] = $array_data['title'];
@@ -256,8 +252,6 @@
                 'active'        => 'trim|sanitize_numbers',
                 'membership_id' => 'trim|sanitize_string',
                 'access'        => 'trim|sanitize_numbers',
-                'module_id'     => 'trim|sanitize_numbers',
-                'module_name'   => 'trim|sanitize_string',
                 'description'   => 'trim|sanitize_string',
                 'keywords'      => 'trim|sanitize_string',
                 'body'          => 'htmlencode'
@@ -271,10 +265,6 @@
 
                 foreach ($array_diff as $key => $value) {
                     unset($array_data[$key]);
-                }
-
-                if(!empty($array_data['module_name']) && !empty($array_data['module_id'])){
-                    $this->db->update('pages', ['module_name' => '', 'module_id' => 0], ['module_name = ?' => $array_data['module_name']]);
                 }
 
                 if($array_data['type_page'] != 'home' || $array_data['type_page'] != 'normal'){

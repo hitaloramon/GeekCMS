@@ -6,6 +6,9 @@
     array_shift($url);
 
     $blog = new ModBlog();
+    $routes = new Routes();
+    $routes = $routes->getRoutes();
+    
     if(isset($url[0])){
         switch($url[0]):
             case 'visualizar':
