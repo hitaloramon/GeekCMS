@@ -47,21 +47,15 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="control-label">Tipo de Página</label>
+                                    <label class="control-label">Página Inicial</label>
                                     <select class="form-control custom-select" id="type_page" name="type_page">
-                                        <option value="normal" selected>Normal</option>
-                                        <option value="activate">Ativação</option>
-                                        <option value="register">Cadastro</option>
-                                        <option value="account">Conta</option>
-                                        <option value="login">Login</option>
-                                        <option value="home">Página Inicial</option>
-                                        <option value="search">Pesquisa</option>
-                                        <option value="profile">Perfil</option>
+                                        <option value="normal">Não</option>
+                                        <option value="home">Sim</option>
                                     </select>
                                     <small class="form-control-feedback" id="type_page-feedback"></small>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="control-label">Acesso</label>
                                     <select class="form-control custom-select" id="access" name="access" onchange="checkOptions(this.value)">
@@ -72,7 +66,7 @@
                                     <small class="form-control-feedback" id="access-feedback"></small>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="control-label">Plano de Acesso</label>
                                     <select class="selectpicker" name="membership_id[]" id="membership_id" multiple data-style="form-control custom-select" title="Selecione">
@@ -83,12 +77,22 @@
                                     <small class="form-control-feedback" id="membership_id-feedback"></small>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="control-label">Publicar Página</label>
                                     <select class="form-control custom-select" name="active" id="active">
                                         <option value="1">Sim</option>
                                         <option value="0">Não</option>
+                                    </select>
+                                    <small class="form-control-feedback" id="active-feedback"></small>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Criar Menu</label>
+                                    <select class="form-control custom-select" name="create_menu" id="create_menu">
+                                        <option value="0" selected>Não</option>
+                                        <option value="1">Sim</option>
                                     </select>
                                     <small class="form-control-feedback" id="active-feedback"></small>
                                 </div>

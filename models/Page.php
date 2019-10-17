@@ -154,6 +154,7 @@
 
             if($validated === true){
 
+                $create_menu = $array_data['create_menu'];
                 $array_diff = array_diff_key($array_data, $filters);
                 foreach ($array_diff as $key => $value) {
                     unset($array_data[$key]);
@@ -172,7 +173,23 @@
                 $checkSlug = $this->db->fetchRow("SELECT id FROM pages WHERE slug = '{$array_data['slug']}'");
 
                 if($checkSlug == false){
-                    $this->db->insert('pages', $array_data);
+                    $lastid = $this->db->insert('pages', $array_data);
+
+                    if($create_menu){
+                        $array_menu = array(
+                            'page_id'       => $lastid,
+                            'page_slug'     => $array_data['slug'],
+                            'name'          => $array_data['title'],
+                            'slug'          => $array_data['slug'],
+                            'content_type'  => 'page',
+                            'active'        => 1
+                        );
+
+                        if($array_data['type_page'] == 'home'){
+                            $array_menu['home_page'] = 1;
+                        }
+                        $this->db->insert('menus', $array_menu);
+                    }
 
                     $json['heading'] = "Sucesso";
                     $json['text'] =  "Página adicionada com sucesso!";

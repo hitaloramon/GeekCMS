@@ -25,7 +25,7 @@
 		<div class="container-fluid bg-dark">
 			<div class="container">
 				<nav class="navbar navbar-expand-lg navbar-dark bg-dark h-25">
-					<a class="navbar-brand" href="#">Admin Painel</a>
+					<a class="navbar-brand" href="<?php echo BASE_ADMIN; ?>">Admin Painel</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
 						<span class="navbar-toggler-icon"></span>
 					</button>

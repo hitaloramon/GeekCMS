@@ -36,94 +36,85 @@
             </div>
     
             <?php if($post['show_comments']): ?>
-                <ul class="nav nav-tabs customtab" role="tablist">
-                    <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#comments" role="tab"><i class="fas fa-comments"></i> Comentários</a> </li>
-                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#comment" role="tab"><i class="fas fa-comment"></i> Comentar</a></a> </li>
-                </ul>
-                <!-- Tab panes -->
+
+                <h4>Adicionar Comentário</h4>
+                <h6 class="subtitle">Seu endereço de email não será visível</h6>
+                <div id="msg-add-comment"></div>
+                <form class="row" id="form-comments" method="post" action="<?php echo BASE; ?>/controller/commentadd">
+                    <?php if(!isset($_SESSION['user_id'])): ?>
+                    <div class="form-group col-md-6 m-t-20">
+                        <input type="text" name="name" class="form-control" placeholder="Nome">
+                    </div>
+                    <div class="form-group col-md-6 m-t-20">
+                        <input type="text" name="email" class="form-control" placeholder="Email">
+                    </div>
+                    <?php endif; ?>
+                    <div class="form-group col-md-12 m-t-20">
+                        <input type="hidden" name="id_post" value="<?php echo $post['id']; ?>">
+                        <textarea class="form-control" rows="5" maxlength="450" name="comment" placeholder="Comentário (até 450 caracteres)"></textarea>
+                    </div>
+                    <div class="form-group col-md-12 m-t-20">
+                        <button type="submit" class="btn btn-info waves-effect waves-light m-r-10">Comentar</button>
+                    </div>
+                </form>
+    
+      
                 <?php $comment = $blog->getComments($post['id']); ?>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="comments" role="tabpanel">
-                        <div class="pt-4">
-                        <?php if(!empty($comment)): ?>
-                            <h4>Comentários Recentes:</h4>
-                        <?php else: ?>
-                        <h6 class="subtitle">Nenhum comentário nessa postagem.</h6>
-                        <?php endif; ?>
-                            <ul class="list-unstyled with-noborder">
-                                <?php foreach ($comment as $comments): ?>
-                                    <li class="media">
-                                        <img class="d-flex mr-3 img-circle b-all" src="<?php echo BASE_UPLOADS; ?>/users/<?php echo (empty($comments['avatar'])) ? 'blank.jpg' : $comments['avatar']; ?>" width="60">
-                                        <div class="media-body">
-                                            <h5 class="mt-0 mb-1"><?php echo $comments['name']; ?></h5> 
-                                            <span class="badge mb-2"><?php echo time_elapsed_string(strtotime($comments['created'])); ?></span>
-                                            <p><?php echo $comments['comment']; ?></p>
-                                            <a data-toggle="collapse" href="#collapse_comment<?php echo $comments['id']; ?>" role="button" aria-expanded="false" aria-controls="collapse_comment">Responder</a>
-                                            <div class="collapse" id="collapse_comment<?php echo $comments['id']; ?>">
-                                                <div class="card card-body">
-                                                    <form class="row form-comments-replay" method="post" action="<?php echo BASE; ?>/controller/commentreplay">
-                                                        <div class="msg-comment-replay col-md-12"></div>  
-                                                        <?php if(!isset($_SESSION['user_id'])): ?>
-                                                        <div class="form-group col-md-6">
-                                                            <input type="text" name="name" required class="form-control" placeholder="Nome">
-                                                        </div>
-                                                        <div class="form-group col-md-6">
-                                                            <input type="email" name="email" required class="form-control" placeholder="Email">
-                                                        </div>
-                                                        <?php endif; ?>
-                                                        <div class="form-group col-md-12">
-                                                            <input type="hidden" name="id_post" value="<?php echo $post['id']; ?>">
-                                                            <input type="hidden" name="parent_id" value="<?php echo $comments['id']; ?>">
-                                                            <textarea class="form-control" rows="5" maxlength="450" name="comment" required placeholder="Comentário (até 450 caracteres)"></textarea>
-                                                        </div>
-                                                        <div class="form-group col-md-12">
-                                                            <button type="submit" class="btn btn-info waves-effect waves-light m-r-10">Responder</button>
-                                                        </div>
-                                                    </form>
+                <div class="pt-4">
+                    <?php if(!empty($comment)): ?>
+                        <h4>Comentários Recentes:</h4>
+                    <?php else: ?>
+                    <h6 class="subtitle">Nenhum comentário nessa postagem.</h6>
+                    <?php endif; ?>
+                        <ul class="list-unstyled with-noborder">
+                            <?php foreach ($comment as $comments): ?>
+                                <li class="media">
+                                    <img class="d-flex mr-3 img-circle b-all" src="<?php echo BASE_UPLOADS; ?>/users/<?php echo (empty($comments['avatar'])) ? 'blank.jpg' : $comments['avatar']; ?>" width="60">
+                                    <div class="media-body">
+                                        <h5 class="mt-0 mb-1"><?php echo $comments['name']; ?></h5> 
+                                        <span class="badge mb-2"><?php echo time_elapsed_string(strtotime($comments['created'])); ?></span>
+                                        <p><?php echo $comments['comment']; ?></p>
+                                        <a data-toggle="collapse" href="#collapse_comment<?php echo $comments['id']; ?>" role="button" aria-expanded="false" aria-controls="collapse_comment">Responder</a>
+                                        <div class="collapse" id="collapse_comment<?php echo $comments['id']; ?>">
+                                            <div class="card card-body">
+                                                <form class="row form-comments-replay" method="post" action="<?php echo BASE; ?>/controller/commentreplay">
+                                                    <div class="msg-comment-replay col-md-12"></div>  
+                                                    <?php if(!isset($_SESSION['user_id'])): ?>
+                                                    <div class="form-group col-md-6">
+                                                        <input type="text" name="name" required class="form-control" placeholder="Nome">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <input type="email" name="email" required class="form-control" placeholder="Email">
+                                                    </div>
+                                                    <?php endif; ?>
+                                                    <div class="form-group col-md-12">
+                                                        <input type="hidden" name="id_post" value="<?php echo $post['id']; ?>">
+                                                        <input type="hidden" name="parent_id" value="<?php echo $comments['id']; ?>">
+                                                        <textarea class="form-control" rows="5" maxlength="450" name="comment" required placeholder="Comentário (até 450 caracteres)"></textarea>
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <button type="submit" class="btn btn-info waves-effect waves-light m-r-10">Responder</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <?php foreach ($blog->getComments($post['id'], $comments['id']) as $commentReplay): ?>
+                                            <div class="media mb-0">
+                                                <img class="d-flex mr-3 img-circle b-all" src="<?php echo BASE_UPLOADS; ?>/users/<?php echo (empty($commentReplay['avatar'])) ? 'blank.jpg' : $commentReplay['avatar']; ?>" width="60" height="60">
+                                                <div class="media-body">
+                                                    <h5 class="mt-0"><?php echo $commentReplay['name']; ?></h5> 
+                                                    <span class="badge mb-2"><?php echo time_elapsed_string(strtotime($commentReplay['created'])); ?></span>
+                                                    <p><?php echo $commentReplay['comment']; ?></p>
                                                 </div>
                                             </div>
-                                            <?php foreach ($blog->getComments($post['id'], $comments['id']) as $commentReplay): ?>
-                                                <div class="media mb-0">
-                                                    <img class="d-flex mr-3 img-circle b-all" src="<?php echo BASE_UPLOADS; ?>/users/<?php echo (empty($commentReplay['avatar'])) ? 'blank.jpg' : $commentReplay['avatar']; ?>" width="60" height="60">
-                                                    <div class="media-body">
-                                                        <h5 class="mt-0"><?php echo $commentReplay['name']; ?></h5> 
-                                                        <span class="badge mb-2"><?php echo time_elapsed_string(strtotime($commentReplay['created'])); ?></span>
-                                                        <p><?php echo $commentReplay['comment']; ?></p>
-                                                    </div>
-                                                </div>
-                                            <?php endforeach; ?>
-                                        </div>
-                                    </li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
                     </div>
-                    <div class="tab-pane pt-4" id="comment" role="tabpanel">
-                        <h4>Adicionar Comentário</h4>
-                        <h6 class="subtitle">Seu endereço de email não será visível</h6>
-                        <div id="msg-add-comment"></div>
-                        <form class="row" id="form-comments" method="post" action="<?php echo BASE; ?>/controller/commentadd">
-                            <?php if(!isset($_SESSION['user_id'])): ?>
-                            <div class="form-group col-md-6 m-t-20">
-                                <input type="text" name="name" class="form-control" placeholder="Nome">
-                            </div>
-                            <div class="form-group col-md-6 m-t-20">
-                                <input type="text" name="email" class="form-control" placeholder="Email">
-                            </div>
-                            <?php endif; ?>
-                            <div class="form-group col-md-12 m-t-20">
-                                <input type="hidden" name="id_post" value="<?php echo $post['id']; ?>">
-                                <textarea class="form-control" rows="5" maxlength="450" name="comment" placeholder="Comentário (até 450 caracteres)"></textarea>
-                            </div>
-                            <div class="form-group col-md-12 m-t-20">
-                                <button type="submit" class="btn btn-info waves-effect waves-light m-r-10">Comentar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-    
+
                 <script>
-    
                 function fontSize(e) {
                     var font = parseInt($(".accessibility").css('font-size'));
                     e == '+' ? font++ : font--;
