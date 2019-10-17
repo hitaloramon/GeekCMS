@@ -208,9 +208,67 @@
     </div>
 </div>
 
-<div data-type="component-text" data-preview="<?= $base_img; ?>media_panel.png" data-keditor-title="Teste" data-keditor-categories="Mídia;Imagem;Bootstrap">
-    <a href="#" class="btn btn-info">Botão</a>
+
+<div data-type="component-button" data-preview="<?= $base_img; ?>media_panel.png" data-keditor-title="Botão Teste" data-keditor-categories="Botões">
+    <div class="button-wrapper">
+        <a href="#" class="btn-edit btn btn-primary">Botão</a>
+    </div>
 </div>
+
+<div data-type="component-text" data-preview="<?= $base_img; ?>text.png" data-keditor-title="Alerta Sucesso" data-keditor-categories="Alerta">
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Sucesso!</h4>
+        <p>Exemplo de texto para que você possa ver como o espaçamento dentro de um alerta trabalha com este tipo de conteúdo.</p>
+        <hr>
+        <p class="mb-0">Mais um texto aqui.</p>
+    </div>
+</div>
+
+<div data-type="component-text" data-preview="<?= $base_img; ?>text.png" data-keditor-title="Alerta Aviso" data-keditor-categories="Alerta">
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Sucesso!</h4>
+        <p>Exemplo de texto para que você possa ver como o espaçamento dentro de um alerta trabalha com este tipo de conteúdo.</p>
+        <hr>
+        <p class="mb-0">Mais um texto aqui.</p>
+    </div>
+</div>
+
+<div data-type="component-text" data-preview="<?= $base_img; ?>text.png" data-keditor-title="Alerta Informação" data-keditor-categories="Alerta">
+    <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">Sucesso!</h4>
+        <p>Exemplo de texto para que você possa ver como o espaçamento dentro de um alerta trabalha com este tipo de conteúdo.</p>
+        <hr>
+        <p class="mb-0">Mais um texto aqui.</p>
+    </div>
+</div>
+
+<div data-type="component-text" data-preview="<?= $base_img; ?>text.png" data-keditor-title="Alerta Erro" data-keditor-categories="Alerta">
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Sucesso!</h4>
+        <p>Exemplo de texto para que você possa ver como o espaçamento dentro de um alerta trabalha com este tipo de conteúdo.</p>
+        <hr>
+        <p class="mb-0">Mais um texto aqui.</p>
+    </div>
+</div>
+
+<div data-type="component-text" data-preview="<?= $base_img; ?>text.png" data-keditor-title="Alerta Primário" data-keditor-categories="Alerta">
+    <div class="alert alert-primary" role="alert">
+        <h4 class="alert-heading">Sucesso!</h4>
+        <p>Exemplo de texto para que você possa ver como o espaçamento dentro de um alerta trabalha com este tipo de conteúdo.</p>
+        <hr>
+        <p class="mb-0">Mais um texto aqui.</p>
+    </div>
+</div>
+
+<div data-type="component-text" data-preview="<?= $base_img; ?>text.png" data-keditor-title="Alerta Secundário" data-keditor-categories="Alerta">
+    <div class="alert alert-secondary" role="alert">
+        <h4 class="alert-heading">Sucesso!</h4>
+        <p>Exemplo de texto para que você possa ver como o espaçamento dentro de um alerta trabalha com este tipo de conteúdo.</p>
+        <hr>
+        <p class="mb-0">Mais um texto aqui.</p>
+    </div>
+</div>
+
 
 
 <!-------------------------------------------------------------------------------------------------->

@@ -42,19 +42,7 @@
             include 'views/admin/admin.php';
         }
 
-        public function renderModule($viewData = array()){
-            if(!empty($viewData)){
-                $themefile = 'views/front/modules/'.$viewData['module_name'].'/'.$this->config['site_theme'].'/main.php';
-                $modulefile = 'views/front/modules/'.$viewData['module_name'].'/main.php';
-
-                if(file_exists($themefile)){
-                    include $themefile;
-                }elseif (file_exists($modulefile)) {
-                    include $modulefile;
-                }
-            }
-        }
-
+        
         public function renderPage($body){
             $body = html_entity_decode($body);
             preg_match_all("/{{(.*?)}}/", $body, $matches);
