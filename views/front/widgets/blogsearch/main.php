@@ -2,6 +2,9 @@
  if (!defined("_VALID_PHP")){
    die('Acesso Direto Negado');
  }
+
+  $routes = new Routes();
+  $routes = $routes->getRoutes();
 ?>
 <form id="form-blog-search">
   <div class="input-group">
@@ -19,7 +22,7 @@
         var search = $('#blogsearch').val();
         var site_url = localStorage.getItem('SITEURL');
         if(search.length >= 1){
-          window.location = site_url + '/blog/pesquisa/' + search;
+          window.location = site_url + '/<?php echo $routes['blog']; ?>/pesquisa/' + search;
         }
     });
   </script>
