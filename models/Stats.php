@@ -83,35 +83,37 @@
             $this->getBrowser();
             $this->getDevice();
 
-            try {
-                if (function_exists('curl_version')){
-                    $curl = curl_init();  
-                    curl_setopt($curl, CURLOPT_URL, 'https://geoip-db.com/json/'.$this->ip);
-                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-                    $stats = json_decode(curl_exec($curl), true);
-                    curl_close($curl);
-                }else{
-                    $stats = json_decode(file_get_contents('https://geoip-db.com/json/'.$this->ip), true);
+            if($this->ip != '127.0.0.1'){
+                try {
+                    if (function_exists('curl_version')){
+                        $curl = curl_init();  
+                        curl_setopt($curl, CURLOPT_URL, 'https://geoip-db.com/json/'.$this->ip);
+                        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                        $stats = json_decode(curl_exec($curl), true);
+                        curl_close($curl);
+                    }else{
+                        $stats = json_decode(file_get_contents('https://geoip-db.com/json/'.$this->ip), true);
+                    }
+        
+                    if(is_array($stats)){
+                        $data = array(
+                            'ip'           => $this->ip,
+                            'browser'      => $this->browser,
+                            'device'       => $this->device,
+                            'os'           => $this->os,
+                            'country'      => $stats['country_name'],
+                            'country_code' => $stats['country_code'],
+                            'region'       => $stats['state'],
+                            'city'         => $stats['city'],
+                            'reference'    => $this->referer,
+                            'date'         => date('Y-m-d H:i:s')
+                        );
+        
+                        $this->db->insert('stats', $data);
+                    }
+                } catch (\Throwable $th) {
+                   //
                 }
-    
-                if(is_array($stats)){
-                    $data = array(
-                        'ip'           => $this->ip,
-                        'browser'      => $this->browser,
-                        'device'       => $this->device,
-                        'os'           => $this->os,
-                        'country'      => $stats['country_name'],
-                        'country_code' => $stats['country_code'],
-                        'region'       => $stats['state'],
-                        'city'         => $stats['city'],
-                        'reference'    => $this->referer,
-                        'date'         => date('Y-m-d H:i:s')
-                    );
-    
-                    $this->db->insert('stats', $data);
-                }
-            } catch (\Throwable $th) {
-               //
             }
 
         }
