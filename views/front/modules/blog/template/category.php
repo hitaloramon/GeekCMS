@@ -10,11 +10,11 @@
             <div class="row m-b-30">
                 <?php if(!empty($post['thumb'])): ?>
                     <div class="col-md-4 mb-3">
-                        <a href="<?php echo BASE.'/'.$routes['blog'].'/visualizar/'. $post['slug']; ?>"><img class="img-responsive rounded" src="<?php echo BASE_UPLOADS; ?>/<?php echo $post['thumb']; ?>"></a>
+                        <a href="<?php echo BASE.'/'.$routes['modules']['blog'].'/visualizar/'. $post['slug']; ?>"><img class="img-responsive rounded" src="<?php echo BASE_UPLOADS; ?>/<?php echo $post['thumb']; ?>"></a>
                     </div>
                 <?php endif; ?>
                 <div class="col-md">
-                    <a href="<?php echo BASE.'/'. $routes['blog']. '/visualizar/'. $post['slug']; ?>">
+                    <a href="<?php echo BASE.'/'. $routes['modules']['blog']. '/visualizar/'. $post['slug']; ?>">
                         <h5 class="media-heading"><?php echo $post['title']; ?></h5>
                     </a>
                     <ul class="list-inline list-unstyled">
@@ -29,7 +29,7 @@
             </div>
         <?php endforeach; ?>
         <?php 
-            $link = BASE.'/'.$routes['blog'].'/categoria/'. $url[1] . '/';
+            $link = BASE.'/'.$routes['modules']['blog'].'/categoria/'. $url[1] . '/';
             pagination($totalResults, $resultsPerPage, $currentPage, $link); 
         ?>
     <?php else: ?>

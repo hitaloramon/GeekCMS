@@ -12,7 +12,7 @@
                         <?php if($post['show_created']): ?>
                             <div class="mb-2"><i class="fas fa-calendar"></i> <?php echo strftime('%a, %d %b %Y às %H:%Mh', strtotime($post['created'])); ?></div>
                         <?php endif; ?>
-                            <div class="mb-2"><i class="fas fa-tag"></i> <a href="<?php echo BASE.'/'. $routes['blog'].'/categoria/'. $post['category_slug'].'';?>"><?php echo $post['category']; ?></a></div>
+                            <div class="mb-2"><i class="fas fa-tag"></i> <a href="<?php echo BASE.'/'. $routes['modules']['blog'].'/categoria/'. $post['category_slug'].'';?>"><?php echo $post['category']; ?></a></div>
                             <div class="mb-2">
                                 <button class="btn btn-sm btn-light font-bold" onClick="fontSize('+');">A+</button>
                                 <button class="btn btn-sm btn-light font-bold" onClick="fontSize('-');">A-</button>
@@ -29,9 +29,9 @@
             <div class="my-5">
                 <h5>Compartilhar:</h5>
                 <div class="round-social">
-                    <a class="btn bg-facebook btn-circle" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(BASE.'/'. $routes['blog']. '/visualizar/'. $post['slug']); ?>" title="Compartilhar no Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn bg-twitter btn-circle" href="http://twitter.com/intent/tweet?text=<?php echo urlencode(BASE.'/'. $routes['blog']. '/visualizar/'. $post['slug']); ?>" title="Compartilhar no Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-success btn-circle" href="https://web.whatsapp.com/send?text=<?php echo urlencode(BASE.'/'. $routes['blog']. '/visualizar/'. $post['slug']); ?>" title="Compartilhar no WhatsApp" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+                    <a class="btn bg-facebook btn-circle" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(BASE.'/'. $routes['modules']['blog']. '/visualizar/'. $post['slug']); ?>" title="Compartilhar no Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn bg-twitter btn-circle" href="http://twitter.com/intent/tweet?text=<?php echo urlencode(BASE.'/'. $routes['modules']['blog']. '/visualizar/'. $post['slug']); ?>" title="Compartilhar no Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-success btn-circle" href="https://web.whatsapp.com/send?text=<?php echo urlencode(BASE.'/'. $routes['modules']['blog']. '/visualizar/'. $post['slug']); ?>" title="Compartilhar no WhatsApp" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
     

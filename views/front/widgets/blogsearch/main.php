@@ -22,7 +22,7 @@
         var search = $('#blogsearch').val();
         var site_url = localStorage.getItem('SITEURL');
         if(search.length >= 1){
-          window.location = site_url + '/<?php echo $routes['blog']; ?>/pesquisa/' + search;
+          window.location = site_url + '/<?php echo $routes['modules']['blog']; ?>/pesquisa/' + search;
         }
     });
   </script>

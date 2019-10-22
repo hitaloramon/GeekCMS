@@ -3,13 +3,13 @@
     <div class="row m-b-30">
         <?php if(!empty($post['thumb'])): ?>
             <div class="col-md-4 m-b-30">
-                <a href="<?php echo BASE.'/'. $routes['blog']. '/visualizar/'. $post['slug']; ?>">
+                <a href="<?php echo BASE.'/'. $routes['modules']['blog']. '/visualizar/'. $post['slug']; ?>">
                     <img class="img-responsive rounded" src="<?php echo BASE_UPLOADS; ?>/<?php echo $post['thumb']; ?>" alt="<?php echo $post['title']; ?>">
                 </a>
             </div>
         <?php endif; ?>
         <div class="col-md">
-            <a href="<?php echo BASE.'/'. $routes['blog']. '/visualizar/'. $post['slug']; ?>">
+            <a href="<?php echo BASE.'/'. $routes['modules']['blog']. '/visualizar/'. $post['slug']; ?>">
                 <h5 class="media-heading"><?php echo $post['title']; ?></h5>
             </a>
             <ul class="list-inline list-unstyled">

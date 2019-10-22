@@ -102,26 +102,6 @@
                 $array_data['membership_id'] = implode(',', $array_data['membership_id']);
             }
 
-            //Check Module
-            preg_match_all("/{{(module.*?)}}/", $array_data['body'], $modules);
-            $modules = array_shift($modules);
-            foreach ($modules as $m) {
-                $module = explode('|', $m);
-                $routes = new Routes();
-                $routes->updateRoutes($module[1], $array_data['slug']);
-            }
-
-            // Check Page Type
-            preg_match_all("/{{(page.*?)}}/", $array_data['body'], $matches);
-            if($array_data['type_page'] != 'home'){
-                if(!empty($matches[1])){
-                    $matches = explode('|', $matches[1][0]);
-                    $array_data['type_page'] = $matches[1];
-                }else{
-                    $array_data['type_page'] = 'normal';
-                }
-            }
-
             $validator = new Gump('pt-br');
     
             // Regras para validar os campos
@@ -153,6 +133,28 @@
             $validated = $validator->validate($array_data, $rules);
 
             if($validated === true){
+
+                //Check Module
+                preg_match_all("/{{(module.*?)}}/", $array_data['body'], $modules);
+                $modules = array_shift($modules);
+                foreach ($modules as $m) {
+                    $module = explode('|', $m);
+                    $routes = new Routes();
+                    $routes->updateRoutes('modules', $module[1], $array_data['slug']);
+                }
+
+                // Check Page Type
+                preg_match_all("/{{(page.*?)}}/", $array_data['body'], $pages);
+                if($array_data['type_page'] != 'home'){
+                    if(!empty($pages[1])){
+                        $pages = explode('|', $pages[1][0]);
+                        $array_data['type_page'] = $pages[1];
+                        $routes = new Routes();
+                        $routes->updateRoutes('pages', $pages[1], $array_data['slug']);
+                    }else{
+                        $array_data['type_page'] = 'normal';
+                    }
+                }
 
                 $create_menu = $array_data['create_menu'];
                 $array_diff = array_diff_key($array_data, $filters);
@@ -215,27 +217,6 @@
 
         public function pageUpdate($array_data, $id){
 
-            // Check Modules
-            preg_match_all("/{{(module.*?)}}/", $array_data['body'], $modules);
-            $modules = array_shift($modules);
-            foreach ($modules as $m) {
-                $module = explode('|', $m);
-                $routes = new Routes();
-                $routes->updateRoutes($module[1], $array_data['slug']);
-            }
-
-            // Check Page Type
-            preg_match_all("/{{(page.*?)}}/", $array_data['body'], $matches);
-            if($array_data['type_page'] != 'home'){
-                if(!empty($matches[1])){
-                    $matches = explode('|', $matches[1][0]);
-                    $array_data['type_page'] = $matches[1];
-                }else{
-                    $array_data['type_page'] = 'normal';
-                }
-            }
-            
-
             if(empty($array_data['slug'])){
                 $array_data['slug'] = $array_data['title'];
             }
@@ -278,8 +259,30 @@
             $validated = $validator->validate($array_data, $rules);
 
             if($validated === true){
-                $array_diff = array_diff_key($array_data, $filters);
 
+                // Check Modules
+                preg_match_all("/{{(module.*?)}}/", $array_data['body'], $modules);
+                $modules = array_shift($modules);
+                foreach ($modules as $m) {
+                    $module = explode('|', $m);
+                    $routes = new Routes();
+                    $routes->updateRoutes('modules', $module[1], $array_data['slug']);
+                }
+
+                // Check Page Type
+                preg_match_all("/{{(page.*?)}}/", $array_data['body'], $pages);
+                if($array_data['type_page'] != 'home'){
+                    if(!empty($pages[1])){
+                        $pages = explode('|', $pages[1][0]);
+                        $array_data['type_page'] = $pages[1];
+                        $routes = new Routes();
+                        $routes->updateRoutes('pages', $pages[1], $array_data['slug']);
+                    }else{
+                        $array_data['type_page'] = 'normal';
+                    }
+                }
+
+                $array_diff = array_diff_key($array_data, $filters);
                 foreach ($array_diff as $key => $value) {
                     unset($array_data[$key]);
                 }

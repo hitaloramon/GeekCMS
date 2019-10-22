@@ -1,0 +1,15 @@
+{
+    "pages": {
+        "account": "conta",
+        "register": "cadastro",
+        "profile": "perfil",
+        "search": "pesquisa",
+        "login": "login",
+        "activate": "ativacao"
+    },
+    "modules": {
+        "blog": "pagina-inicial",
+        "events": "eventos",
+        "gallery": "galeria"
+    }
+}

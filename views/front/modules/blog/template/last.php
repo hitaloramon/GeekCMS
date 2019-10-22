@@ -10,19 +10,19 @@
         <div class="row m-b-30">
             <?php if(!empty($post['thumb'])): ?>
                 <div class="col-md-4 mb-3">
-                    <a href="<?php echo BASE.'/'. $routes['blog']. '/visualizar/'. $post['slug']; ?>">
+                    <a href="<?php echo BASE.'/'. $routes['modules']['blog']. '/visualizar/'. $post['slug']; ?>">
                         <img class="img-responsive rounded" src="<?php echo BASE_UPLOADS; ?>/<?php echo $post['thumb']; ?>" alt="<?php echo $post['title']; ?>">
                     </a>
                 </div>
             <?php endif; ?>
             <div class="col-md">
-                <a href="<?php echo BASE.'/'. $routes['blog']. '/visualizar/'. $post['slug']; ?>">
+                <a href="<?php echo BASE.'/'. $routes['modules']['blog']. '/visualizar/'. $post['slug']; ?>">
                     <h5 class="media-heading"><?php echo $post['title']; ?></h5>
                 </a>
                 <ul class="list-inline list-unstyled">
                     <li><small class="text-muted"><i class="fas fa-calendar"></i> <?php echo time_elapsed_string(strtotime($post['created'])); ?></small></li>
                     <li>|</li>
-                    <li><small class="text-muted"><i class="fas fa-tag"></i> <a href="<?php echo BASE.'/'. $routes['blog'].'/categoria/'. $post['category_slug'].'';?>"><?php echo $post['category']; ?></a></small> </li>
+                    <li><small class="text-muted"><i class="fas fa-tag"></i> <a href="<?php echo BASE.'/'. $routes['modules']['blog'].'/categoria/'. $post['category_slug'].'';?>"><?php echo $post['category']; ?></a></small> </li>
                 </ul>
                 <p><?php echo strlen($post['description']) >= 400 ? substr($post['description'], 0, 400) . '...' : $post['description']; ?></p>
             </div>
@@ -31,6 +31,6 @@
 </div>
 
 <?php 
-    $link = BASE.'/'. $routes['blog'].'/';
+    $link = BASE.'/'. $routes['modules']['blog'].'/';
     pagination($totalResults, $resultsPerPage, $currentPage, $link); 
 ?>

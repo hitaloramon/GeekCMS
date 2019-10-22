@@ -15,7 +15,7 @@
 <div class="media m-t-20">
   <h1 class="m-r-20"><?php echo $count++; ?>.</h1>
   <div class="media-body">
-    <h6 class="mt-0"><a class="text-muted" href="<?php echo BASE.'/'. $routes['blog']. '/visualizar/'. $pop['slug']; ?>"><?php echo $pop['title']; ?></a></h6>
+    <h6 class="mt-0"><a class="text-muted" href="<?php echo BASE.'/'. $routes['modules']['blog']. '/visualizar/'. $pop['slug']; ?>"><?php echo $pop['title']; ?></a></h6>
   </div>
 </div>
 <?php endforeach; ?>

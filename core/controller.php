@@ -23,12 +23,6 @@
             extract($viewData);
             include 'views/'.$viewName.'.php';
         }
-        
-        public function loadSnippets($snippet, $viewData = array()){
-            extract($viewData);
-            include 'views/front/templates/'.$this->config['site_theme'].'/snippets/'.$snippet.'.php';
-        }
-
 
         public function loadTemplate($viewData = array()){
             if(isset($_GET['theme']) && is_dir("views/front/templates/{$_GET['theme']}")){
@@ -42,6 +36,10 @@
             include 'views/admin/admin.php';
         }
 
+        public function loadSnippets($snippet, $viewData = array()){
+            extract($viewData);
+            include 'views/front/templates/'.$this->config['site_theme'].'/snippets/'.$snippet.'.php';
+        }
         
         public function renderPage($body){
             $body = html_entity_decode($body);
@@ -137,14 +135,17 @@
 
         public function renderMetatags($viewData = array()){
             $meta = '';
-            // $mod = 'Mod'.$viewData['module_name'];
+            $routes = new Routes();
+            $routes = $routes->getRoutes();
 
-            // if($viewData['module_id'] != 0 && class_exists($mod)){
-            //      $module = new $mod();
-            //      if(method_exists($module, 'metatags')){
-            //         $meta = $module->metatags($this->config, $viewData);
-            //      }
-            // }
+            if(in_array($viewData['slug'], $routes)) { 
+                $module = array_search($viewData['slug'], $routes);
+                $module = 'Mod'.$module;
+                $module = new $module();
+                 if(method_exists($module, 'metatags')){
+                    $meta = $module->metatags($this->config, $viewData);
+                 }
+            }
             
             if(empty($meta)){
                 $meta .= '<title>'.$this->config['site_name'].' - '.$viewData['title'].'</title>'. PHP_EOL;
@@ -171,7 +172,7 @@
             $meta .= '<meta name="viewport" content="width=device-width, initial-scale=1.0">'. PHP_EOL;
 
             if (!empty($this->config['site_favicon'])){
-                $meta .= '<link rel="shortcut icon" href="'.BASE_UPLOADS.'/'.$this->config['site_favicon'].'" type="image/x-icon">';
+                $meta .= '<link rel="shortcut icon" href="'.BASE_UPLOADS.'/'.$this->config['site_favicon'].'" type="image/x-icon">'. PHP_EOL;
             }
 
             echo($meta);
