@@ -228,8 +228,12 @@
 </div>
 
 <?php else: ?>
+<?php 
+  $routes = new Routes();
+  $routes = $routes->getRoutes();
+?>
 <div class="alert alert-warning mt-4 mb-4" role="alert">
-  Você não está logado no sistema. <a href="<?php echo BASE.'/'.$this->config['page_login']; ?>">Clique Aqui</a> para ir para página de login.
+  Você não está logado no sistema. <a href="<?php echo BASE.'/'.$routes['pages']['login']; ?>">Clique Aqui</a> para ir para página de login.
 </div>
 <?php endif; ?>
 

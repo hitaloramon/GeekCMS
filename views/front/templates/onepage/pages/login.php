@@ -88,7 +88,11 @@
                 </div>
               </div>
               <div class="col-md-12 m-b-10">
-                <a href="<?php echo BASE.'/'.$this->config['page_register']; ?>">Clique aqui para se cadastrar.</a>
+                <?php 
+                  $routes = new Routes();
+                  $routes = $routes->getRoutes();
+                ?>
+                <a href="<?php echo BASE.'/'.$routes['pages']['register']; ?>">Clique aqui para se cadastrar.</a>
               </div>
               <div class="col-md-12">
                 <button type="submit" class="btn btn-info">Enviar</button>

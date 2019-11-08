@@ -51,7 +51,7 @@
         }
 
 
-        public function bootstrap_menu($array, $parent_id = 0, $parents = array(), $submenu = 0){
+        public function bootstrap_menu($array, $parent_id = 0, $parents = array(), $submenu = 0, $nivel = 0){
             if($parent_id == 0){
                 foreach ($array as $element) {
                     if (($element['parent_id'] != 0) && !in_array($element['parent_id'], $parents)) {
@@ -64,7 +64,7 @@
                 if($element['parent_id'] == $parent_id){
                     if(in_array($element['id'], $parents)){
                         $menu_html .= '<li class="nav-item dropdown">'. PHP_EOL;
-                        $menu_html .= '<a class="nav-link dropdown-toggle" href="#" id="h6-dropdown1 '.$element['id'].'" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="'.$element['icon'].'"></i> '.$element['name'].' <i class="fa fa-angle-down m-l-5"></i></a>'. PHP_EOL;
+                        $menu_html .= '<a class="nav-link dropdown-toggle" href="#" id="h6-dropdown1 '.$element['id'].'" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="'.$element['icon'].'"></i> '.$element['name']. $submenu.' <i class="fa fa-angle-down m-l-5"></i></a>'. PHP_EOL;
                     }
                     else {
                         if($submenu == 0){
@@ -79,21 +79,22 @@
                             if($element['content_type'] == 'web'){
                                 $menu_html .= '<a class="nav-link" href="'.$element['link'].'" target="'.$element['target'].'"><i class="'.$element['icon'].'"></i> ' . $element['name'] . '</a>'. PHP_EOL;
                             }else{
-                                $menu_html .= '<a class="dropdown-item" href="'.BASE.'/'.$element['page_slug'].'"><i class="'.$element['icon'].'"></i> ' . $element['name'] . '</a>'. PHP_EOL;
+                                $menu_html .= '<a class="dropdown-item" href="'.BASE.'/'.$element['page_slug'].'"><i class="'.$element['icon'].'"></i> ' . $element['name'] .'</a>'. PHP_EOL;
                             }
                         }
                     }
                     if(in_array($element['id'], $parents)){
-                        $menu_html .= '<ul class="b-none rounded-0 dropdown-menu font-14 animated fadeInUp">'. PHP_EOL;
-                        $menu_html .= $this->bootstrap_menu($array, $element['id'], $parents, 1);
+                        $nivel += 1;
+                        $menu_html .= '<ul class="dropdown-menu">'. PHP_EOL;
+                        $menu_html .= $this->bootstrap_menu($array, $element['id'], $parents, 1, $nivel);
                         $menu_html .= '</ul>'. PHP_EOL;
+                        $nivel = 0;
                     }
                     $menu_html .= '</li>'. PHP_EOL;
                 }
             }
             return $menu_html;
         }
-
 
         public function menuProcess($list, $parent_id = 0, $m_order = 0, $submenu = 0){
             foreach($list as $item) {

@@ -24,10 +24,6 @@
                 exit;
             }
 
-            if(empty($array_data['password'])){
-                unset($array_data['password']);
-            }
-
             $validator = new Gump('pt-br');
             $array_data = $validator->sanitize($array_data);
 
@@ -38,7 +34,7 @@
             
             $filters = array(
                 'email' 	  => 'trim|sanitize_email',
-                'password'	  => 'trim|sha1'
+                'password'	  => 'trim|sanitize_string'
             );
             
             $array_data = $validator->filter($array_data, $filters);
@@ -56,9 +52,14 @@
                 }
                 
                 extract($array_data);
-                $result = $this->db->fetchRow("SELECT * FROM users WHERE email = '$email' AND password = '$password'");
+                $result = $this->db->fetchRow("SELECT * FROM users WHERE email = '$email'");
                 
-                if($result > 0){
+                if($result > 0 && password_verify($array_data['password'], $result['password'])){
+
+                    if(password_needs_rehash($result['password'], PASSWORD_DEFAULT)){
+                        $datapass = array('password' => password_hash($array_data['password'], PASSWORD_DEFAULT));
+                        $this->db->update('users', $datapass, ['id = ?' => $result['id']]);
+                    }
 
                     switch ($result['active']) {
                         case 'y':
@@ -167,7 +168,7 @@
             
             // Regras para filtra e limpar os campos
             $filters = array(
-                'password'      => 'trim|sha1',
+                'password'      => 'trim|sanitize_string',
                 'fname'         => 'trim|sanitize_string',
                 'lname'         => 'trim|sanitize_string',
                 'email'         => 'trim|sanitize_string',
@@ -189,6 +190,8 @@
                     }
                     $array_data['mem_expire'] = calculateDays($member['period'], $member['days']);
                 }
+
+                $array_data['password'] = password_hash($array_data['password'], PASSWORD_DEFAULT);
 
                 $checkUser = $this->db->fetchRow("SELECT * FROM users WHERE email = '{$array_data['email']}'");
 
@@ -239,7 +242,7 @@
             
             // Regras para filtra e limpar os campos
             $filters = array(
-                'password'      => 'trim|sha1',
+                'password'      => 'trim|sanitize_string',
                 'fname'         => 'trim|sanitize_string',
                 'lname'         => 'trim|sanitize_string',
                 'email'         => 'trim|sanitize_email',
@@ -283,6 +286,8 @@
                 if($checkUser == false){
                     unset($array_data['confirm_password']);
                     unset($array_data['captcha']);
+
+                    $array_data['password'] = password_hash($array_data['password'], PASSWORD_DEFAULT);
 
                     // Configura Plano de Acesso.
                     if($array_data['membership_id'] == 0){
@@ -421,7 +426,7 @@
             
             // Regras para filtra e limpar os campos
             $filters = array(
-                'password'      => 'trim|sha1',
+                'password'      => 'trim|sanitize_string',
                 'fname'         => 'trim|sanitize_string',
                 'lname'         => 'trim|sanitize_string',
                 'email'         => 'trim|sanitize_email',
@@ -435,6 +440,11 @@
             $validated = $validator->validate($array_data, $rules);
 
             if($validated === true){
+
+  
+                if(array_key_exists('password', $array_data)){
+                    $array_data['password'] = password_hash($array_data['password'], PASSWORD_DEFAULT);
+                }
 
                 if($array_data['membership_id'] == 0){
                     $array_data['mem_expire'] = '2000-01-01 00:00:00';
@@ -576,7 +586,7 @@
             
             // Regras para filtra e limpar os campos
             $filters = array(
-                'password'  => 'trim|sha1',
+                'password'  => 'trim|sanitize_string',
                 'token'     => 'trim|sanitize_string',
             );
 
@@ -589,6 +599,8 @@
                 foreach ($array_diff as $key => $value) {
                     unset($array_data[$key]);
                 }
+
+                $array_data['password'] = password_hash($array_data['password'], PASSWORD_DEFAULT);
 
                 $array = array(
                     'password' => $array_data['password'],
@@ -713,7 +725,7 @@
             
             // Regras para filtra e limpar os campos
             $filters = array(
-                'password'      => 'trim|sha1',
+                'password'      => 'trim|sanitize_string',
                 'fname'         => 'trim|sanitize_string',
                 'lname'         => 'trim|sanitize_string',
                 'email'         => 'trim|sanitize_string',
@@ -738,6 +750,10 @@
             $validator->set_field_name("password", "Senha");
 
             if($validated === true){
+
+                if(array_key_exists('password', $array_data)){
+                    $array_data['password'] = password_hash($array_data['password'], PASSWORD_DEFAULT);
+                }
 
                 $array_diff = array_diff_key($array_data, $filters);
 
