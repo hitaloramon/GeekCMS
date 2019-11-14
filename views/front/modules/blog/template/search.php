@@ -4,7 +4,7 @@
         <?php if(!empty($post['thumb'])): ?>
             <div class="col-md-4 m-b-30">
                 <a href="<?php echo BASE.'/'. $routes['modules']['blog']. '/visualizar/'. $post['slug']; ?>">
-                    <img class="img-responsive rounded" src="<?php echo BASE_UPLOADS; ?>/<?php echo $post['thumb']; ?>" alt="<?php echo $post['title']; ?>">
+                    <img class="img-responsive my-4 rounded" src="<?php echo BASE.'/'. $cropper->make(BASE_UPLOADS_PATH.'/'.$post['thumb'], 400) ?>" title="<?php echo $post['title']; ?>" alt="<?php echo $post['title']; ?>">
                 </a>
             </div>
         <?php endif; ?>

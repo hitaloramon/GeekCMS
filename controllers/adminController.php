@@ -44,6 +44,7 @@ class adminController extends controller{
                 $stats->clearStats();
             break;
             case 'datatable':
+                header('Content-type: application/json');
                 echo json_encode($stats->getOnlineData());
                 exit;
             break;
@@ -82,6 +83,7 @@ class adminController extends controller{
                 exit;
             break;
             case 'datatable':
+                header('Content-type: application/json');
                 $this->permission->hasPermission('page', 'view');
                 $p->getPagesDatatable();
                 exit;
@@ -158,6 +160,7 @@ class adminController extends controller{
 
         switch ($action):
             case 'datatable':
+                header('Content-type: application/json');
                 $this->permission->hasPermission('notification', 'view');
                 $data = $notification->datatable();
                 echo json_encode($data);
@@ -183,7 +186,6 @@ class adminController extends controller{
         $this->user->verifyLogin();
         
         $data = array('action' => $action, 'id' => $id);
-
 
         switch ($action):
             case 'edit':
@@ -222,6 +224,7 @@ class adminController extends controller{
                 exit;
             break;
             case 'datatable':
+                header('Content-type: application/json');
                 $this->permission->hasPermission('user', 'view');
                 $this->user->getUserDatatable();
                 exit;
@@ -518,6 +521,7 @@ class adminController extends controller{
 
         switch ($action):
             case 'datatable':
+                header('Content-type: application/json');
                 $this->permission->hasPermission('financial', 'view');
                 $transactions->getDatatable();
                 exit;

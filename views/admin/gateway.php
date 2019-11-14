@@ -28,7 +28,7 @@
 
     <div class="row">
         <?php foreach ($gateways as $g): ?>
-            <div class="col-md-3">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                 <div class="card">
                     <a href="<?php echo BASE_ADMIN.'/gateway/config/'.$g['dir']; ?>">
                         <img class="card-img-top m-t-30 m-b-30 p-l-20 p-r-20" src="<?php echo BASE.'/assets/images/gateway/'.$g['dir'].'.svg';?>" alt="<?php echo $g['displayname']; ?>">

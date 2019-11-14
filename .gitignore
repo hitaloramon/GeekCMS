@@ -1,2 +1,4 @@
 .vscode/sftp.json
 models/modules/module_route.json
+models/route.json
+cache

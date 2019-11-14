@@ -8,8 +8,8 @@
         "activate": "ativacao"
     },
     "modules": {
-        "blog": "pagina-inicial",
-        "events": "eventos",
+        "blog": "blog",
+        "events": "pagina-inicial",
         "gallery": "galeria"
     }
 }

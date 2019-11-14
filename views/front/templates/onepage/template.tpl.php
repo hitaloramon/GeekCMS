@@ -16,12 +16,13 @@
 	<link href="<?php echo BASE; ?>/views/front/templates/<?php echo $this->config['site_theme']; ?>/assets/css/aos.css" rel="stylesheet">
 	<?php echo Asset::outputStyles(); ?>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src='https://fullcalendar.io/js/fullcalendar-3.1.0/lib/moment.min.js'></script>
 	<script type="text/javascript"> localStorage.setItem('SITEURL', '<?php echo BASE; ?>'); </script>
 	<?php echo Asset::outputScripts('header'); ?>
 </head>
 <body class="animated">
 	<div class="main-wrapper">
-		<?php if(isset($_SESSION['user_group']) && $_SESSION['user_group'] == 1): ?>
+		<!-- <?php if(isset($_SESSION['user_group']) && $_SESSION['user_group'] == 1): ?>
 		<div class="container-fluid bg-dark">
 			<div class="container">
 				<nav class="navbar navbar-expand-lg navbar-dark bg-dark h-25">
@@ -57,7 +58,7 @@
 				</nav>
 			</div>
 		</div>
-		<?php endif; ?>
+		<?php endif; ?> -->
 
 		<div class="header13 po-relative">
 
@@ -170,7 +171,7 @@
 	<script src="<?php echo BASE; ?>/views/front/templates/<?php echo $this->config['site_theme']; ?>/assets/js/custom.js"></script>
 	<script src="<?php echo BASE; ?>/assets/plugins/mask/jquery.mask.min.js"></script>
 	<script src="<?php echo BASE; ?>/assets/js/payment.js"></script>
-	<?= View::getSection('footer-js'); ?>
+	<?php echo View::getSection('footer-js'); ?>
 </body>
 
 </html>

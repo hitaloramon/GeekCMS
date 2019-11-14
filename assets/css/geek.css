@@ -107,6 +107,13 @@
     position: relative;
 }
 
+
+@media screen and (max-width: 990px) {
+    .browser-empty{
+        top: 0vh;
+    }
+}
+
 .browser-icon{
     font-size: 90px;
     margin-bottom: 30px;

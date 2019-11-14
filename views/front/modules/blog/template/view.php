@@ -22,7 +22,7 @@
             </div>
     
             <?php if(!empty($post['thumb'])): ?>
-                <img class="img-fluid my-4 rounded" src="<?php echo BASE_UPLOADS; ?>/<?php echo $post['thumb']; ?>" alt="<?php $post['title']; ?>" />
+                <img class="img-fluid my-4 rounded" src="<?php echo BASE.'/'. $cropper->make(BASE_UPLOADS_PATH.'/'.$post['thumb'], 700) ?>" title="<?php echo $post['title']; ?>" alt="<?php echo $post['title']; ?>">
             <?php endif; ?>
     
             <div class="accessibility"><?php echo html_entity_decode($post['body']); ?></div>

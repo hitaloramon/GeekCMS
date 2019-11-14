@@ -8,6 +8,7 @@
     $blog = new ModBlog();
     $routes = new Routes();
     $routes = $routes->getRoutes();
+    $cropper = new Cropper("cache/images/blog");
     
     if(isset($url[0])){
         switch($url[0]):

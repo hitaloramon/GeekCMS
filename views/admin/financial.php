@@ -11,50 +11,54 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-3">
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex no-block">
                         <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="<?php echo BASE; ?>/assets/images/icon/transaction_paid.svg" width="50px" height="50px" alt="Income" /></div>
                         <div class="align-self-center">
                             <h6 class="text-muted m-t-10 m-b-0">Transações Pagas</h6>
-                            <h2 class="m-t-0"><?php echo $viewData['paid']; ?></h2></div>
+                            <h2 class="m-t-0"><?php echo $viewData['paid']; ?></h2>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex no-block">
                         <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="<?php echo BASE; ?>/assets/images/icon/transaction_pendent.svg" width="50px" height="50px" alt="Income" /></div>
                         <div class="align-self-center">
                             <h6 class="text-muted m-t-10 m-b-0">Transações Pendentes</h6>
-                            <h2 class="m-t-0"><?php echo $viewData['pending']; ?></h2></div>
+                            <h2 class="m-t-0"><?php echo $viewData['pending']; ?></h2>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex no-block">
                         <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="<?php echo BASE; ?>/assets/images/icon/receive_today.svg" width="50px" height="50px" alt="Income" /></div>
                         <div class="align-self-center">
                             <h6 class="text-muted m-t-10 m-b-0">Recebido Hoje</h6>
-                            <h2 class="m-t-0"><?php echo $this->config['cur_symbol']; ?> <?php echo ($viewData['today'] != '') ? $viewData['today'] : '0.00' ; ?></h2></div>
+                            <h2 class="m-t-0"><?php echo $this->config['cur_symbol']; ?> <?php echo ($viewData['today'] != '') ? $viewData['today'] : '0.00' ; ?></h2>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex no-block">
                         <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="<?php echo BASE; ?>/assets/images/icon/receive_total.svg" width="50px" height="50px" alt="Income" /></div>
                         <div class="align-self-center">
                             <h6 class="text-muted m-t-10 m-b-0">Total Recebido</h6>
-                            <h2 class="m-t-0"><?php echo $this->config['cur_symbol']; ?> <?php echo ($viewData['total'] != '') ? $viewData['total'] : '0.00' ; ?></h2></div>
+                            <h2 class="m-t-0"><?php echo $this->config['cur_symbol']; ?> <?php echo ($viewData['total'] != '') ? $viewData['total'] : '0.00' ; ?></h2>
+                        </div>
                     </div>
                 </div>
             </div>

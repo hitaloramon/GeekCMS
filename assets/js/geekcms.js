@@ -67,8 +67,15 @@ function requestFullScreen(el = 'body') {
 }
 
 $(document).ready(function() {
-    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+    $('body').tooltip({
+        selector: '[data-toggle="tooltip"], [title]:not([data-toggle="popover"])',
+        trigger: 'hover',
+        container: 'body'
+    }).on('click mousedown mouseup', '[data-toggle="tooltip"], [title]:not([data-toggle="popover"])', function () {
+        $('[data-toggle="tooltip"], [title]:not([data-toggle="popover"])').tooltip('dispose');
+    });
 });
+
 function deleteInfo(handler, url){
     $.confirm({
         title: 'Apagar Conteúdo',
@@ -100,6 +107,8 @@ function deleteInfo(handler, url){
                                 hideAfter: 3000, 
                                 stack: 6
                             });
+
+                            $('.tooltip-inner, [data-toggle="tooltip"]').tooltip('hide'); 
                         }
                     });
                 }
@@ -143,6 +152,8 @@ function msgInfo(handler, title, content, type, url) {
                                 hideAfter: 3000,
                                 stack: 6
                             });
+
+                            $('.tooltip-inner, [data-toggle="tooltip"]').tooltip('hide'); 
                         }
                     });
                 }

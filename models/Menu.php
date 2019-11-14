@@ -64,7 +64,7 @@
                 if($element['parent_id'] == $parent_id){
                     if(in_array($element['id'], $parents)){
                         $menu_html .= '<li class="nav-item dropdown">'. PHP_EOL;
-                        $menu_html .= '<a class="nav-link dropdown-toggle" href="#" id="h6-dropdown1 '.$element['id'].'" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="'.$element['icon'].'"></i> '.$element['name']. $submenu.' <i class="fa fa-angle-down m-l-5"></i></a>'. PHP_EOL;
+                        $menu_html .= '<a class="nav-link dropdown-toggle" href="#" id="h6-dropdown1 '.$element['id'].'" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="'.$element['icon'].'"></i> '.$element['name'].' <i class="fa fa-angle-down m-l-5"></i></a>'. PHP_EOL;
                     }
                     else {
                         if($submenu == 0){

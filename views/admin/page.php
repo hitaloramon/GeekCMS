@@ -294,7 +294,7 @@
             <div class="rpanel-title"> Ajuda <span><i class="mdi mdi-close right-side-toggle"></i></span> </div>
             <div class="r-panel-body geek-help">
                 <h5>Páginas</h5>
-                <p>Aqui você pode gerenciar o conteúdo das suas páginas. Atenção: A exclusão da página também excluirá layouts correspondentes a página..</p>
+                <p>Aqui você pode gerenciar o conteúdo das suas páginas.</p>
             </div>
         </div>
     </div>
