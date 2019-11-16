@@ -4,15 +4,13 @@
         protected $db;
 
         public function __construct(){
-            global $config_db;
-
             $this->db = OneDB::load([
-                'host'      => $config_db['host'],
-                'port'      => $config_db['port'],
+                'host'      => CONFIG_DB['host'],
+                'port'      => CONFIG_DB['port'],
+                'database'  => CONFIG_DB['dbname'],
+                'user'      => CONFIG_DB['dbuser'],
+                'password'  => CONFIG_DB['dbpass'],
                 'charset'   => 'utf8',
-                'database'  => $config_db['dbname'],
-                'user'      => $config_db['dbuser'],
-                'password'  => $config_db['dbpass']
             ]);
         }
     }
